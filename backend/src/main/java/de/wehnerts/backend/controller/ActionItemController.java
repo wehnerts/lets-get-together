@@ -18,5 +18,6 @@ public class ActionItemController {
     }
 
     @GetMapping
-    public List<ActionItem> getActionItems(){return actionItemService.getActionItems();}
+    public List<ActionItem> getActionItems(){return actionItemService.getActionItems();
+    }
 }
