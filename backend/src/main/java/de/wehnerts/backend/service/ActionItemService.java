@@ -15,5 +15,6 @@ public class ActionItemService {
     public ActionItemService(ActionItemRepo actionItemRepo) {
         this.actionItemRepo = actionItemRepo;
     }
-    public List<ActionItem> getActionItems(){return actionItemRepo.findAll();}
+    public List<ActionItem> getActionItems(){return actionItemRepo.findAll();
+    }
 }
