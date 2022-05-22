@@ -6,8 +6,10 @@ import {Route} from "react-router";
 import 'react-toastify/dist/ReactToastify.css';
 import MainPage from "./pages/MainPage";
 import ActionItemsPage from "./pages/ActionItemsPage";
+
 import ActionItemDetailPage from "./pages/ActionItemDetailPage";
 import PlanItemsPage from "./pages/PlanItemsPage";
+
 
 function App() {
 
@@ -17,6 +19,7 @@ function App() {
             <Routes>
                <Route path={"/"} element={<MainPage/>}/>
                <Route path={"/actions"} element={<ActionItemsPage/>}/>
+
 
              <Route path={'/actionitem/:id'}
                       element={<ActionItemDetailPage/>}/>
