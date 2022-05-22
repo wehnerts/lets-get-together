@@ -3,6 +3,8 @@ package de.wehnerts.backend.controller;
 import de.wehnerts.backend.model.ActionItem;
 import de.wehnerts.backend.repository.ActionItemRepo;
 
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,29 +17,51 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ActionItemControllerTest {
-
+    ActionItem item1 = null;
+    ActionItem item2 = null;
     @Autowired
     private WebTestClient testClient;
     @Autowired
     private ActionItemRepo actionItemRepo;
 
+    @BeforeEach
+    public void cleanRepoAndSetItems(){
+        actionItemRepo.deleteAll();
+            item1 = ActionItem.builder()
+                .id("1")
+                .actionTitle ("Ab geht er")
+                .imageName ("")
+                .actionDescription("Der Peter geht ab")
+                .childFriendly (true)
+                .openingSeason ("Von O bis O")
+                .openingHours ("24/7")
+                .estDuration ("2h")
+                .price ("ne Mark")
+                .homepage("www.de")
+                .build();
 
+        item2 = ActionItem.builder()
+                .id("2")
+                .actionTitle ("Äkschn Zwo")
+                .imageName ("")
+                .actionDescription("Der Peter geht ab")
+                .childFriendly (true)
+                .openingSeason ("Von O bis O")
+                .openingHours ("24/7")
+                .estDuration ("2h")
+                .price ("ne Mark")
+                .homepage("www.de")
+                .build();
+
+
+    }
     @Test
     void getActionItems() {
         //GIVEN
 
-        ActionItem item1 = ActionItem.builder()
-                            .actionTitle ("Ab geht er")
-                            .imageName ("")
-                            .actionDescription("Der Peter geht ab")
-                            .childFriendly (true)
-                            .openingSeason ("Von O bis O")
-                            .openingHours ("24/7")
-                            .estDuration ("2h")
-                            .price ("ne Mark")
-                            .homepage("www.de")
-                            .build();
         actionItemRepo.insert(item1);
+        actionItemRepo.insert(item2);
+
         //WHEN
         List<ActionItem> actual = testClient.get()
                 .uri("/api/actionitem")
@@ -48,7 +72,7 @@ class ActionItemControllerTest {
                 .getResponseBody();
         //THEN
         List<ActionItem> expected = List.of(ActionItem.builder()
-                .id(item1.getId())
+                .id("1")
                 .actionTitle ("Ab geht er")
                 .imageName ("")
                 .actionDescription("Der Peter geht ab")
@@ -58,7 +82,66 @@ class ActionItemControllerTest {
                 .estDuration ("2h")
                 .price ("ne Mark")
                 .homepage("www.de")
-                .build());
+                .build(),
+                ActionItem.builder()
+                        .id("2")
+                        .actionTitle ("Äkschn Zwo")
+                        .imageName ("")
+                        .actionDescription("Der Peter geht ab")
+                        .childFriendly (true)
+                        .openingSeason ("Von O bis O")
+                        .openingHours ("24/7")
+                        .estDuration ("2h")
+                        .price ("ne Mark")
+                        .homepage("www.de")
+                        .build());
         assertEquals(expected, actual);
     }
+
+    @Test
+    void getActionItemById_when_id_is_2() {
+        //GIVEN
+        actionItemRepo.insert(item1);
+        actionItemRepo.insert(item2);
+        //WHEN
+        ActionItem actual = testClient.get()
+                .uri("/api/actionitem/"+"2")
+                .exchange()
+                .expectStatus().is2xxSuccessful()
+                .expectBody(ActionItem.class)
+                .returnResult()
+                .getResponseBody();
+        //THEN
+
+        ActionItem expected = ActionItem.builder()
+                .id("2")
+                .actionTitle ("Äkschn Zwo")
+                .imageName ("")
+                .actionDescription("Der Peter geht ab")
+                .childFriendly (true)
+                .openingSeason ("Von O bis O")
+                .openingHours ("24/7")
+                .estDuration ("2h")
+                .price ("ne Mark")
+                .homepage("www.de")
+                .build();
+        assertEquals(expected, actual);
+    }
+    @Test
+    void getActionItemById_whenIdIsNotValid_shouldThrowException() {
+        //GIVEN
+        actionItemRepo.insert(item1);
+        actionItemRepo.insert(item2);
+        //WHEN
+        testClient.get()
+                .uri("/api/actionitem/" + "20")
+                .exchange()
+
+
+                //THEN
+                .expectStatus().is5xxServerError();
+
+
+    }
+
 }
