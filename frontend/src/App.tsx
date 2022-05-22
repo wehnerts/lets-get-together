@@ -2,21 +2,31 @@ import React from 'react';
 import { Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import './App.css';
-import useActionItems from "./hooks/useActionItems";
 import {Route} from "react-router";
-import ActionItemsGallery from "./components/ActionItemsGallery";
 import 'react-toastify/dist/ReactToastify.css';
+import MainPage from "./pages/MainPage";
+import ActionItemsPage from "./pages/ActionItemsPage";
+import ActionItemDetailPage from "./pages/ActionItemDetailPage";
+import PlanItemsPage from "./pages/PlanItemsPage";
+
 function App() {
-    const {actionItems} = useActionItems()
+
   return (
     <div className="App">
-        <ToastContainer/>
-        <Routes>
-            <Route path={"/"} element={<ActionItemsGallery actionItems={actionItems}/>}>
 
-            </Route>
+            <Routes>
+               <Route path={"/"} element={<MainPage/>}/>
+               <Route path={"/actions"} element={<ActionItemsPage/>}/>
+
+             <Route path={'/actionitem/:id'}
+                      element={<ActionItemDetailPage/>}/>
+
+               <Route path={"/plans"} element={<PlanItemsPage/>}/>
+
+
 
         </Routes>
+        <ToastContainer/>
     </div>
   );
 }
