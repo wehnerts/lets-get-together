@@ -1,7 +1,13 @@
 .action-item-card{
-    background-color: #857E61;
+    background-color: #0EB1D2;
     color:#2C1A1D;
-    margin: 3px 3px 3px 3px;
+    margin: 10px 10px 10px 10px;
+    box-shadow: #F6E27F 2px 2px 3px;
+
+    align-items: center ;
+    width: 90%;
+
+    height: 50%
 }
 .action-title{
     font-weight: bold;
