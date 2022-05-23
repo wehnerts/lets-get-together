@@ -11,6 +11,6 @@ export default function useActionItems(){
             .then(allActionItems => setActionItems(allActionItems))
             .catch(()=>toast.error("Connection failed! Please retry later."))
 
-    })
+    },[])
     return {actionItems}
 }

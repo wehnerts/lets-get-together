@@ -3,6 +3,7 @@ package de.wehnerts.backend.controller;
 import de.wehnerts.backend.model.ActionItem;
 import de.wehnerts.backend.service.ActionItemService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,5 +20,10 @@ public class ActionItemController {
 
     @GetMapping
     public List<ActionItem> getActionItems(){return actionItemService.getActionItems();
+    }
+
+    @GetMapping ("{id}")
+    public ActionItem getActionItemById(@PathVariable String id){
+        return actionItemService.getActionItemById(id);
     }
 }
