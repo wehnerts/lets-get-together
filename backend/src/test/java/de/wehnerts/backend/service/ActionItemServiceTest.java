@@ -3,7 +3,6 @@ package de.wehnerts.backend.service;
 import de.wehnerts.backend.model.ActionItem;
 import de.wehnerts.backend.repository.ActionItemRepo;
 import org.junit.jupiter.api.Test;
-
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
