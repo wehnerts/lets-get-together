@@ -21,9 +21,16 @@ export default function ActionItemDetailPage(){
             <div>Hyper Hyper!</div>
             {detailedActionItem &&
             <div className={"action-title"}>
-                <p>id: {detailedActionItem.id}</p>  <p>Title: {detailedActionItem.actionTitle}</p> <p>Description: {detailedActionItem.actionDescription}</p> <p>{detailedActionItem.childFriendly}</p>
-                <p>Saison: {detailedActionItem.openingSeason}</p> <p>Opening hours: {detailedActionItem.openingHours}</p> <p>Estimated duration: {detailedActionItem.estDuration}</p>
-                <p>Price: {detailedActionItem.price}</p><p>Homepage: <a href={detailedActionItem.homepage}> {detailedActionItem.homepage}</a></p>
+                <p>id: {detailedActionItem.id}</p>  
+                <p>Title: {detailedActionItem.actionTitle}</p> 
+                <p>Description: {detailedActionItem.actionDescription}</p> 
+                <p>{detailedActionItem.childFriendly}</p>
+                <p>Saison: {detailedActionItem.openingSeason}</p> 
+                <p>Opening hours: {detailedActionItem.openingHours}</p> 
+                <p>Estimated duration: {detailedActionItem.estDuration}</p>
+                <p>Price: {detailedActionItem.price}</p>
+                <p>Homepage: 
+                <a href={detailedActionItem.homepage}> {detailedActionItem.homepage}</a></p>
             </div>}
             <button onClick={()=>navigate(-1)}>Back</button>
         </div>
