@@ -4,7 +4,6 @@ import de.wehnerts.backend.model.ActionItem;
 import de.wehnerts.backend.repository.ActionItemRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.NoSuchElementException;
 
