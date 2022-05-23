@@ -6,7 +6,6 @@ import {Route} from "react-router";
 import 'react-toastify/dist/ReactToastify.css';
 import MainPage from "./pages/MainPage";
 import ActionItemsPage from "./pages/ActionItemsPage";
-
 import ActionItemDetailPage from "./pages/ActionItemDetailPage";
 import PlanItemsPage from "./pages/PlanItemsPage";
 
