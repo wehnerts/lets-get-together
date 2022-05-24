@@ -1,20 +1,16 @@
-package de.wehnerts.backend.model;
-
+package de.wehnerts.backend.dto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Document (collection = "actionItems")
-public class ActionItem {
-    @Id
-    private String id;
+public class NewActionItemDto {
+
     private String actionTitle;
     private String imageName;
     private String actionDescription;
@@ -25,5 +21,5 @@ public class ActionItem {
     private String price;
     private String homepage;
 
-
 }
+

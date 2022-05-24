@@ -1,5 +1,6 @@
 package de.wehnerts.backend.service;
 
+import de.wehnerts.backend.dto.NewActionItemDto;
 import de.wehnerts.backend.model.ActionItem;
 import de.wehnerts.backend.repository.ActionItemRepo;
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,7 @@ class ActionItemServiceTest {
                 .actionTitle ("Äkschn One")
                 .imageName ("")
                 .actionDescription("Der Peter geht ab")
-                .childFriendly (true)
+                .childFriendly ("true")
                 .openingSeason ("Von O bis O")
                 .openingHours ("24/7")
                 .estDuration ("2h")
@@ -35,7 +36,7 @@ class ActionItemServiceTest {
                 .actionTitle ("Äkschn Zwo")
                 .imageName ("")
                 .actionDescription("Der Peter geht ab")
-                .childFriendly (true)
+                .childFriendly ("true")
                 .openingSeason ("Von O bis O")
                 .openingHours ("24/7")
                 .estDuration ("2h")
@@ -54,7 +55,7 @@ class ActionItemServiceTest {
                     .actionTitle ("Äkschn One")
                     .imageName ("")
                     .actionDescription("Der Peter geht ab")
-                    .childFriendly (true)
+                    .childFriendly ("true")
                     .openingSeason ("Von O bis O")
                     .openingHours ("24/7")
                     .estDuration ("2h")
@@ -67,7 +68,7 @@ class ActionItemServiceTest {
                     .actionTitle ("Äkschn Zwo")
                     .imageName ("")
                     .actionDescription("Der Peter geht ab")
-                    .childFriendly (true)
+                    .childFriendly ("true")
                     .openingSeason ("Von O bis O")
                     .openingHours ("24/7")
                     .estDuration ("2h")
@@ -89,7 +90,7 @@ class ActionItemServiceTest {
         .actionTitle ("Äkschn Zwo")
         .imageName ("")
         .actionDescription("Der Peter geht ab")
-        .childFriendly (true)
+        .childFriendly ("true")
         .openingSeason ("Von O bis O")
         .openingHours ("24/7")
         .estDuration ("2h")
@@ -106,7 +107,7 @@ class ActionItemServiceTest {
             .actionTitle ("Äkschn Zwo")
             .imageName ("")
             .actionDescription("Der Peter geht ab")
-            .childFriendly (true)
+            .childFriendly ("true")
             .openingSeason ("Von O bis O")
             .openingHours ("24/7")
             .estDuration ("2h")
@@ -125,4 +126,65 @@ class ActionItemServiceTest {
         assertThrows(NoSuchElementException.class, () -> actionItemService.getActionItemById("4711"));
         verify(actionItemRepo).findById("4711");
     }
+
+    @Test
+    void addActionItem(){
+        //GIVEN
+        ActionItem item = ActionItem.builder()
+
+                .actionTitle ("Äkschn Zwo")
+                .imageName ("")
+                .actionDescription("Der Peter geht ab")
+                .childFriendly ("true")
+                .openingSeason ("Von O bis O")
+                .openingHours ("24/7")
+                .estDuration ("2h")
+                .price ("ne Mark")
+                .homepage("www.de")
+                .build();
+        when(actionItemRepo.insert(item)).thenReturn(ActionItem.builder()
+                .id("2")
+                .actionTitle ("Äkschn Zwo")
+                .imageName ("")
+                .actionDescription("Der Peter geht ab")
+                .childFriendly ("true")
+                .openingSeason ("Von O bis O")
+                .openingHours ("24/7")
+                .estDuration ("2h")
+                .price ("ne Mark")
+                .homepage("www.de")
+                .build());
+
+        //WHEN
+        NewActionItemDto newItem = NewActionItemDto.builder()
+                .actionTitle ("Äkschn Zwo")
+                .imageName ("")
+                .actionDescription("Der Peter geht ab")
+                .childFriendly ("true")
+                .openingSeason ("Von O bis O")
+                .openingHours ("24/7")
+                .estDuration ("2h")
+                .price ("ne Mark")
+                .homepage("www.de")
+                .build();
+        ActionItem actual = actionItemService.addNewActionItem(newItem);
+
+        //THEN
+        ActionItem expected = ActionItem.builder()
+                .id("2")
+                .actionTitle ("Äkschn Zwo")
+                .imageName ("")
+                .actionDescription("Der Peter geht ab")
+                .childFriendly ("true")
+                .openingSeason ("Von O bis O")
+                .openingHours ("24/7")
+                .estDuration ("2h")
+                .price ("ne Mark")
+                .homepage("www.de")
+                .build();
+        verify(actionItemRepo).insert(item);
+        assertEquals(expected, actual);
+
+    }
+
 }

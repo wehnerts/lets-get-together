@@ -1,8 +1,8 @@
 package de.wehnerts.backend.controller;
 
+import de.wehnerts.backend.dto.NewActionItemDto;
 import de.wehnerts.backend.model.ActionItem;
 import de.wehnerts.backend.repository.ActionItemRepo;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ class ActionItemControllerTest {
                 .actionTitle ("Ab geht er")
                 .imageName ("")
                 .actionDescription("Der Peter geht ab")
-                .childFriendly (true)
+                .childFriendly ("true")
                 .openingSeason ("Von O bis O")
                 .openingHours ("24/7")
                 .estDuration ("2h")
@@ -44,16 +44,15 @@ class ActionItemControllerTest {
                 .actionTitle ("Äkschn Zwo")
                 .imageName ("")
                 .actionDescription("Der Peter geht ab")
-                .childFriendly (true)
+                .childFriendly ("true")
                 .openingSeason ("Von O bis O")
                 .openingHours ("24/7")
                 .estDuration ("2h")
                 .price ("ne Mark")
                 .homepage("www.de")
                 .build();
-
-
     }
+
     @Test
     void getActionItems() {
         //GIVEN
@@ -75,7 +74,7 @@ class ActionItemControllerTest {
                 .actionTitle ("Ab geht er")
                 .imageName ("")
                 .actionDescription("Der Peter geht ab")
-                .childFriendly (true)
+                .childFriendly ("true")
                 .openingSeason ("Von O bis O")
                 .openingHours ("24/7")
                 .estDuration ("2h")
@@ -87,7 +86,7 @@ class ActionItemControllerTest {
                         .actionTitle ("Äkschn Zwo")
                         .imageName ("")
                         .actionDescription("Der Peter geht ab")
-                        .childFriendly (true)
+                        .childFriendly ("true")
                         .openingSeason ("Von O bis O")
                         .openingHours ("24/7")
                         .estDuration ("2h")
@@ -117,7 +116,7 @@ class ActionItemControllerTest {
                 .actionTitle ("Äkschn Zwo")
                 .imageName ("")
                 .actionDescription("Der Peter geht ab")
-                .childFriendly (true)
+                .childFriendly ("true")
                 .openingSeason ("Von O bis O")
                 .openingHours ("24/7")
                 .estDuration ("2h")
@@ -126,6 +125,7 @@ class ActionItemControllerTest {
                 .build();
         assertEquals(expected, actual);
     }
+
     @Test
     void getActionItemById_whenIdIsNotValid_shouldThrowException() {
         //GIVEN
@@ -139,8 +139,49 @@ class ActionItemControllerTest {
 
                 //THEN
                 .expectStatus().is5xxServerError();
-
-
     }
 
+    @Test
+    void addNewActionItem() {
+        //GIVEN
+        NewActionItemDto item1 = NewActionItemDto.builder()
+                .actionTitle ("TestActionItemNew")
+                .imageName ("")
+                .actionDescription("Der Peter geht ab")
+                .childFriendly ("true")
+                .openingSeason ("Von O bis O")
+                .openingHours ("24/7")
+                .estDuration ("2h")
+                .price ("ne Mark")
+                .homepage("www.de")
+                .build();
+
+        //WHEN
+        ActionItem actual = testClient.post()
+                .uri("api/actionitem")
+                .bodyValue(item1)
+                .exchange()
+                .expectStatus().is2xxSuccessful()
+                .expectBody(ActionItem.class)
+                .returnResult()
+                .getResponseBody();
+
+        //THEN
+        assertNotNull(actual);
+        assertNotNull(actual.getId());
+        assertEquals(24, actual.getId().length());
+        ActionItem expected = ActionItem.builder()
+                .id(actual.getId())
+                .actionTitle ("TestActionItemNew")
+                .imageName ("")
+                .actionDescription("Der Peter geht ab")
+                .childFriendly ("true")
+                .openingSeason ("Von O bis O")
+                .openingHours ("24/7")
+                .estDuration ("2h")
+                .price ("ne Mark")
+                .homepage("www.de")
+                .build();
+        assertEquals(actual, expected);
+    }
 }
