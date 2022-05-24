@@ -1,0 +1,11 @@
+.new-action-item-details form{
+    color: #F6E27F;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.new-action-item-details div {
+    display: flex;
+    align-items: center;
+}
+
