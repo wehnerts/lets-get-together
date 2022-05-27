@@ -4,20 +4,20 @@ import {ToastContainer} from 'react-toastify';
 import './App.css';
 import {Route} from "react-router";
 import 'react-toastify/dist/ReactToastify.css';
-import MainPage from "./pages/MainPage";
-import ActionItemsPage from "./pages/ActionItemsPage";
-import ActionItemDetailPage from "./pages/ActionItemDetailPage";
-import PlanItemsPage from "./pages/PlanItemsPage";
 import useActionItems from "./hooks/useActionItems";
-import NewActionItem from "./components/NewActionItem";
-
+import TitleBar from './components/TitleBar';
+import MainPage from './pages/MainPage';
+import ActionItemsPage from './pages/ActionItemsPage';
+import ActionItemDetailPage from './pages/ActionItemDetailPage';
+import PlanItemsPage from './pages/PlanItemsPage';
+import NewActionItem from './components/NewActionItem';
 
 
 export default function App() {
 const {addNewActionItem, actionItems}= useActionItems()
     return (
-        <div className="App">
-
+    <div className="App">
+        <TitleBar/>
             <Routes>
                 <Route path={"/"} element={<MainPage/>}/>
                 <Route path={"/actions"} element={<ActionItemsPage actionItems={actionItems}/>}/>
@@ -27,7 +27,6 @@ const {addNewActionItem, actionItems}= useActionItems()
             </Routes>
             <ToastContainer/>
         </div>
-    );
+    )
+
 }
-
-

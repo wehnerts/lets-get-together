@@ -1,0 +1,13 @@
+.titlebar {
+    background-color: #2B4162;
+    color:#2C1A1D;
+    margin: 20px 10px 10px 10px;
+    align-items: center ;
+    justify-items: center;
+    max-width: 90%;
+    max-height: 50%
+}
+.title{
+    align-items: center;
+    max-width: 99%;
+}
