@@ -43,4 +43,8 @@ public class ActionItemService {
 
         return actionItemRepo.insert(newActionItem);
     }
+
+    public void deleteActionitemById(String id) {
+        actionItemRepo.deleteById(id);
+    }
 }

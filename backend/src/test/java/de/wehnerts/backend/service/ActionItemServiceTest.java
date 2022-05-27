@@ -187,4 +187,12 @@ class ActionItemServiceTest {
 
     }
 
+    @Test
+    void deleteActionitemById() {
+        //Given
+        //WHEN
+        actionItemService.deleteActionitemById("1");
+        //Then
+        verify(actionItemRepo).deleteById("1");
+    }
 }
