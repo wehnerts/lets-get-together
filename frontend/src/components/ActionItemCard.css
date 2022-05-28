@@ -1,21 +1,20 @@
 .action-item-card{
+    display: flex;
     background-color: #0EB1D2;
     color:#2C1A1D;
     margin: 10px 10px 10px 10px;
     box-shadow: #F6E27F 2px 2px 3px;
-
     align-items: center ;
-    width: 90%;
-
-    height: 50%
+    flex-direction: column;
+    border-color: #857E61;
+    border-width: thick;
+    border-style: solid;
+    border-bottom-left-radius: 10% 10%;
+    border-top-right-radius: 10% 10%;
+    border-bottom-right-radius: 10% 10%;
+    border-top-left-radius: 10% 20%;
 }
+
 .action-title{
     font-weight: bold;
-}
-.action-description{
-
-}
-
-.homepage{
-
 }
