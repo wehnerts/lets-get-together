@@ -5,6 +5,7 @@ import de.wehnerts.backend.model.ActionItem;
 import de.wehnerts.backend.repository.ActionItemRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -216,8 +217,35 @@ class ActionItemControllerTest {
                 .exchange()
         //THEN
                 .expectStatus().is2xxSuccessful();
+    }
 
+    @Test
+    void updateActionItemById() {
+        //GIVEN
+        actionItemRepo.insert(item1);
+        ActionItem newItem = ActionItem.builder()
+                .id("1")
+                .actionTitle ("Changed")
+                .imageName ("")
+                .actionDescription("Changed")
+                .childFriendly ("true")
+                .openingSeason ("Von O bis O")
+                .openingHours ("24/7")
+                .estDuration ("2h")
+                .price ("ne Mark")
+                .homepage("www.de")
+                .build();
 
-
+        //WHEN
+        ActionItem actual = testClient.put()
+                .uri("api/actionitem")
+                .bodyValue(newItem)
+                .exchange()
+                .expectStatus().is2xxSuccessful()
+                .expectBody(ActionItem.class)
+                .returnResult()
+                .getResponseBody();
+        //THEN
+        assertEquals(actual, newItem);
     }
 }
