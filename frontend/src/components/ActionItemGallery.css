@@ -1,10 +1,9 @@
 p {
     font-weight: bold;
     color: #F6E27F;
-
 }
-.content{
 
+.gallery{
     display: flex;
     flex-direction: column-reverse;
     align-items: center;

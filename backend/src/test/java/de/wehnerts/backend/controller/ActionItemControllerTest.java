@@ -184,4 +184,40 @@ class ActionItemControllerTest {
                 .build();
         assertEquals(actual, expected);
     }
+
+    @Test
+    void deleteActionitemById() {
+    //GIVEN
+        NewActionItemDto item1 = NewActionItemDto.builder()
+                .actionTitle ("TestActionItemNew")
+                .imageName ("")
+                .actionDescription("Der Peter geht ab")
+                .childFriendly ("true")
+                .openingSeason ("Von O bis O")
+                .openingHours ("24/7")
+                .estDuration ("2h")
+                .price ("ne Mark")
+                .homepage("www.de")
+                .build();
+        ActionItem actual = testClient.post()
+                .uri("api/actionitem")
+                .bodyValue(item1)
+                .exchange()
+                .expectStatus().is2xxSuccessful()
+                .expectBody(ActionItem.class)
+                .returnResult()
+                .getResponseBody();
+
+
+        //WHEN
+        assertNotNull(actual);
+      testClient.delete()
+                .uri("/api/actionitem/"+ actual.getId())
+                .exchange()
+        //THEN
+                .expectStatus().is2xxSuccessful();
+
+
+
+    }
 }

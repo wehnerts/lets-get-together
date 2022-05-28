@@ -1,9 +1,8 @@
 import {ActionItem} from "../model/ActionItem";
 import {useEffect, useState} from "react";
-import {getAllActionItems, postActionItem} from "../services/api-service";
+import { getAllActionItems, postActionItem, removeActionItem} from "../services/api-service";
 import {toast} from "react-toastify";
 import {ActionItemDto} from "../dto/ActionItemDto";
-
 
 export default function useActionItems(){
     const [actionItems, setActionItems] = useState<ActionItem[]>([])
@@ -21,5 +20,13 @@ export default function useActionItems(){
             .then(()=>toast.success("Es wurde eine neue Action hinzugefügt!"))
             .catch(()=>toast.error("Something went wrong!"))
     }
-    return {actionItems, addNewActionItem}
+
+    const deleteActionItem = (id:string)=>{
+        removeActionItem(id)
+            .then(() => setActionItems(actionItems.filter(actionItem => actionItem.id !==id)))
+            .then(()=>toast.success("ActionItem wurde gelöscht"))
+            .catch(()=>toast.error("Error while remove ActionItem"))
+    }
+
+    return {actionItems, addNewActionItem, deleteActionItem}
 }

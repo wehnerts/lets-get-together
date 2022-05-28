@@ -29,4 +29,9 @@ public class ActionItemController {
     public ActionItem addNewActionItem(@RequestBody NewActionItemDto newActionItemDto){
         return actionItemService.addNewActionItem(newActionItemDto);
     }
+
+    @DeleteMapping ("{id}")
+    public void deleteActionitemById(@PathVariable String id){
+        actionItemService.deleteActionitemById(id);
+    }
 }

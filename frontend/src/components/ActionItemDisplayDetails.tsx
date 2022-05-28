@@ -1,22 +1,12 @@
-import {useParams} from "react-router";
-import useDetailedActionItem from "../hooks/useDetailedActionItem";
-import React, {useEffect} from "react";
-export default function ActionItemDisplayDetails() {
-
-    const {id} = useParams()
-    const {detailedActionItem, getActionItemById} = useDetailedActionItem()
-
-    useEffect(() => {
-        if (id) {
-            getActionItemById(id)
-        }
-        // eslint-disable-next-line
-    }, [id])
-
+import React from "react";
+import {ActionItem} from "../model/ActionItem";
+type ActionItemDisplayProps ={
+    detailedActionItem: ActionItem
+}
+export default function ActionItemDisplayDetails({detailedActionItem}:ActionItemDisplayProps) {
     return (
         <div className={"action-item-details"}>
-            <div>Hyper Hyper!</div>
-            {detailedActionItem &&
+            <div>Details</div>
                 <div className={"action-title"}>
                     <p>id: {detailedActionItem.id}</p>
                     <p>Title: {detailedActionItem.actionTitle}</p>
@@ -27,9 +17,9 @@ export default function ActionItemDisplayDetails() {
                     <p>Estimated duration: {detailedActionItem.estDuration}</p>
                     <p>Price: {detailedActionItem.price}</p>
                     <p>Homepage:
-                        <a href={detailedActionItem.homepage}> {detailedActionItem.homepage}</a></p>
-                </div>}
-
+                        <a href={detailedActionItem.homepage}> {detailedActionItem.homepage}</a>
+                    </p>
+                </div>
         </div>
     )
 }
