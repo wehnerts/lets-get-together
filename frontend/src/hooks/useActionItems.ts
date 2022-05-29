@@ -1,6 +1,6 @@
 import {ActionItem} from "../model/ActionItem";
 import {useEffect, useState} from "react";
-import { getAllActionItems, postActionItem, removeActionItem} from "../services/api-service";
+import {getAllActionItems, postActionItem, putActionItem, removeActionItem} from "../services/api-service";
 import {toast} from "react-toastify";
 import {ActionItemDto} from "../dto/ActionItemDto";
 
@@ -28,5 +28,18 @@ export default function useActionItems(){
             .catch(()=>toast.error("Error while remove ActionItem"))
     }
 
-    return {actionItems, addNewActionItem, deleteActionItem}
+    const editActionItem=(editItem:ActionItem)=>{
+        return putActionItem(editItem)
+            .then(editEdItem=>{
+                setActionItems(actionItems.map(item=>item.id===editEdItem.id?editEdItem:item))
+                toast.success("Action item " +editEdItem.id+" updated")
+                return editEdItem})
+            .catch(()=>{
+                toast.error("Update failed please try later")
+            })
+    }
+
+
+
+    return {actionItems, addNewActionItem, deleteActionItem, editActionItem}
 }
