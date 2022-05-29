@@ -20,3 +20,8 @@ export const postActionItem: (newActionItem: ActionItemDto)=>Promise<ActionItem>
 export const removeActionItem: (id:string)=>Promise<void>=(id:string)=>{
     return axios.delete (`/api/actionitem/${id}`)
 }
+
+export const putActionItem: (editItem:ActionItem)=>Promise<ActionItem>=(editItem:ActionItem)=>{
+    return axios.put(`/api/actionitem`,editItem)
+        .then(response => response.data)
+}

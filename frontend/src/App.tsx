@@ -12,7 +12,6 @@ import ActionItemDetailPage from './pages/ActionItemDetailPage';
 import PlanItemsPage from './pages/PlanItemsPage';
 import NewActionItem from './components/NewActionItem';
 
-
 export default function App() {
 const {addNewActionItem, actionItems}= useActionItems()
     return (
@@ -28,5 +27,4 @@ const {addNewActionItem, actionItems}= useActionItems()
             <ToastContainer/>
         </div>
     )
-
 }

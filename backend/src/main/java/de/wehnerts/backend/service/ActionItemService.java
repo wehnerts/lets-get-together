@@ -47,4 +47,8 @@ public class ActionItemService {
     public void deleteActionitemById(String id) {
         actionItemRepo.deleteById(id);
     }
+
+    public ActionItem updateActionItemById(ActionItem changedItem) {
+        return actionItemRepo.save(changedItem);
+    }
 }

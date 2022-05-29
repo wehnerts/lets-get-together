@@ -195,4 +195,50 @@ class ActionItemServiceTest {
         //Then
         verify(actionItemRepo).deleteById("1");
     }
+
+    @Test
+    void updateActionItemById() {
+        //GIVEN
+        ActionItem item = ActionItem.builder()
+                .id("2")
+                .actionTitle ("Äkschn Zwo")
+                .imageName ("")
+                .actionDescription("Der Peter geht ab")
+                .childFriendly ("true")
+                .openingSeason ("Von O bis O")
+                .openingHours ("24/7")
+                .estDuration ("2h")
+                .price ("ne Mark")
+                .homepage("www.de")
+                .build();
+
+        when(actionItemRepo.save(item)).thenReturn(ActionItem.builder()
+                .id("2")
+                .actionTitle ("Äkschn Zwo")
+                .imageName ("")
+                .actionDescription("Der Peter geht ab")
+                .childFriendly ("true")
+                .openingSeason ("Von O bis O")
+                .openingHours ("24/7")
+                .estDuration ("2h")
+                .price ("ne Mark")
+                .homepage("www.de")
+                .build());
+        //WHEN
+        ActionItem actual = actionItemService.updateActionItemById(item);
+        //THEN
+        ActionItem expected = ActionItem.builder()
+                .id("2")
+                .actionTitle ("Äkschn Zwo")
+                .imageName ("")
+                .actionDescription("Der Peter geht ab")
+                .childFriendly ("true")
+                .openingSeason ("Von O bis O")
+                .openingHours ("24/7")
+                .estDuration ("2h")
+                .price ("ne Mark")
+                .homepage("www.de")
+                .build();
+        assertEquals(expected, actual);
+    }
 }

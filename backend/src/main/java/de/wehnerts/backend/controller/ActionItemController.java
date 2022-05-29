@@ -4,7 +4,6 @@ import de.wehnerts.backend.dto.NewActionItemDto;
 import de.wehnerts.backend.model.ActionItem;
 import de.wehnerts.backend.service.ActionItemService;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -33,5 +32,9 @@ public class ActionItemController {
     @DeleteMapping ("{id}")
     public void deleteActionitemById(@PathVariable String id){
         actionItemService.deleteActionitemById(id);
+    }
+    @PutMapping ()
+    public ActionItem updateActionItemById(@RequestBody ActionItem changedItem){
+       return actionItemService.updateActionItemById(changedItem);
     }
 }

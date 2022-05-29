@@ -3,14 +3,15 @@
     background-color: #0EB1D2;
     color:#2C1A1D;
     margin: 10px 10px 10px 10px;
-    box-shadow: #F6E27F 2px 2px 3px;
+    box-shadow: #847d61 4px 4px ;
     align-items: center ;
     flex-direction: column;
-    border-color: #857E61;
-    border-width: thick;
+    border-color: #f4e07f;
+    border-width: medium;
     border-style: solid;
-    border-bottom-left-radius: 10% 10%;
-    border-top-right-radius: 10% 10%;
+
+    border-bottom-left-radius: 5px 5px;
+    border-top-right-radius: 5px 5px;
     border-bottom-right-radius: 10% 10%;
     border-top-left-radius: 10% 20%;
 }
