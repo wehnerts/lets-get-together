@@ -1,5 +1,5 @@
 import React, {FormEvent,  useState} from "react";
-import {ActionItemDto} from "../dto/ActionItemDto";
+import {ActionItemDto} from "../../dto/ActionItemDto";
 import {toast} from "react-toastify";
 import './NewActionItem.css'
 import {useNavigate} from "react-router"

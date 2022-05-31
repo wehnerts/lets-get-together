@@ -1,7 +1,7 @@
 import React, {FormEvent,  useState} from "react";
 import {toast} from "react-toastify";
 import './NewActionItem.css'
-import {ActionItem} from "../model/ActionItem";
+import {ActionItem} from "../../model/ActionItem";
 
 
 type EditActionItemProps ={

@@ -1,10 +1,10 @@
 import {useNavigate, useParams} from "react-router";
 import React, {useEffect, useState} from "react";
 import "./ActionItemDetailPage.css"
-import ActionItemDisplayDetails from "../components/ActionItemDisplayDetails";
+import ActionItemDisplayDetails from "../components/ActionItem/ActionItemDisplayDetails";
 import useActionItems from "../hooks/useActionItems";
 import useDetailedActionItem from "../hooks/useDetailedActionItem";
-import EditActionItem from "../components/EditActionItem";
+import EditActionItem from "../components/ActionItem/EditActionItem";
 
 export default function ActionItemDetailPage(){
     const {id} = useParams()

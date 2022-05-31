@@ -1,5 +1,5 @@
 import React from "react";
-import {ActionItem} from "../model/ActionItem";
+import {ActionItem} from "../../model/ActionItem";
 type ActionItemDisplayProps ={
     detailedActionItem: ActionItem
     toggleEdit:()=>void

@@ -1,6 +1,6 @@
-.action-item-card{
+.plan-item-card{
     display: flex;
-    background-color: #0EB1D2;
+    background-color: #F27059;
     color:#2C1A1D;
     margin: 10px 10px 10px 10px;
     box-shadow: #847d61 4px 4px ;
@@ -16,6 +16,6 @@
     border-top-left-radius: 10% 20%;
 }
 
-.action-title{
+.plan-title{
     font-weight: bold;
 }

@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {ActionItem} from "../model/ActionItem";
 import {toast} from "react-toastify";
-import {getActionItemBy} from "../services/api-service";
+import {getActionItemBy} from "../services/api-service-action";
 
 
 export default function useDetailedActionItem(){

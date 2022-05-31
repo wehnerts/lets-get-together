@@ -5,7 +5,6 @@ import de.wehnerts.backend.model.ActionItem;
 import de.wehnerts.backend.repository.ActionItemRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
