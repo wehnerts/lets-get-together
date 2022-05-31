@@ -1,4 +1,4 @@
-package de.wehnerts.backend.model;
+package de.wehnerts.backend.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,12 +7,15 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+
+
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Document(collection = "planItems")
-public class PlanItem {
+public class PlanItemDto {
     @Id
     private String id;
     private String actionItemId;
@@ -25,3 +28,5 @@ public class PlanItem {
     private String finalDate;
     private String status;
 }
+
+

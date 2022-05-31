@@ -1,7 +1,9 @@
 package de.wehnerts.backend.controller;
 
+import de.wehnerts.backend.dto.PlanItemDto;
 import de.wehnerts.backend.model.ActionItem;
 import de.wehnerts.backend.model.PlanItem;
+import de.wehnerts.backend.repository.ActionItemRepo;
 import de.wehnerts.backend.repository.PlanItemRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,12 +16,14 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class PlanItemControllerTest {
-    PlanItem plan1 = null;
-    PlanItem plan2 = null;
+    PlanItem plan1, plan2;
+    ActionItem item1, item2;
     @Autowired
     private WebTestClient testClient;
     @Autowired
     private PlanItemRepo planItemRepo;
+    @Autowired
+    private ActionItemRepo actionItemRepo;
     @BeforeEach
     public void cleanRepoAndSetItems(){
         planItemRepo.deleteAll();
@@ -45,6 +49,30 @@ class PlanItemControllerTest {
                 .finalDate("")
                 .status("DRAFT")
                 .build();
+        item1 =ActionItem.builder()
+                .id("1234567")
+                .actionTitle ("Äkschn One")
+                .imageName ("")
+                .actionDescription("Der Peter geht ab")
+                .childFriendly ("true")
+                .openingSeason ("Von O bis O")
+                .openingHours ("24/7")
+                .estDuration ("2h")
+                .price ("ne Mark")
+                .homepage("www.de")
+                .build();
+        item2 =ActionItem.builder()
+                .id("8834567")
+                .actionTitle ("Äkschn ZWoo")
+                .imageName ("")
+                .actionDescription("Der Peter geht ab")
+                .childFriendly ("true")
+                .openingSeason ("Von O bis O")
+                .openingHours ("24/7")
+                .estDuration ("2h")
+                .price ("ne Mark")
+                .homepage("www.de")
+                .build();
 
     }
 
@@ -53,18 +81,22 @@ class PlanItemControllerTest {
         //GIVEN
         planItemRepo.insert(plan1);
         planItemRepo.insert(plan2);
+        actionItemRepo.insert(item1);
+        actionItemRepo.insert(item2);
+
         //WHEN
-        List<PlanItem> actual = testClient.get()
+        List<PlanItemDto> actual = testClient.get()
                 .uri("api/planitem")
                 .exchange()
                 .expectStatus().is2xxSuccessful()
-                .expectBodyList(PlanItem.class)
+                .expectBodyList(PlanItemDto.class)
                 .returnResult()
                 .getResponseBody();
         //THEN
-        List<PlanItem> expected = List.of(PlanItem.builder()
+        List<PlanItemDto> expected = List.of(PlanItemDto.builder()
                 .id("4711")
                 .actionItemId("1234567")
+                .actionItemName("Äkschn One")
                 .planDescription("Wir Treffen uns beim Wirtshaus")
                 .plannedOn("29.05.2022")
                 .plannedBy("Sönke")
@@ -74,9 +106,10 @@ class PlanItemControllerTest {
                 .status("DRAFT")
                 .build(),
 
-                PlanItem.builder()
+                PlanItemDto.builder()
                 .id("4714")
                 .actionItemId("8834567")
+                .actionItemName("Äkschn ZWoo")
                 .planDescription("Wir Fahren Rad")
                 .plannedOn("30.05.2022")
                 .plannedBy("Robert")
@@ -86,7 +119,5 @@ class PlanItemControllerTest {
                 .status("DRAFT")
                 .build());
         assertEquals(expected, actual);
-
-
     }
 }

@@ -1,6 +1,6 @@
 package de.wehnerts.backend.controller;
 
-import de.wehnerts.backend.model.PlanItem;
+import de.wehnerts.backend.dto.PlanItemDto;
 import de.wehnerts.backend.service.PlanItemService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +17,7 @@ public class PlanItemController {
         this.planItemService = planItemService;
     }
     @GetMapping
-    public List<PlanItem> getPlanItems(){return planItemService.getPlanItems();
+    public List<PlanItemDto> getPlanItems(){return planItemService.getPlanItems();
     }
 
 }

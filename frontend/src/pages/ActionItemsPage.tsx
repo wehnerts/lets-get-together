@@ -1,5 +1,5 @@
 import {useNavigate} from "react-router"
-import ActionItemsGallery from "../components/ActionItemsGallery";
+import ActionItemsGallery from "../components/ActionItem/ActionItemsGallery";
 import React from "react";
 import {ActionItem} from "../model/ActionItem";
 import './ActionItemsPage.css'

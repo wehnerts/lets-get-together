@@ -1,4 +1,4 @@
-import {ActionItem} from "../model/ActionItem";
+import {ActionItem} from "../../model/ActionItem";
 import ActionItemCard from "./ActionItemCard";
 import './ActionItemGallery.css'
 

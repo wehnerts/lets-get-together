@@ -1,6 +1,6 @@
 import {ActionItem} from "../model/ActionItem";
 import {useEffect, useState} from "react";
-import {getAllActionItems, postActionItem, putActionItem, removeActionItem} from "../services/api-service";
+import {getAllActionItems, postActionItem, putActionItem, removeActionItem} from "../services/api-service-action";
 import {toast} from "react-toastify";
 import {ActionItemDto} from "../dto/ActionItemDto";
 
