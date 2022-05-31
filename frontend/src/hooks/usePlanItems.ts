@@ -9,7 +9,7 @@ export default function usePlanItems(){
     useEffect(()=>{
         getAllPlanItems()
             .then(allPlanI => setPlanItems(allPlanI))
-            .catch(()=>toast.error("Connection failed! Please retry later"))
+            .catch(()=>toast.error("Connection failed! Please try again later"))
     },[])
     return {planItems}
 }
