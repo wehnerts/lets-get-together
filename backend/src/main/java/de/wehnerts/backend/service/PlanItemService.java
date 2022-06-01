@@ -1,6 +1,7 @@
 package de.wehnerts.backend.service;
 
 import de.wehnerts.backend.dto.PlanItemDto;
+import de.wehnerts.backend.model.ActionItem;
 import de.wehnerts.backend.model.PlanItem;
 import de.wehnerts.backend.repository.ActionItemRepo;
 import de.wehnerts.backend.repository.PlanItemRepo;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -30,8 +32,7 @@ public class PlanItemService {
                 planItemDtos.add(PlanItemDto.builder()
                         .id(planItem.getId())
                         .actionItemId(planItem.getActionItemId())
-                        .actionItemName(actionItemRepo.findById(planItem.getActionItemId()).isPresent() ?
-                                actionItemRepo.findById(planItem.getActionItemId()).get().getActionTitle() : "Ups! ActionItem is lost!")
+                        .actionItemName(getActionItemName(planItem))
                         .planDescription(planItem.getPlanDescription())
                         .plannedOn(planItem.getPlannedOn())
                         .plannedBy(planItem.getPlannedBy())
@@ -41,5 +42,11 @@ public class PlanItemService {
                         .status(planItem.getStatus())
                         .build()));
         return planItemDtos;
+    }
+
+    private String getActionItemName(PlanItem planItem) {
+        Optional<ActionItem>optionalActionItem = actionItemRepo.findById(planItem.getActionItemId());
+        return optionalActionItem.isPresent() ?
+                optionalActionItem.get().getActionTitle() : "Ups! ActionItem is lost!";
     }
 }
