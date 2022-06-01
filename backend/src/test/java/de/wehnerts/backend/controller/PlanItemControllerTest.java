@@ -27,6 +27,7 @@ class PlanItemControllerTest {
     @BeforeEach
     public void cleanRepoAndSetItems(){
         planItemRepo.deleteAll();
+        actionItemRepo.deleteAll();
         plan1 = PlanItem.builder()
                 .id("4711")
                 .actionItemId("1234567")
