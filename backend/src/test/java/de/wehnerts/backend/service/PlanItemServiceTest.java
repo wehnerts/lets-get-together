@@ -33,6 +33,7 @@ class PlanItemServiceTest {
                 .finalDate("")
                 .status("DRAFT")
                 .build();
+
         PlanItem plan2 = PlanItem.builder()
                 .id("4714")
                 .actionItemId("8834567")
@@ -44,6 +45,7 @@ class PlanItemServiceTest {
                 .finalDate("")
                 .status("DRAFT")
                 .build();
+
         ActionItem item1 =ActionItem.builder()
                 .id("1234567")
                 .actionTitle ("Äkschn One")
@@ -56,6 +58,7 @@ class PlanItemServiceTest {
                 .price ("ne Mark")
                 .homepage("www.de")
                 .build();
+
         ActionItem item2 =ActionItem.builder()
                 .id("8834567")
                 .actionTitle ("Äkschn ZWoo")
@@ -68,12 +71,10 @@ class PlanItemServiceTest {
                 .price ("ne Mark")
                 .homepage("www.de")
                 .build();
+
         when(planItemRepo.findAll()).thenReturn(List.of(plan1, plan2));
-
-
         when(actionItemRepo.findById("1234567")).thenReturn(Optional.of(item1));
         when(actionItemRepo.findById("8834567")).thenReturn(Optional.of(item2));
-
 
         //WHEN
         List <PlanItemDto>actual=planItemService.getPlanItems();
@@ -91,6 +92,7 @@ class PlanItemServiceTest {
                 .finalDate("")
                 .status("DRAFT")
                 .build(),
+
         PlanItemDto.builder()
                 .id("4714")
                 .actionItemId("8834567")
@@ -105,6 +107,59 @@ class PlanItemServiceTest {
                 .build()
         );
         verify(planItemRepo).findAll();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void getPlanItemById() {
+        //GIVEN
+        PlanItem plan1 = PlanItem.builder()
+                .id("4711")
+                .actionItemId("1234567")
+                .planDescription("Wir Treffen uns beim Wirtshaus")
+                .plannedOn("29.05.2022")
+                .plannedBy("Sönke")
+                .finalGang(new String[]{"Sönke","Robert"})
+                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalDate("")
+                .status("DRAFT")
+                .build();
+
+        ActionItem item1 =ActionItem.builder()
+                .id("1234567")
+                .actionTitle ("Äkschn One")
+                .imageName ("")
+                .actionDescription("Der Peter geht ab")
+                .childFriendly ("true")
+                .openingSeason ("Von O bis O")
+                .openingHours ("24/7")
+                .estDuration ("2h")
+                .price ("ne Mark")
+                .homepage("www.de")
+                .build();
+
+        when(planItemRepo.findById("4711")).thenReturn(Optional.of(plan1));
+        when(actionItemRepo.findById("1234567")).thenReturn(Optional.of(item1));
+
+        //WHEN
+        PlanItemDto actual=planItemService.getPlanItemById("4711");
+
+        //THEN
+        PlanItemDto expected = PlanItemDto.builder()
+                        .id("4711")
+                        .actionItemId("1234567")
+                        .actionItemName("Äkschn One")
+                        .planDescription("Wir Treffen uns beim Wirtshaus")
+                        .plannedOn("29.05.2022")
+                        .plannedBy("Sönke")
+                        .finalGang(new String[]{"Sönke","Robert"})
+                        .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                        .finalDate("")
+                        .status("DRAFT")
+                        .build();
+
+
+        verify(planItemRepo).findById("4711");
         assertEquals(expected, actual);
     }
 }
