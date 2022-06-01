@@ -120,4 +120,82 @@ class PlanItemControllerTest {
                 .build());
         assertEquals(expected, actual);
     }
+
+    @Test
+    void getPlanItemById_whenID_is_OK() {
+        //GIVEN
+        planItemRepo.insert(plan1);
+        planItemRepo.insert(plan2);
+        actionItemRepo.insert(item1);
+        actionItemRepo.insert(item2);
+        //WHEN
+        PlanItemDto actual = testClient.get()
+                .uri("/api/planitem/"+"4711")
+                .exchange()
+                .expectStatus().is2xxSuccessful()
+                .expectBody(PlanItemDto.class)
+                .returnResult()
+                .getResponseBody();
+        //THEN
+        PlanItemDto expected = PlanItemDto.builder()
+                .id("4711")
+                .actionItemId("1234567")
+                .actionItemName("Äkschn One")
+                .planDescription("Wir Treffen uns beim Wirtshaus")
+                .plannedOn("29.05.2022")
+                .plannedBy("Sönke")
+                .finalGang(new String[]{"Sönke","Robert"})
+                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalDate("")
+                .status("DRAFT")
+                .build();
+
+        assertEquals(expected, actual);
+
+    }
+    @Test
+    void getPlanItemById_whenID_is_NotOK_should_throw_Exception() {
+        //GIVEN
+        planItemRepo.insert(plan1);
+        planItemRepo.insert(plan2);
+        actionItemRepo.insert(item1);
+        actionItemRepo.insert(item2);
+        //WHEN
+        testClient.get()
+                .uri("/api/planitem/"+"4712")
+                .exchange()
+                .expectStatus().is5xxServerError();
+        //THEN
+
+    }
+    @Test
+    void getPlanItemById_whenActionID_is_NotOK_should_throw_Exception() {
+        //GIVEN
+        plan1 = PlanItem.builder()
+                .id("4711")
+                .actionItemId("12")
+                .planDescription("Wir Treffen uns beim Wirtshaus")
+                .plannedOn("29.05.2022")
+                .plannedBy("Sönke")
+                .finalGang(new String[]{"Sönke","Robert"})
+                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalDate("")
+                .status("DRAFT")
+                .build();
+        planItemRepo.insert(plan1);
+        planItemRepo.insert(plan2);
+        actionItemRepo.insert(item1);
+        actionItemRepo.insert(item2);
+        //WHEN
+        PlanItemDto actual = testClient.get()
+                .uri("/api/planitem/"+"4711")
+                .exchange()
+                .expectStatus().is2xxSuccessful()
+                .expectBody(PlanItemDto.class)
+                .returnResult()
+                .getResponseBody();
+        //THEN
+        assertNotNull(actual);
+        assertEquals("Ups! ActionItem is lost!", actual.getActionItemName());
+    }
 }

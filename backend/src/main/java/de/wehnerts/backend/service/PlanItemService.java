@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
 @Service
 public class PlanItemService {
     private final PlanItemRepo planItemRepo;
@@ -43,10 +42,35 @@ public class PlanItemService {
                         .build()));
         return planItemDtos;
     }
-
     private String getActionItemName(PlanItem planItem) {
         Optional<ActionItem>optionalActionItem = actionItemRepo.findById(planItem.getActionItemId());
         return optionalActionItem.isPresent() ?
                 optionalActionItem.get().getActionTitle() : "Ups! ActionItem is lost!";
     }
+
+    public PlanItemDto getPlanItemById(String id) {
+        Optional<PlanItem> optionalPlanItem = planItemRepo.findById(id);
+        if (optionalPlanItem.isPresent()) {
+            return PlanItemDto.builder()
+                    .id(optionalPlanItem.get().getId())
+                    .actionItemId(optionalPlanItem.get().getActionItemId())
+                    .actionItemName(getActionItemNameById(optionalPlanItem.get().getActionItemId()))
+                    .planDescription(optionalPlanItem.get().getPlanDescription())
+                    .plannedOn(optionalPlanItem.get().getPlannedOn())
+                    .plannedBy(optionalPlanItem.get().getPlannedBy())
+                    .finalGang(optionalPlanItem.get().getFinalGang())
+                    .dateOptions(optionalPlanItem.get().getDateOptions())
+                    .finalDate(optionalPlanItem.get().getFinalDate())
+                    .status(optionalPlanItem.get().getStatus())
+                    .build();
+        } else {
+            throw new IllegalArgumentException("Plan Item is missing!");
+        }
+    }
+    private String getActionItemNameById(String id) {
+        Optional<ActionItem>optionalActionItem = actionItemRepo.findById(id);
+        return optionalActionItem.isPresent() ?
+                optionalActionItem.get().getActionTitle() : "Ups! ActionItem is lost!";
+    }
+
 }
