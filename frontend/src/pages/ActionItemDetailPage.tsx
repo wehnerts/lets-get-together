@@ -6,6 +6,9 @@ import ActionItemDisplayDetails from "../components/ActionItem/ActionItemDisplay
 import useDetailedActionItem from "../hooks/useDetailedActionItem";
 import EditActionItem from "../components/ActionItem/EditActionItem";
 import {ActionItem} from "../model/ActionItem";
+import Box from "@mui/material/Box";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import Button from "@mui/material/Button";
 
 
 type ActionItemDetailProps = {
@@ -35,13 +38,31 @@ export default function ActionItemDetailPage({deleteActionItem, editActionItem}:
            <div>
                {editingEnabled
                    ? <EditActionItem editActionItem={editActionItem} item={detailedActionItem}/>
-                   : <ActionItemDisplayDetails detailedActionItem={detailedActionItem}
-                                               toggleEdit={toggleEdit}/>}
+                   : <ActionItemDisplayDetails detailedActionItem={detailedActionItem}/>}
            </div>}
-           {detailedActionItem&&
-           <button onClick={() => deleteActionItem(detailedActionItem.id)}> ❌ </button>}
 
-           <button onClick={() => navigate(-1)}>Back</button>
+           <Box
+               sx={{
+                   outlineColor:"#F6E27F",
+                   display: 'flex',
+                   flexDirection: 'column',
+                   alignItems: 'center',
+                   '& > *': {
+                       m: 1
+
+                   }
+               }}
+           >
+               <ButtonGroup  variant="text" aria-label="text button group" sx={{outlineColor: "#F6E27F"}}>
+                   <Button sx={{color: "#F6E27F"}} onClick={() => navigate(-1)}>Back</Button>
+                   {editingEnabled ? detailedActionItem&&
+                   <Button sx={{color: "#F6E27F"}} onClick={() => deleteActionItem(detailedActionItem.id)} >Delete Item</Button>:<Button sx={{color: "#F6E27F"}} disabled={true}>Delete Item</Button>}
+                   {editingEnabled ? <Button sx={{color: "#F6E27F"}} type={"submit"} form={"editActionItem"}>Submit</Button>:<Button disabled={true} sx={{color: "#F6E27F"}} onClick={toggleEdit}>Submit</Button>}
+                   <Button sx={{color: "#F6E27F"}} onClick={toggleEdit}>{editingEnabled?"cancel":"Edit"}</Button>
+               </ButtonGroup>
+           </Box>
+
+
        </div>
    )
 }

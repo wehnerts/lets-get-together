@@ -46,7 +46,7 @@ export default function EditActionItem({item, editActionItem}:EditActionItemProp
 
     return (
         <div className={"new-action-item-details"}>
-            <form onSubmit={onEdit}>
+            <form id="editActionItem" onSubmit={onEdit}>
                 <div>Action with id "{id}" ready for edit</div>
                 <div>Titel: <input type={"text"} placeholder="Add a new item" value={actionTitle} onChange={event => setActionTitle(event.target.value)} /></div>
                 <div>Beschreibung: <input type={"text"} placeholder="Add a new item" value={actionDescription} onChange={event => setActionDescription(event.target.value)} /></div>
@@ -58,7 +58,6 @@ export default function EditActionItem({item, editActionItem}:EditActionItemProp
                 <div>Homepage: <input type={"text"} placeholder="Add a new item" value={homepage} onChange={event => setHomepage(event.target.value)} /></div>
                 <button type={"submit"}>Submit</button>
             </form>
-
         </div>
     )
 }
