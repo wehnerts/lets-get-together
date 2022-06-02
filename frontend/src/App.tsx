@@ -12,18 +12,21 @@ import ActionItemDetailPage from './pages/ActionItemDetailPage';
 import PlanItemsPage from './pages/PlanItemsPage';
 import NewActionItem from './components/ActionItem/NewActionItem';
 import usePlanItems from "./hooks/usePlanItems";
+import PlanItemDetailPage from "./pages/PlanItemDetailPage";
 
 export default function App() {
-const {addNewActionItem, actionItems}= useActionItems()
+const {addNewActionItem, actionItems, deleteActionItem, editActionItem}= useActionItems()
 const {planItems}=usePlanItems()
+
     return (
     <div className="App">
         <TitleBar/>
             <Routes>
                 <Route path={"/"} element={<MainPage/>}/>
                 <Route path={"/actions"} element={<ActionItemsPage actionItems={actionItems}/>}/>
-                <Route path={'/actionitem/:id'} element={<ActionItemDetailPage/>}/>
+                <Route path={'/actionitem/:id'} element={<ActionItemDetailPage editActionItem={editActionItem} deleteActionItem={deleteActionItem}/>}/>
                 <Route path={"/plans"} element={<PlanItemsPage planItems={planItems}/>}/>
+                <Route path={'/planItem/:id'} element={<PlanItemDetailPage/>}/>
                 <Route path={"/new-action"} element={<NewActionItem addNewActionItem={addNewActionItem}/>}/>
             </Routes>
             <ToastContainer/>
