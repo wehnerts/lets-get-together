@@ -1,13 +1,41 @@
-import {Link} from "react-router-dom";
+
+import * as React from 'react';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+
 
 export default function MainPage(){
     return(
-        <div className={"navi-buttons"}>
-            <Link to="/actions"><button type="button">Actions</button> </Link>
-            <Link to="/plans"><button type="button">Plans</button></Link>
-        </div>
+        <div>
 
+        <div className={"navi-buttons"}>
+            <Box
+                sx={{
+                    outlineColor:"#F6E27F",
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    '& > *': {
+                        m: 1
+
+                    }
+                }}
+            >
+                <ButtonGroup  variant="text" aria-label="text button group" sx={{outlineColor: "#F6E27F"}}>
+                    <Button sx={{color: "#F6E27F"}} >Actions</Button>
+                    <Button sx={{color: "#F6E27F"}}>Plans</Button>
+                    <Button sx={{color: "#F6E27F"}}>Delete</Button>
+                </ButtonGroup>
+            </Box>
+        </div>
+        </div>
     )
 }
+
+
+
+
+
 
 
