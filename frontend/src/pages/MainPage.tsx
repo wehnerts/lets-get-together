@@ -1,4 +1,4 @@
-
+import {useNavigate} from "react-router"
 import * as React from 'react';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Box from '@mui/material/Box';
@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 
 
 export default function MainPage(){
+    const navigate = useNavigate()
     return(
         <div>
 
@@ -23,9 +24,8 @@ export default function MainPage(){
                 }}
             >
                 <ButtonGroup  variant="text" aria-label="text button group" sx={{outlineColor: "#F6E27F"}}>
-                    <Button sx={{color: "#F6E27F"}} >Actions</Button>
-                    <Button sx={{color: "#F6E27F"}}>Plans</Button>
-                    <Button sx={{color: "#F6E27F"}}>Delete</Button>
+                    <Button sx={{color: "#F6E27F"}} onClick={() => navigate("/actions")}>Actions</Button>
+                    <Button sx={{color: "#F6E27F"}} onClick={() => navigate("/plans")}>Plans</Button>
                 </ButtonGroup>
             </Box>
         </div>
