@@ -38,8 +38,7 @@ export default function ActionItemDetailPage({deleteActionItem, editActionItem}:
            <div>
                {editingEnabled
                    ? <EditActionItem editActionItem={editActionItem} item={detailedActionItem}/>
-                   : <ActionItemDisplayDetails detailedActionItem={detailedActionItem}
-                                               toggleEdit={toggleEdit}/>}
+                   : <ActionItemDisplayDetails detailedActionItem={detailedActionItem}/>}
            </div>}
 
            <Box
@@ -56,7 +55,6 @@ export default function ActionItemDetailPage({deleteActionItem, editActionItem}:
            >
                <ButtonGroup  variant="text" aria-label="text button group" sx={{outlineColor: "#F6E27F"}}>
                    <Button sx={{color: "#F6E27F"}} onClick={() => navigate(-1)}>Back</Button>
-
                    {editingEnabled ? detailedActionItem&&
                    <Button sx={{color: "#F6E27F"}} onClick={() => deleteActionItem(detailedActionItem.id)} >Delete Item</Button>:<Button sx={{color: "#F6E27F"}} disabled={true}>Delete Item</Button>}
                    {editingEnabled ? <Button sx={{color: "#F6E27F"}} type={"submit"} form={"editActionItem"}>Submit</Button>:<Button disabled={true} sx={{color: "#F6E27F"}} onClick={toggleEdit}>Submit</Button>}
