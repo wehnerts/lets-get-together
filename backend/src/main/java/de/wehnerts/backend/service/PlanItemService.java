@@ -7,7 +7,6 @@ import de.wehnerts.backend.repository.ActionItemRepo;
 import de.wehnerts.backend.repository.PlanItemRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -70,7 +69,18 @@ public class PlanItemService {
     private String getActionItemNameById(String id) {
         Optional<ActionItem>optionalActionItem = actionItemRepo.findById(id);
         return optionalActionItem.isPresent() ?
-                optionalActionItem.get().getActionTitle() : "Ups! ActionItem is lost!";
+               optionalActionItem.get().getActionTitle() : "Ups! ActionItem is lost!";
     }
 
+    public PlanItem addPlanItem(PlanItem planItem) {
+        return planItemRepo.insert(planItem);
+    }
+
+    public void deletePlanById(String id) {
+        planItemRepo.deleteById(id);
+    }
+
+    public PlanItem updatePlanItem(PlanItem changedPlanItem) {
+        return planItemRepo.save(changedPlanItem);
+    }
 }

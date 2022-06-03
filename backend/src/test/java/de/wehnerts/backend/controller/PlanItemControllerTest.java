@@ -161,12 +161,12 @@ class PlanItemControllerTest {
         planItemRepo.insert(plan2);
         actionItemRepo.insert(item1);
         actionItemRepo.insert(item2);
-        //WHEN
+        //WHEN//THEN
         testClient.get()
                 .uri("/api/planitem/"+"4712")
                 .exchange()
                 .expectStatus().is5xxServerError();
-        //THEN
+
 
     }
     @Test
@@ -198,5 +198,104 @@ class PlanItemControllerTest {
         //THEN
         assertNotNull(actual);
         assertEquals("Ups! ActionItem is lost!", actual.getActionItemName());
+    }
+
+    @Test
+    void addPlanItem() {
+        //GIVEN
+        PlanItem item1 = PlanItem.builder()
+                .actionItemId("4711")
+                .planDescription("description")
+                .plannedOn("today")
+                .plannedBy("Mork")
+                .finalGang(new String[]{"Sönke","Robert"})
+                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalDate("")
+                .status("DRAFT")
+                .build();
+        //WHEN
+        PlanItem actual = testClient.post()
+                .uri("api/planitem")
+                .bodyValue(item1)
+                .exchange()
+                .expectStatus().is2xxSuccessful()
+                .expectBody(PlanItem.class)
+                .returnResult()
+                .getResponseBody();
+        //THEN
+        assertNotNull(actual);
+        assertNotNull(actual.getId());
+        assertEquals(24, actual.getId().length());
+        PlanItem expected = PlanItem.builder()
+                .id(actual.getId())
+                .actionItemId("4711")
+                .planDescription("description")
+                .plannedOn("today")
+                .plannedBy("Mork")
+                .finalGang(new String[]{"Sönke","Robert"})
+                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalDate("")
+                .status("DRAFT")
+                .build();
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    void deletePlanItemById() {
+        //GIVEN
+        PlanItem item1 = PlanItem.builder()
+                .actionItemId("4711")
+                .planDescription("description")
+                .plannedOn("today")
+                .plannedBy("Mork")
+                .finalGang(new String[]{"Sönke","Robert"})
+                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalDate("")
+                .status("DRAFT")
+                .build();
+
+        PlanItem actual = testClient.post()
+                .uri("api/planitem")
+                .bodyValue(item1)
+                .exchange()
+                .expectStatus().is2xxSuccessful()
+                .expectBody(PlanItem.class)
+                .returnResult()
+                .getResponseBody();
+        //WHEN
+        assertNotNull(actual);
+        testClient.delete()
+                .uri("/api/planitem/"+actual.getId())
+                .exchange()
+        //THEN
+                .expectStatus().is2xxSuccessful();
+    }
+
+    @Test
+    void updatePlanItem() {
+        //GIVEN
+        planItemRepo.insert(plan1);
+        PlanItem newplan1 = PlanItem.builder()
+                .id("4711")
+                .actionItemId("1234567")
+                .planDescription("Wir Treffen uns irgendwo")
+                .plannedOn("25.05.2022")
+                .plannedBy("Sönke")
+                .finalGang(new String[]{"Sönke","Robert"})
+                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalDate("")
+                .status("DRAFT")
+                .build();
+        //WHEN
+        PlanItem actual = testClient.put()
+                .uri("api/planitem")
+                .bodyValue(newplan1)
+                .exchange()
+                .expectStatus().is2xxSuccessful()
+                .expectBody(PlanItem.class)
+                .returnResult()
+                .getResponseBody();
+        //THEN
+        assertEquals(actual, newplan1);
     }
 }
