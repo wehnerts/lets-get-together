@@ -3,7 +3,6 @@ package de.wehnerts.backend.service;
 import de.wehnerts.backend.model.MemberWorkItem;
 import de.wehnerts.backend.repository.MembersRepo;
 import org.junit.jupiter.api.Test;
-
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
