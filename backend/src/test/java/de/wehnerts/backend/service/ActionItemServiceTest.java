@@ -131,7 +131,6 @@ class ActionItemServiceTest {
     void addActionItem(){
         //GIVEN
         ActionItem item = ActionItem.builder()
-
                 .actionTitle ("Äkschn Zwo")
                 .imageName ("")
                 .actionDescription("Der Peter geht ab")

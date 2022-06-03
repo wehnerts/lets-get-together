@@ -1,12 +1,9 @@
 package de.wehnerts.backend.controller;
 
 import de.wehnerts.backend.dto.PlanItemDto;
+import de.wehnerts.backend.model.PlanItem;
 import de.wehnerts.backend.service.PlanItemService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
@@ -27,4 +24,17 @@ public class PlanItemController {
         return planItemService.getPlanItemById(id);
     }
 
+    @PostMapping
+    public PlanItem addPlanItem(@RequestBody PlanItem newPlanItem){
+          return planItemService.addPlanItem(newPlanItem);
+    }
+
+    @DeleteMapping("{id}")
+    public void deletePlanItemById(@PathVariable String id){
+        planItemService.deletePlanById(id);
+    }
+
+    @PutMapping PlanItem updatePlanItem(@RequestBody PlanItem changedPlanItem){
+          return planItemService.updatePlanItem(changedPlanItem);
+    }
 }

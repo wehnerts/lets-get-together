@@ -7,10 +7,8 @@ import de.wehnerts.backend.repository.ActionItemRepo;
 import de.wehnerts.backend.repository.PlanItemRepo;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import java.util.List;
 import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -160,6 +158,106 @@ class PlanItemServiceTest {
 
 
         verify(planItemRepo).findById("4711");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void addPlanItem() {
+        //GIVEN
+        PlanItem newplan1 = PlanItem.builder()
+                .actionItemId("1234567")
+                .planDescription("Wir Treffen uns irgendwo")
+                .plannedOn("25.05.2022")
+                .plannedBy("Sönke")
+                .finalGang(new String[]{"Sönke","Robert"})
+                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalDate("")
+                .status("DRAFT")
+                .build();
+        when(planItemRepo.insert(newplan1)).thenReturn(PlanItem.builder()
+                .id("4711")
+                .actionItemId("1234567")
+                .planDescription("Wir Treffen uns irgendwo")
+                .plannedOn("25.05.2022")
+                .plannedBy("Sönke")
+                .finalGang(new String[]{"Sönke","Robert"})
+                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalDate("")
+                .status("DRAFT")
+                .build());
+        //WHEN
+        PlanItem newPlan = PlanItem.builder()
+                .actionItemId("1234567")
+                .planDescription("Wir Treffen uns irgendwo")
+                .plannedOn("25.05.2022")
+                .plannedBy("Sönke")
+                .finalGang(new String[]{"Sönke","Robert"})
+                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalDate("")
+                .status("DRAFT")
+                .build();
+        PlanItem actual = planItemService.addPlanItem(newPlan);
+        PlanItem expected = (PlanItem.builder()
+                .id("4711")
+                .actionItemId("1234567")
+                .planDescription("Wir Treffen uns irgendwo")
+                .plannedOn("25.05.2022")
+                .plannedBy("Sönke")
+                .finalGang(new String[]{"Sönke","Robert"})
+                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalDate("")
+                .status("DRAFT")
+                .build());
+        verify(planItemRepo).insert(newplan1);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void deletePlanById() {
+        planItemService.deletePlanById("12");
+        //Then
+        verify(planItemRepo).deleteById("12");
+    }
+
+    @Test
+    void updatePlanItem() {
+        //GIVEN
+        PlanItem newplan1 = PlanItem.builder()
+                .id("4711")
+                .actionItemId("1234567")
+                .planDescription("Wir Treffen uns irgendwo")
+                .plannedOn("25.05.2022")
+                .plannedBy("Sönke")
+                .finalGang(new String[]{"Sönke","Robert"})
+                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalDate("")
+                .status("DRAFT")
+                .build();
+        when(planItemRepo.save(newplan1)).thenReturn(PlanItem.builder()
+                .id("4711")
+                .actionItemId("1234567")
+                .planDescription("Wir Treffen uns irgendwo")
+                .plannedOn("25.05.2022")
+                .plannedBy("Sönke")
+                .finalGang(new String[]{"Sönke","Robert"})
+                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalDate("")
+                .status("DRAFT")
+                .build());
+        PlanItem expected = PlanItem.builder()
+                .id("4711")
+                .actionItemId("1234567")
+                .planDescription("Wir Treffen uns irgendwo")
+                .plannedOn("25.05.2022")
+                .plannedBy("Sönke")
+                .finalGang(new String[]{"Sönke","Robert"})
+                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalDate("")
+                .status("DRAFT")
+                .build();
+        //WHEN
+        PlanItem actual = planItemService.updatePlanItem(newplan1);
+        //THEN
         assertEquals(expected, actual);
     }
 }
