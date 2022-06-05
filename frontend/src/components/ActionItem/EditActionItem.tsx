@@ -3,7 +3,6 @@ import {toast} from "react-toastify";
 import './NewActionItem.css'
 import {ActionItem} from "../../model/ActionItem";
 
-
 type EditActionItemProps ={
     item:ActionItem
     editActionItem: (editedActionItem:ActionItem)=>void

@@ -1,10 +1,9 @@
-import {MemberForWork} from "./MemberForWork";
-import {DateOption} from "./DateOption";
+import {MemberForWork} from "../model/MemberForWork";
+import {DateOption} from "../model/DateOption";
 
-export type PlanItem = {
-    id: string;
+export type PlanItemDto = {
+
     actionItemId: string;
-    actionItemName: string;
     planDescription: string;
     plannedOn:string;
     plannedBy:string;
