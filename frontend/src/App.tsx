@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {Routes} from 'react-router-dom';
 import {ToastContainer} from 'react-toastify';
 import './App.css';
@@ -14,7 +14,6 @@ import NewActionItem from './components/ActionItem/NewActionItem';
 import usePlanItems from "./hooks/usePlanItems";
 import PlanItemDetailPage from "./pages/PlanItemDetailPage";
 import NewPlanItem from "./pages/NewPlanItem";
-import {getAllMembers} from "./services/api-service-members";
 import useMembers from "./hooks/useMembers";
 
 export default function App() {
@@ -32,7 +31,7 @@ const {membersForWork}=useMembers()
 
                 <Route path={"/plans"} element={<PlanItemsPage planItems={planItems}/>}/>
                 <Route path={'/planItem/:id'} element={<PlanItemDetailPage/>}/>
-                <Route path={'/new-plan/:actionId'} element={<NewPlanItem membersForWork={membersForWork}/>}/>
+                <Route path={'/new-plan/:actionId'} element={<NewPlanItem membersForWork={membersForWork} />}/>
 
             </Routes>
             <ToastContainer/>
