@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,8 +22,8 @@ public class ReceivedPlanItem {
     private String planDescription;
     private String plannedOn;
     private String plannedBy;
-    private String[] finalGang;
-    private String[] dateOptions;
+    private List<MemberWorkItem> finalGang;
+    private List <DateOption> dateOptions;
     private String finalDate;
     private String status;
 }

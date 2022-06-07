@@ -2,6 +2,8 @@ package de.wehnerts.backend.controller;
 
 import de.wehnerts.backend.dto.PlanItemDto;
 import de.wehnerts.backend.model.ActionItem;
+import de.wehnerts.backend.model.DateOption;
+import de.wehnerts.backend.model.MemberWorkItem;
 import de.wehnerts.backend.model.PlanItem;
 import de.wehnerts.backend.repository.ActionItemRepo;
 import de.wehnerts.backend.repository.PlanItemRepo;
@@ -34,8 +36,25 @@ class PlanItemControllerTest {
                 .planDescription("Wir Treffen uns beim Wirtshaus")
                 .plannedOn("29.05.2022")
                 .plannedBy("Sönke")
-                .finalGang(new String[]{"Sönke","Robert"})
-                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalGang(List.of(
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build(),
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build()))
+                .dateOptions(List.of(
+                        DateOption.builder()
+                                .optionName("1")
+                                .optionDate("21.10.2022")
+                                .build(),
+                        DateOption.builder()
+                                .optionName("2")
+                                .optionDate("22.10.2022")
+                                .build()
+                ))
                 .finalDate("")
                 .status("DRAFT")
                 .build();
@@ -45,8 +64,25 @@ class PlanItemControllerTest {
                 .planDescription("Wir Fahren Rad")
                 .plannedOn("30.05.2022")
                 .plannedBy("Robert")
-                .finalGang(new String[]{"Tomm","Sönke","Robert"})
-                .dateOptions(new String[]{"12.06.2022","19.06.2022"})
+                .finalGang(List.of(
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build(),
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build()))
+                .dateOptions(List.of(
+                        DateOption.builder()
+                                .optionName("1")
+                                .optionDate("21.10.2022")
+                                .build(),
+                        DateOption.builder()
+                                .optionName("2")
+                                .optionDate("22.10.2022")
+                                .build()
+                ))
                 .finalDate("")
                 .status("DRAFT")
                 .build();
@@ -101,8 +137,25 @@ class PlanItemControllerTest {
                 .planDescription("Wir Treffen uns beim Wirtshaus")
                 .plannedOn("29.05.2022")
                 .plannedBy("Sönke")
-                .finalGang(new String[]{"Sönke","Robert"})
-                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalGang(List.of(
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build(),
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build()))
+                .dateOptions(List.of(
+                        DateOption.builder()
+                                .optionName("1")
+                                .optionDate("21.10.2022")
+                            .build(),
+                        DateOption.builder()
+                                .optionName("2")
+                                .optionDate("22.10.2022")
+                                .build()
+                        ))
                 .finalDate("")
                 .status("DRAFT")
                 .build(),
@@ -114,8 +167,25 @@ class PlanItemControllerTest {
                 .planDescription("Wir Fahren Rad")
                 .plannedOn("30.05.2022")
                 .plannedBy("Robert")
-                .finalGang(new String[]{"Tomm","Sönke","Robert"})
-                .dateOptions(new String[]{"12.06.2022","19.06.2022"})
+                        .finalGang(List.of(
+                                MemberWorkItem.builder()
+                                        .id("4711")
+                                        .username("Sönke")
+                                        .build(),
+                                MemberWorkItem.builder()
+                                        .id("4711")
+                                        .username("Sönke")
+                                        .build()))
+                        .dateOptions(List.of(
+                                DateOption.builder()
+                                        .optionName("1")
+                                        .optionDate("21.10.2022")
+                                        .build(),
+                                DateOption.builder()
+                                        .optionName("2")
+                                        .optionDate("22.10.2022")
+                                        .build()
+                        ))
                 .finalDate("")
                 .status("DRAFT")
                 .build());
@@ -145,8 +215,25 @@ class PlanItemControllerTest {
                 .planDescription("Wir Treffen uns beim Wirtshaus")
                 .plannedOn("29.05.2022")
                 .plannedBy("Sönke")
-                .finalGang(new String[]{"Sönke","Robert"})
-                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalGang(List.of(
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build(),
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build()))
+                .dateOptions(List.of(
+                        DateOption.builder()
+                                .optionName("1")
+                                .optionDate("21.10.2022")
+                                .build(),
+                        DateOption.builder()
+                                .optionName("2")
+                                .optionDate("22.10.2022")
+                                .build()
+                ))
                 .finalDate("")
                 .status("DRAFT")
                 .build();
@@ -178,8 +265,25 @@ class PlanItemControllerTest {
                 .planDescription("Wir Treffen uns beim Wirtshaus")
                 .plannedOn("29.05.2022")
                 .plannedBy("Sönke")
-                .finalGang(new String[]{"Sönke","Robert"})
-                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalGang(List.of(
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build(),
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build()))
+                .dateOptions(List.of(
+                        DateOption.builder()
+                                .optionName("1")
+                                .optionDate("21.10.2022")
+                                .build(),
+                        DateOption.builder()
+                                .optionName("2")
+                                .optionDate("22.10.2022")
+                                .build()
+                ))
                 .finalDate("")
                 .status("DRAFT")
                 .build();
@@ -208,8 +312,25 @@ class PlanItemControllerTest {
                 .planDescription("description")
                 .plannedOn("today")
                 .plannedBy("Mork")
-                .finalGang(new String[]{"Sönke","Robert"})
-                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalGang(List.of(
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build(),
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build()))
+                .dateOptions(List.of(
+                        DateOption.builder()
+                                .optionName("1")
+                                .optionDate("21.10.2022")
+                                .build(),
+                        DateOption.builder()
+                                .optionName("2")
+                                .optionDate("22.10.2022")
+                                .build()
+                ))
                 .finalDate("")
                 .status("DRAFT")
                 .build();
@@ -232,8 +353,25 @@ class PlanItemControllerTest {
                 .planDescription("description")
                 .plannedOn("today")
                 .plannedBy("Mork")
-                .finalGang(new String[]{"Sönke","Robert"})
-                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalGang(List.of(
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build(),
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build()))
+                .dateOptions(List.of(
+                        DateOption.builder()
+                                .optionName("1")
+                                .optionDate("21.10.2022")
+                                .build(),
+                        DateOption.builder()
+                                .optionName("2")
+                                .optionDate("22.10.2022")
+                                .build()
+                ))
                 .finalDate("")
                 .status("DRAFT")
                 .build();
@@ -248,8 +386,25 @@ class PlanItemControllerTest {
                 .planDescription("description")
                 .plannedOn("today")
                 .plannedBy("Mork")
-                .finalGang(new String[]{"Sönke","Robert"})
-                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalGang(List.of(
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build(),
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build()))
+                .dateOptions(List.of(
+                        DateOption.builder()
+                                .optionName("1")
+                                .optionDate("21.10.2022")
+                                .build(),
+                        DateOption.builder()
+                                .optionName("2")
+                                .optionDate("22.10.2022")
+                                .build()
+                ))
                 .finalDate("")
                 .status("DRAFT")
                 .build();
@@ -281,8 +436,25 @@ class PlanItemControllerTest {
                 .planDescription("Wir Treffen uns irgendwo")
                 .plannedOn("25.05.2022")
                 .plannedBy("Sönke")
-                .finalGang(new String[]{"Sönke","Robert"})
-                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalGang(List.of(
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build(),
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build()))
+                .dateOptions(List.of(
+                        DateOption.builder()
+                                .optionName("1")
+                                .optionDate("21.10.2022")
+                                .build(),
+                        DateOption.builder()
+                                .optionName("2")
+                                .optionDate("22.10.2022")
+                                .build()
+                ))
                 .finalDate("")
                 .status("DRAFT")
                 .build();
