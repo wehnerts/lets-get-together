@@ -4,6 +4,7 @@ import {getAllActionItems, postActionItem, putActionItem, removeActionItem} from
 import {toast} from "react-toastify";
 import {ActionItemDto} from "../dto/ActionItemDto";
 
+
 export default function useActionItems(){
     const [actionItems, setActionItems] = useState<ActionItem[]>([])
 
@@ -13,8 +14,6 @@ export default function useActionItems(){
             .catch(()=>toast.error("Connection failed! Please retry later."))
 
     },[])
-
-
 
     const addNewActionItem = (newActionItem : ActionItemDto)=>{
         postActionItem(newActionItem)
@@ -37,11 +36,9 @@ export default function useActionItems(){
                 toast.success("Action item " +editEdItem.id+" updated")
                 return editEdItem})
             .catch(()=>{
-                toast.error("Update failed please try later")
+                toast.error("Update failed. Please try again later.")
             })
     }
-
-
 
     return {actionItems, addNewActionItem, deleteActionItem, editActionItem}
 }

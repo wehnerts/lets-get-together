@@ -19,6 +19,7 @@ export default function ActionItemDetailPage({deleteActionItem, editActionItem}:
     const {detailedActionItem, getActionItemById} = useDetailedActionItem()
     const navigate = useNavigate()
     const [editingEnabled, setEditingEnabled] = useState<boolean>(false);
+
     useEffect(() => {
         if (id) {
             getActionItemById(id)

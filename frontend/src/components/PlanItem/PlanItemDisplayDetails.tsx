@@ -1,25 +1,26 @@
 import {PlanItem} from "../../model/PlanItem";
 import React from "react";
 
-type PlanItemDisplayProps ={
+type PlanItemDisplayProps = {
     detailedPlanItem: PlanItem
 }
 
-export default function PlanItemDisplayDetails({detailedPlanItem}:PlanItemDisplayProps) {
+export default function PlanItemDisplayDetails({detailedPlanItem}: PlanItemDisplayProps) {
     return (
         <div className={"plan-item-details"}>
             <div>Details</div>
             <div className={"action-title"}>
-                <p>id: {detailedPlanItem.id}</p>
-                <p>ActionId: {detailedPlanItem.actionItemId}</p>
-                <p>Aktion: {detailedPlanItem.actionItemName}</p>
-                <p>Beschreibung: {detailedPlanItem.planDescription}</p>
-                <p>Geplant am: {detailedPlanItem.plannedOn}</p>
-                <p>Planer: {detailedPlanItem.plannedBy}</p>
-                <p>Teilnehmer: {detailedPlanItem.finalGang.filter(item=>(!item.isPlanned)).map(item=> <div key={item.id}>{item.username}</div>)}</p>
-                <p>Optionen: {detailedPlanItem.dateOptions.map( item=> <div key={item.optionName}>{item.optionName} {item.optionDate}</div>)}</p>
-                <p>Gewähltes Datum: {detailedPlanItem.finalDate}</p>
-                <p>Status: {detailedPlanItem.status}</p>
+                <div>id: {detailedPlanItem.id}</div>
+                <div>ActionId: {detailedPlanItem.actionItemId}</div>
+                <div>Aktion: {detailedPlanItem.actionItemName}</div>
+                <div>Beschreibung: {detailedPlanItem.planDescription}</div>
+                <div>Geplant am: {detailedPlanItem.plannedOn}</div>
+                <div>Planer: {detailedPlanItem.plannedBy}</div>
+                <div>Teilnehmer: {detailedPlanItem.finalGang.filter(item => (!item.isPlanned)).map(item => <div
+                    key={item.id}>{item.username}</div>)}</div>
+                <div>Optionen: {detailedPlanItem.dateOptions.map(item => <div
+                    key={item.optionName}>{item.optionName} {item.optionDate}</div>)}</div>
+                <div>Gewähltes Datum: {detailedPlanItem.finalDate}</div>
             </div>
         </div>
     )

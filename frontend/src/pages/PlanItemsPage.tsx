@@ -32,7 +32,6 @@ const PlanItemsPage=({planItems}:PlanItemProps)=>{
             >
                 <ButtonGroup  variant="text" aria-label="text button group" sx={{outlineColor: "#F6E27F"}}>
                     <Button sx={{color: "#F6E27F"}} onClick={()=>navigate(-1)}>Back</Button>
-
                 </ButtonGroup>
             </Box>
 
