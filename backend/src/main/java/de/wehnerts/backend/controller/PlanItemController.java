@@ -2,7 +2,6 @@ package de.wehnerts.backend.controller;
 
 import de.wehnerts.backend.dto.NewPlanItemDto;
 import de.wehnerts.backend.dto.PlanItemDto;
-import de.wehnerts.backend.model.PlanItem;
 import de.wehnerts.backend.service.PlanItemService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -35,7 +34,7 @@ public class PlanItemController {
         planItemService.deletePlanById(id);
     }
 
-    @PutMapping PlanItem updatePlanItem(@RequestBody PlanItem changedPlanItem){
+    @PutMapping PlanItemDto updatePlanItem(@RequestBody PlanItemDto changedPlanItem){
           return planItemService.updatePlanItem(changedPlanItem);
     }
 }

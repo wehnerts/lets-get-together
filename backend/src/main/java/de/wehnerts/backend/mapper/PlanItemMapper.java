@@ -28,12 +28,24 @@ public class PlanItemMapper {
                 .planDescription(planItem.getPlanDescription())
                 .plannedOn(planItem.getPlannedOn())
                 .plannedBy(planItem.getPlannedBy())
-                .finalGang(planItem.getFinalGang())//TODO: Member Work Item DTO erstellen
+                .finalGang(planItem.getFinalGang())
                 .dateOptions(planItem.getDateOptions())
                 .finalDate(planItem.getFinalDate())
                 .status(planItem.getStatus())
                 .build();
     }
 
-
+    public PlanItem mapToEntity(PlanItemDto planItemDto) {
+        return PlanItem.builder()
+                .id(planItemDto.getId())
+                .actionItemId(planItemDto.getActionItemId())
+                .planDescription(planItemDto.getPlanDescription())
+                .plannedOn(planItemDto.getPlannedOn())
+                .plannedBy(planItemDto.getPlannedBy())
+                .finalGang(planItemDto.getFinalGang())
+                .dateOptions(planItemDto.getDateOptions())
+                .finalDate(planItemDto.getFinalDate())
+                .status(planItemDto.getStatus())
+                .build();
+    }
 }

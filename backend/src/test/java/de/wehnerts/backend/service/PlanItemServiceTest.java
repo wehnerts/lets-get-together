@@ -9,8 +9,6 @@ import de.wehnerts.backend.model.MemberWorkItem;
 import de.wehnerts.backend.model.PlanItem;
 import de.wehnerts.backend.repository.ActionItemRepo;
 import de.wehnerts.backend.repository.PlanItemRepo;
-import org.junit.Ignore;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
@@ -24,8 +22,6 @@ class PlanItemServiceTest {
     private final ActionItemRepo actionItemRepo = mock(ActionItemRepo.class);
     private final PlanItemMapper planItemMapper = mock(PlanItemMapper.class);
     private final PlanItemService planItemService = new PlanItemService(planItemRepo, actionItemRepo, planItemMapper);
-
-
 
     @Test
     void getPlanItems() {
@@ -218,6 +214,36 @@ class PlanItemServiceTest {
                 .status("DRAFT")
                 .build();
 
+        PlanItemDto plan1Dto = PlanItemDto.builder()
+                .id("4711")
+                .actionItemId("1234567")
+                .actionItemName ("Äkschn One")
+                .planDescription("Wir Treffen uns beim Wirtshaus")
+                .plannedOn("29.05.2022")
+                .plannedBy("Sönke")
+                .finalGang(List.of(
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build(),
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build()))
+                .dateOptions(List.of(
+                        DateOption.builder()
+                                .optionName("1")
+                                .optionDate("21.10.2022")
+                                .build(),
+                        DateOption.builder()
+                                .optionName("2")
+                                .optionDate("22.10.2022")
+                                .build()
+                ))
+                .finalDate("")
+                .status("DRAFT")
+                .build();
+
         ActionItem item1 =ActionItem.builder()
                 .id("1234567")
                 .actionTitle ("Äkschn One")
@@ -233,6 +259,7 @@ class PlanItemServiceTest {
 
         when(planItemRepo.findById("4711")).thenReturn(Optional.of(plan1));
         when(actionItemRepo.findById("1234567")).thenReturn(Optional.of(item1));
+        when(planItemMapper.mapToDto(plan1, "Äkschn One")).thenReturn(plan1Dto);
 
         //WHEN
         PlanItemDto actual=planItemService.getPlanItemById("4711");
@@ -241,7 +268,7 @@ class PlanItemServiceTest {
         PlanItemDto expected = PlanItemDto.builder()
                         .id("4711")
                         .actionItemId("1234567")
-                        .actionItemName("Äkschn One")
+                        .actionItemName ("Äkschn One")
                         .planDescription("Wir Treffen uns beim Wirtshaus")
                         .plannedOn("29.05.2022")
                         .plannedBy("Sönke")
@@ -272,7 +299,6 @@ class PlanItemServiceTest {
         verify(planItemRepo).findById("4711");
         assertEquals(expected, actual);
     }
-
 
     @Test
     void addPlanItem() {
@@ -377,8 +403,8 @@ class PlanItemServiceTest {
                 .build();
 
         when(planItemMapper.mapToEntity(newPlanItemDto)).thenReturn(planItem);
-        when (planItemRepo.insert(planItem)).thenReturn(planItem);
-        when(planItemMapper.mapToDto(planItem, "Äkschn One" )).thenReturn(planItemDto);
+        when (planItemRepo.insert(any(PlanItem.class))).thenReturn(planItem);
+        when(planItemMapper.mapToDto(planItem, "Ups! ActionItem is lost!" )).thenReturn(planItemDto);
 
         //WHEN
 
@@ -453,7 +479,7 @@ class PlanItemServiceTest {
                 .finalDate("")
                 .status("DRAFT")
                 .build();
-        when(planItemRepo.save(newplan1)).thenReturn(PlanItem.builder()
+        PlanItemDto newplan1Dto = PlanItemDto.builder()
                 .id("4711")
                 .actionItemId("1234567")
                 .planDescription("Wir Treffen uns irgendwo")
@@ -480,8 +506,12 @@ class PlanItemServiceTest {
                 ))
                 .finalDate("")
                 .status("DRAFT")
-                .build());
-        PlanItem expected = PlanItem.builder()
+                .build();
+        when(planItemRepo.save(newplan1)).thenReturn(newplan1);
+        when(planItemMapper.mapToEntity(any(PlanItemDto.class))).thenReturn(newplan1);
+
+        when(planItemMapper.mapToDto(newplan1, "Ups! ActionItem is lost!" )).thenReturn(newplan1Dto);
+        PlanItemDto expected = PlanItemDto.builder()
                 .id("4711")
                 .actionItemId("1234567")
                 .planDescription("Wir Treffen uns irgendwo")
@@ -510,7 +540,7 @@ class PlanItemServiceTest {
                 .status("DRAFT")
                 .build();
         //WHEN
-        PlanItem actual = planItemService.updatePlanItem(newplan1);
+        PlanItemDto actual = planItemService.updatePlanItem(newplan1Dto);
         //THEN
         assertEquals(expected, actual);
     }
