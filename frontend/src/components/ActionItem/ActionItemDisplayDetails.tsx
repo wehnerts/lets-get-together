@@ -11,12 +11,12 @@ export default function ActionItemDisplayDetails({detailedActionItem}:ActionItem
                     <p>id: {detailedActionItem.id}</p>
                     <p>Title: {detailedActionItem.actionTitle}</p>
                     <p>Description: {detailedActionItem.actionDescription}</p>
-                    <p>{detailedActionItem.childFriendly}</p>
+                    <p>Kinder: {detailedActionItem.childFriendly}</p>
                     <p>Saison: {detailedActionItem.openingSeason}</p>
                     <p>Opening hours: {detailedActionItem.openingHours}</p>
                     <p>Estimated duration: {detailedActionItem.estDuration}</p>
                     <p>Price: {detailedActionItem.price}</p>
-                    <p>Homepage:
+                    <p>Homepage: &nbsp;
                         <a href={detailedActionItem.homepage}> {detailedActionItem.homepage}</a>
                     </p>
 

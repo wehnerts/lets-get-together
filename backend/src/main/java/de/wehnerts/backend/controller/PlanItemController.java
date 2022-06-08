@@ -1,13 +1,13 @@
 package de.wehnerts.backend.controller;
 
+import de.wehnerts.backend.dto.NewPlanItemDto;
 import de.wehnerts.backend.dto.PlanItemDto;
-import de.wehnerts.backend.model.PlanItem;
 import de.wehnerts.backend.service.PlanItemService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/planitem")
+@RequestMapping("api/planitems")
 public class PlanItemController {
     private final PlanItemService planItemService;
 
@@ -25,7 +25,7 @@ public class PlanItemController {
     }
 
     @PostMapping
-    public PlanItem addPlanItem(@RequestBody PlanItem newPlanItem){
+    public PlanItemDto addPlanItem(@RequestBody NewPlanItemDto newPlanItem){
           return planItemService.addPlanItem(newPlanItem);
     }
 
@@ -34,7 +34,7 @@ public class PlanItemController {
         planItemService.deletePlanById(id);
     }
 
-    @PutMapping PlanItem updatePlanItem(@RequestBody PlanItem changedPlanItem){
+    @PutMapping PlanItemDto updatePlanItem(@RequestBody PlanItemDto changedPlanItem){
           return planItemService.updatePlanItem(changedPlanItem);
     }
 }

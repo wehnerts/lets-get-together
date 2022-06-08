@@ -20,7 +20,6 @@ export default function ActionItemDetailPage({deleteActionItem, editActionItem}:
     const {detailedActionItem, getActionItemById} = useDetailedActionItem()
     const navigate = useNavigate()
     const [editingEnabled, setEditingEnabled] = useState<boolean>(false);
-
     useEffect(() => {
         if (id) {
             getActionItemById(id)
@@ -31,6 +30,7 @@ export default function ActionItemDetailPage({deleteActionItem, editActionItem}:
     const toggleEdit = () => {
         setEditingEnabled(!editingEnabled);
     }
+
 
    return(
        <div>
@@ -49,7 +49,6 @@ export default function ActionItemDetailPage({deleteActionItem, editActionItem}:
                    alignItems: 'center',
                    '& > *': {
                        m: 1
-
                    }
                }}
            >
@@ -57,12 +56,12 @@ export default function ActionItemDetailPage({deleteActionItem, editActionItem}:
                    <Button sx={{color: "#F6E27F"}} onClick={() => navigate(-1)}>Back</Button>
                    {editingEnabled ? detailedActionItem&&
                    <Button sx={{color: "#F6E27F"}} onClick={() => deleteActionItem(detailedActionItem.id)} >Delete Item</Button>:<Button sx={{color: "#F6E27F"}} disabled={true}>Delete Item</Button>}
-                   {editingEnabled ? <Button sx={{color: "#F6E27F"}} type={"submit"} form={"editActionItem"}>Submit</Button>:<Button disabled={true} sx={{color: "#F6E27F"}} onClick={toggleEdit}>Submit</Button>}
+                   {editingEnabled ? <Button sx={{color: "#F6E27F"}} type={"submit"} form={"editActionItem"}>Submit</Button>:<Button disabled={true}  sx={{color: "#F6E27F"}} onClick={toggleEdit}>Submit</Button>}
                    <Button sx={{color: "#F6E27F"}} onClick={toggleEdit}>{editingEnabled?"cancel":"Edit"}</Button>
+                   <Button sx={{color: "#F6E27F"}} onClick={() => { navigate(`/new-plan/${id}`)}}>New Plan</Button>
                </ButtonGroup>
            </Box>
-
-
        </div>
+
    )
 }

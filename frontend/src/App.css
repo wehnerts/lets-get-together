@@ -15,5 +15,12 @@
 }
 
 
+a:link{
+  color: cadetblue;
+}
+
+a:visited{
+  color: #435757;
+}
 
 

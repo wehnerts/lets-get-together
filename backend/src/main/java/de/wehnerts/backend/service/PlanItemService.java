@@ -1,6 +1,8 @@
 package de.wehnerts.backend.service;
 
+import de.wehnerts.backend.dto.NewPlanItemDto;
 import de.wehnerts.backend.dto.PlanItemDto;
+import de.wehnerts.backend.mapper.PlanItemMapper;
 import de.wehnerts.backend.model.ActionItem;
 import de.wehnerts.backend.model.PlanItem;
 import de.wehnerts.backend.repository.ActionItemRepo;
@@ -9,17 +11,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
 public class PlanItemService {
     private final PlanItemRepo planItemRepo;
     private final ActionItemRepo actionItemRepo;
+    private final PlanItemMapper planItemMapper;
 
     @Autowired
-    public PlanItemService(PlanItemRepo planItemRepo, ActionItemRepo actionItemRepo) {
+    public PlanItemService(PlanItemRepo planItemRepo, ActionItemRepo actionItemRepo, PlanItemMapper planItemMapper) {
         this.actionItemRepo = actionItemRepo;
         this.planItemRepo = planItemRepo;
+        this.planItemMapper = planItemMapper;
     }
 
     public List<PlanItemDto> getPlanItems() {
@@ -48,39 +53,35 @@ public class PlanItemService {
     }
 
     public PlanItemDto getPlanItemById(String id) {
-        Optional<PlanItem> optionalPlanItem = planItemRepo.findById(id);
-        if (optionalPlanItem.isPresent()) {
-            return PlanItemDto.builder()
-                    .id(optionalPlanItem.get().getId())
-                    .actionItemId(optionalPlanItem.get().getActionItemId())
-                    .actionItemName(getActionItemNameById(optionalPlanItem.get().getActionItemId()))
-                    .planDescription(optionalPlanItem.get().getPlanDescription())
-                    .plannedOn(optionalPlanItem.get().getPlannedOn())
-                    .plannedBy(optionalPlanItem.get().getPlannedBy())
-                    .finalGang(optionalPlanItem.get().getFinalGang())
-                    .dateOptions(optionalPlanItem.get().getDateOptions())
-                    .finalDate(optionalPlanItem.get().getFinalDate())
-                    .status(optionalPlanItem.get().getStatus())
-                    .build();
-        } else {
-            throw new IllegalArgumentException("Plan Item is missing!");
-        }
+       PlanItem planItem = planItemRepo.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Fehler!"));
+        String actionItemName = getActionItemNameById(planItem.getActionItemId());
+        return planItemMapper.mapToDto(planItem, actionItemName);
     }
+
     private String getActionItemNameById(String id) {
         Optional<ActionItem>optionalActionItem = actionItemRepo.findById(id);
         return optionalActionItem.isPresent() ?
                optionalActionItem.get().getActionTitle() : "Ups! ActionItem is lost!";
     }
 
-    public PlanItem addPlanItem(PlanItem planItem) {
-        return planItemRepo.insert(planItem);
+    public PlanItemDto addPlanItem(NewPlanItemDto newPlanItemDto) {
+
+        PlanItem newPlanItem = planItemMapper.mapToEntity(newPlanItemDto);
+        PlanItem persistedPlanItem = planItemRepo.insert(newPlanItem);
+        String actionItemName = getActionItemNameById(persistedPlanItem.getActionItemId());
+        return planItemMapper.mapToDto(persistedPlanItem, actionItemName);
+
     }
 
     public void deletePlanById(String id) {
         planItemRepo.deleteById(id);
     }
 
-    public PlanItem updatePlanItem(PlanItem changedPlanItem) {
-        return planItemRepo.save(changedPlanItem);
+    public PlanItemDto updatePlanItem(PlanItemDto changedPlanItemDto) {
+        PlanItem changedPlanItem = planItemMapper.mapToEntity(changedPlanItemDto);
+        PlanItem persistedPlanItem = planItemRepo.save(changedPlanItem);
+        String actionItemName = getActionItemNameById(persistedPlanItem.getActionItemId());
+        return planItemMapper.mapToDto(persistedPlanItem, actionItemName);
     }
 }

@@ -16,8 +16,8 @@ export default function PlanItemDisplayDetails({detailedPlanItem}:PlanItemDispla
                 <p>Beschreibung: {detailedPlanItem.planDescription}</p>
                 <p>Geplant am: {detailedPlanItem.plannedOn}</p>
                 <p>Planer: {detailedPlanItem.plannedBy}</p>
-                <p>Teilnehmer: {detailedPlanItem.finalGang}</p>
-                <p>Optionen: {detailedPlanItem.dateOptions}</p>
+                <p>Teilnehmer: "detailedPlanItem.finalGang"</p>
+                <p>Optionen: "detailedPlanItem.dateOptions"</p>
                 <p>Gewähltes Datum: {detailedPlanItem.finalDate}</p>
                 <p>Status: {detailedPlanItem.status}</p>
             </div>

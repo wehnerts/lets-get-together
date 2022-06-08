@@ -2,6 +2,8 @@ package de.wehnerts.backend.controller;
 
 import de.wehnerts.backend.dto.PlanItemDto;
 import de.wehnerts.backend.model.ActionItem;
+import de.wehnerts.backend.model.DateOption;
+import de.wehnerts.backend.model.MemberWorkItem;
 import de.wehnerts.backend.model.PlanItem;
 import de.wehnerts.backend.repository.ActionItemRepo;
 import de.wehnerts.backend.repository.PlanItemRepo;
@@ -34,8 +36,25 @@ class PlanItemControllerTest {
                 .planDescription("Wir Treffen uns beim Wirtshaus")
                 .plannedOn("29.05.2022")
                 .plannedBy("Sönke")
-                .finalGang(new String[]{"Sönke","Robert"})
-                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalGang(List.of(
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build(),
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build()))
+                .dateOptions(List.of(
+                        DateOption.builder()
+                                .optionName("1")
+                                .optionDate("21.10.2022")
+                                .build(),
+                        DateOption.builder()
+                                .optionName("2")
+                                .optionDate("22.10.2022")
+                                .build()
+                ))
                 .finalDate("")
                 .status("DRAFT")
                 .build();
@@ -45,8 +64,25 @@ class PlanItemControllerTest {
                 .planDescription("Wir Fahren Rad")
                 .plannedOn("30.05.2022")
                 .plannedBy("Robert")
-                .finalGang(new String[]{"Tomm","Sönke","Robert"})
-                .dateOptions(new String[]{"12.06.2022","19.06.2022"})
+                .finalGang(List.of(
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build(),
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build()))
+                .dateOptions(List.of(
+                        DateOption.builder()
+                                .optionName("1")
+                                .optionDate("21.10.2022")
+                                .build(),
+                        DateOption.builder()
+                                .optionName("2")
+                                .optionDate("22.10.2022")
+                                .build()
+                ))
                 .finalDate("")
                 .status("DRAFT")
                 .build();
@@ -87,7 +123,7 @@ class PlanItemControllerTest {
 
         //WHEN
         List<PlanItemDto> actual = testClient.get()
-                .uri("api/planitem")
+                .uri("api/planitems")
                 .exchange()
                 .expectStatus().is2xxSuccessful()
                 .expectBodyList(PlanItemDto.class)
@@ -101,8 +137,25 @@ class PlanItemControllerTest {
                 .planDescription("Wir Treffen uns beim Wirtshaus")
                 .plannedOn("29.05.2022")
                 .plannedBy("Sönke")
-                .finalGang(new String[]{"Sönke","Robert"})
-                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalGang(List.of(
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build(),
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build()))
+                .dateOptions(List.of(
+                        DateOption.builder()
+                                .optionName("1")
+                                .optionDate("21.10.2022")
+                            .build(),
+                        DateOption.builder()
+                                .optionName("2")
+                                .optionDate("22.10.2022")
+                                .build()
+                        ))
                 .finalDate("")
                 .status("DRAFT")
                 .build(),
@@ -114,8 +167,25 @@ class PlanItemControllerTest {
                 .planDescription("Wir Fahren Rad")
                 .plannedOn("30.05.2022")
                 .plannedBy("Robert")
-                .finalGang(new String[]{"Tomm","Sönke","Robert"})
-                .dateOptions(new String[]{"12.06.2022","19.06.2022"})
+                        .finalGang(List.of(
+                                MemberWorkItem.builder()
+                                        .id("4711")
+                                        .username("Sönke")
+                                        .build(),
+                                MemberWorkItem.builder()
+                                        .id("4711")
+                                        .username("Sönke")
+                                        .build()))
+                        .dateOptions(List.of(
+                                DateOption.builder()
+                                        .optionName("1")
+                                        .optionDate("21.10.2022")
+                                        .build(),
+                                DateOption.builder()
+                                        .optionName("2")
+                                        .optionDate("22.10.2022")
+                                        .build()
+                        ))
                 .finalDate("")
                 .status("DRAFT")
                 .build());
@@ -131,7 +201,7 @@ class PlanItemControllerTest {
         actionItemRepo.insert(item2);
         //WHEN
         PlanItemDto actual = testClient.get()
-                .uri("/api/planitem/"+"4711")
+                .uri("/api/planitems/"+"4711")
                 .exchange()
                 .expectStatus().is2xxSuccessful()
                 .expectBody(PlanItemDto.class)
@@ -145,8 +215,25 @@ class PlanItemControllerTest {
                 .planDescription("Wir Treffen uns beim Wirtshaus")
                 .plannedOn("29.05.2022")
                 .plannedBy("Sönke")
-                .finalGang(new String[]{"Sönke","Robert"})
-                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalGang(List.of(
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build(),
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build()))
+                .dateOptions(List.of(
+                        DateOption.builder()
+                                .optionName("1")
+                                .optionDate("21.10.2022")
+                                .build(),
+                        DateOption.builder()
+                                .optionName("2")
+                                .optionDate("22.10.2022")
+                                .build()
+                ))
                 .finalDate("")
                 .status("DRAFT")
                 .build();
@@ -163,7 +250,7 @@ class PlanItemControllerTest {
         actionItemRepo.insert(item2);
         //WHEN//THEN
         testClient.get()
-                .uri("/api/planitem/"+"4712")
+                .uri("/api/planitems/"+"4712")
                 .exchange()
                 .expectStatus().is5xxServerError();
 
@@ -178,8 +265,25 @@ class PlanItemControllerTest {
                 .planDescription("Wir Treffen uns beim Wirtshaus")
                 .plannedOn("29.05.2022")
                 .plannedBy("Sönke")
-                .finalGang(new String[]{"Sönke","Robert"})
-                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalGang(List.of(
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build(),
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build()))
+                .dateOptions(List.of(
+                        DateOption.builder()
+                                .optionName("1")
+                                .optionDate("21.10.2022")
+                                .build(),
+                        DateOption.builder()
+                                .optionName("2")
+                                .optionDate("22.10.2022")
+                                .build()
+                ))
                 .finalDate("")
                 .status("DRAFT")
                 .build();
@@ -189,7 +293,7 @@ class PlanItemControllerTest {
         actionItemRepo.insert(item2);
         //WHEN
         PlanItemDto actual = testClient.get()
-                .uri("/api/planitem/"+"4711")
+                .uri("/api/planitems/"+"4711")
                 .exchange()
                 .expectStatus().is2xxSuccessful()
                 .expectBody(PlanItemDto.class)
@@ -203,19 +307,40 @@ class PlanItemControllerTest {
     @Test
     void addPlanItem() {
         //GIVEN
+        planItemRepo.insert(plan1);
+        planItemRepo.insert(plan2);
+        actionItemRepo.insert(item1);
+        actionItemRepo.insert(item2);
         PlanItem item1 = PlanItem.builder()
-                .actionItemId("4711")
+                .actionItemId("1234567")
                 .planDescription("description")
                 .plannedOn("today")
                 .plannedBy("Mork")
-                .finalGang(new String[]{"Sönke","Robert"})
-                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalGang(List.of(
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build(),
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build()))
+                .dateOptions(List.of(
+                        DateOption.builder()
+                                .optionName("1")
+                                .optionDate("21.10.2022")
+                                .build(),
+                        DateOption.builder()
+                                .optionName("2")
+                                .optionDate("22.10.2022")
+                                .build()
+                ))
                 .finalDate("")
                 .status("DRAFT")
                 .build();
         //WHEN
         PlanItem actual = testClient.post()
-                .uri("api/planitem")
+                .uri("api/planitems")
                 .bodyValue(item1)
                 .exchange()
                 .expectStatus().is2xxSuccessful()
@@ -228,16 +353,34 @@ class PlanItemControllerTest {
         assertEquals(24, actual.getId().length());
         PlanItem expected = PlanItem.builder()
                 .id(actual.getId())
-                .actionItemId("4711")
+                .actionItemId("1234567")
+                .actionItemName("Äkschn One")
                 .planDescription("description")
                 .plannedOn("today")
                 .plannedBy("Mork")
-                .finalGang(new String[]{"Sönke","Robert"})
-                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalGang(List.of(
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build(),
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build()))
+                .dateOptions(List.of(
+                        DateOption.builder()
+                                .optionName("1")
+                                .optionDate("21.10.2022")
+                                .build(),
+                        DateOption.builder()
+                                .optionName("2")
+                                .optionDate("22.10.2022")
+                                .build()
+                ))
                 .finalDate("")
                 .status("DRAFT")
                 .build();
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -245,17 +388,35 @@ class PlanItemControllerTest {
         //GIVEN
         PlanItem item1 = PlanItem.builder()
                 .actionItemId("4711")
+                .actionItemName("Huhu")
                 .planDescription("description")
                 .plannedOn("today")
                 .plannedBy("Mork")
-                .finalGang(new String[]{"Sönke","Robert"})
-                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalGang(List.of(
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build(),
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build()))
+                .dateOptions(List.of(
+                        DateOption.builder()
+                                .optionName("1")
+                                .optionDate("21.10.2022")
+                                .build(),
+                        DateOption.builder()
+                                .optionName("2")
+                                .optionDate("22.10.2022")
+                                .build()
+                ))
                 .finalDate("")
                 .status("DRAFT")
                 .build();
 
         PlanItem actual = testClient.post()
-                .uri("api/planitem")
+                .uri("api/planitems")
                 .bodyValue(item1)
                 .exchange()
                 .expectStatus().is2xxSuccessful()
@@ -265,7 +426,7 @@ class PlanItemControllerTest {
         //WHEN
         assertNotNull(actual);
         testClient.delete()
-                .uri("/api/planitem/"+actual.getId())
+                .uri("/api/planitems/"+actual.getId())
                 .exchange()
         //THEN
                 .expectStatus().is2xxSuccessful();
@@ -275,20 +436,39 @@ class PlanItemControllerTest {
     void updatePlanItem() {
         //GIVEN
         planItemRepo.insert(plan1);
+        actionItemRepo.insert(item1);
         PlanItem newplan1 = PlanItem.builder()
                 .id("4711")
                 .actionItemId("1234567")
+                .actionItemName("Äkschn One")
                 .planDescription("Wir Treffen uns irgendwo")
                 .plannedOn("25.05.2022")
                 .plannedBy("Sönke")
-                .finalGang(new String[]{"Sönke","Robert"})
-                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalGang(List.of(
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build(),
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build()))
+                .dateOptions(List.of(
+                        DateOption.builder()
+                                .optionName("1")
+                                .optionDate("21.10.2022")
+                                .build(),
+                        DateOption.builder()
+                                .optionName("2")
+                                .optionDate("22.10.2022")
+                                .build()
+                ))
                 .finalDate("")
                 .status("DRAFT")
                 .build();
         //WHEN
         PlanItem actual = testClient.put()
-                .uri("api/planitem")
+                .uri("api/planitems")
                 .bodyValue(newplan1)
                 .exchange()
                 .expectStatus().is2xxSuccessful()

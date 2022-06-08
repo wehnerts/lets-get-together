@@ -1,7 +1,11 @@
 package de.wehnerts.backend.service;
 
+import de.wehnerts.backend.dto.NewPlanItemDto;
 import de.wehnerts.backend.dto.PlanItemDto;
+import de.wehnerts.backend.mapper.PlanItemMapper;
 import de.wehnerts.backend.model.ActionItem;
+import de.wehnerts.backend.model.DateOption;
+import de.wehnerts.backend.model.MemberWorkItem;
 import de.wehnerts.backend.model.PlanItem;
 import de.wehnerts.backend.repository.ActionItemRepo;
 import de.wehnerts.backend.repository.PlanItemRepo;
@@ -16,7 +20,9 @@ import static org.mockito.Mockito.*;
 class PlanItemServiceTest {
     private final PlanItemRepo planItemRepo = mock(PlanItemRepo.class);
     private final ActionItemRepo actionItemRepo = mock(ActionItemRepo.class);
-    private final PlanItemService planItemService = new PlanItemService(planItemRepo, actionItemRepo);
+    private final PlanItemMapper planItemMapper = mock(PlanItemMapper.class);
+    private final PlanItemService planItemService = new PlanItemService(planItemRepo, actionItemRepo, planItemMapper);
+
     @Test
     void getPlanItems() {
         //GIVEN
@@ -26,8 +32,25 @@ class PlanItemServiceTest {
                 .planDescription("Wir Treffen uns beim Wirtshaus")
                 .plannedOn("29.05.2022")
                 .plannedBy("Sönke")
-                .finalGang(new String[]{"Sönke","Robert"})
-                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalGang(List.of(
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build(),
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build()))
+                .dateOptions(List.of(
+                        DateOption.builder()
+                                .optionName("1")
+                                .optionDate("21.10.2022")
+                                .build(),
+                        DateOption.builder()
+                                .optionName("2")
+                                .optionDate("22.10.2022")
+                                .build()
+                ))
                 .finalDate("")
                 .status("DRAFT")
                 .build();
@@ -38,8 +61,25 @@ class PlanItemServiceTest {
                 .planDescription("Wir Fahren Rad")
                 .plannedOn("30.05.2022")
                 .plannedBy("Robert")
-                .finalGang(new String[]{"Tomm","Sönke","Robert"})
-                .dateOptions(new String[]{"12.06.2022","19.06.2022"})
+                .finalGang(List.of(
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build(),
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build()))
+                .dateOptions(List.of(
+                        DateOption.builder()
+                                .optionName("1")
+                                .optionDate("21.10.2022")
+                                .build(),
+                        DateOption.builder()
+                                .optionName("2")
+                                .optionDate("22.10.2022")
+                                .build()
+                ))
                 .finalDate("")
                 .status("DRAFT")
                 .build();
@@ -85,8 +125,25 @@ class PlanItemServiceTest {
                 .planDescription("Wir Treffen uns beim Wirtshaus")
                 .plannedOn("29.05.2022")
                 .plannedBy("Sönke")
-                .finalGang(new String[]{"Sönke","Robert"})
-                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalGang(List.of(
+                   MemberWorkItem.builder()
+                            .id("4711")
+                            .username("Sönke")
+                            .build(),
+                    MemberWorkItem.builder()
+                            .id("4711")
+                            .username("Sönke")
+                            .build()))
+                .dateOptions(List.of(
+                        DateOption.builder()
+                                .optionName("1")
+                                .optionDate("21.10.2022")
+                                .build(),
+                        DateOption.builder()
+                                .optionName("2")
+                                .optionDate("22.10.2022")
+                                .build()
+                ))
                 .finalDate("")
                 .status("DRAFT")
                 .build(),
@@ -98,8 +155,25 @@ class PlanItemServiceTest {
                 .planDescription("Wir Fahren Rad")
                 .plannedOn("30.05.2022")
                 .plannedBy("Robert")
-                .finalGang(new String[]{"Tomm","Sönke","Robert"})
-                .dateOptions(new String[]{"12.06.2022","19.06.2022"})
+                .finalGang(List.of(
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build(),
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build()))
+                .dateOptions(List.of(
+                        DateOption.builder()
+                                .optionName("1")
+                                .optionDate("21.10.2022")
+                                .build(),
+                        DateOption.builder()
+                                .optionName("2")
+                                .optionDate("22.10.2022")
+                                .build()
+                ))
                 .finalDate("")
                 .status("DRAFT")
                 .build()
@@ -117,8 +191,55 @@ class PlanItemServiceTest {
                 .planDescription("Wir Treffen uns beim Wirtshaus")
                 .plannedOn("29.05.2022")
                 .plannedBy("Sönke")
-                .finalGang(new String[]{"Sönke","Robert"})
-                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalGang(List.of(
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build(),
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build()))
+                .dateOptions(List.of(
+                        DateOption.builder()
+                                .optionName("1")
+                                .optionDate("21.10.2022")
+                                .build(),
+                        DateOption.builder()
+                                .optionName("2")
+                                .optionDate("22.10.2022")
+                                .build()
+                ))
+                .finalDate("")
+                .status("DRAFT")
+                .build();
+
+        PlanItemDto plan1Dto = PlanItemDto.builder()
+                .id("4711")
+                .actionItemId("1234567")
+                .actionItemName ("Äkschn One")
+                .planDescription("Wir Treffen uns beim Wirtshaus")
+                .plannedOn("29.05.2022")
+                .plannedBy("Sönke")
+                .finalGang(List.of(
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build(),
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build()))
+                .dateOptions(List.of(
+                        DateOption.builder()
+                                .optionName("1")
+                                .optionDate("21.10.2022")
+                                .build(),
+                        DateOption.builder()
+                                .optionName("2")
+                                .optionDate("22.10.2022")
+                                .build()
+                ))
                 .finalDate("")
                 .status("DRAFT")
                 .build();
@@ -138,6 +259,7 @@ class PlanItemServiceTest {
 
         when(planItemRepo.findById("4711")).thenReturn(Optional.of(plan1));
         when(actionItemRepo.findById("1234567")).thenReturn(Optional.of(item1));
+        when(planItemMapper.mapToDto(plan1, "Äkschn One")).thenReturn(plan1Dto);
 
         //WHEN
         PlanItemDto actual=planItemService.getPlanItemById("4711");
@@ -146,12 +268,29 @@ class PlanItemServiceTest {
         PlanItemDto expected = PlanItemDto.builder()
                         .id("4711")
                         .actionItemId("1234567")
-                        .actionItemName("Äkschn One")
+                        .actionItemName ("Äkschn One")
                         .planDescription("Wir Treffen uns beim Wirtshaus")
                         .plannedOn("29.05.2022")
                         .plannedBy("Sönke")
-                        .finalGang(new String[]{"Sönke","Robert"})
-                        .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                        .finalGang(List.of(
+                                MemberWorkItem.builder()
+                                        .id("4711")
+                                        .username("Sönke")
+                                        .build(),
+                                MemberWorkItem.builder()
+                                        .id("4711")
+                                        .username("Sönke")
+                                        .build()))
+                        .dateOptions(List.of(
+                                DateOption.builder()
+                                        .optionName("1")
+                                        .optionDate("21.10.2022")
+                                        .build(),
+                                DateOption.builder()
+                                        .optionName("2")
+                                        .optionDate("22.10.2022")
+                                        .build()
+                        ))
                         .finalDate("")
                         .status("DRAFT")
                         .build();
@@ -164,51 +303,141 @@ class PlanItemServiceTest {
     @Test
     void addPlanItem() {
         //GIVEN
-        PlanItem newplan1 = PlanItem.builder()
+        PlanItem planItem = PlanItem.builder()
+                .id("8080")
                 .actionItemId("1234567")
                 .planDescription("Wir Treffen uns irgendwo")
                 .plannedOn("25.05.2022")
                 .plannedBy("Sönke")
-                .finalGang(new String[]{"Sönke","Robert"})
-                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalGang(List.of(
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build(),
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build()))
+                .dateOptions(List.of(
+                        DateOption.builder()
+                                .optionName("1")
+                                .optionDate("21.10.2022")
+                                .build(),
+                        DateOption.builder()
+                                .optionName("2")
+                                .optionDate("22.10.2022")
+                                .build()
+                ))
                 .finalDate("")
                 .status("DRAFT")
                 .build();
-        when(planItemRepo.insert(newplan1)).thenReturn(PlanItem.builder()
-                .id("4711")
+
+        PlanItemDto planItemDto = PlanItemDto.builder()
+                .id("8080")
                 .actionItemId("1234567")
                 .planDescription("Wir Treffen uns irgendwo")
                 .plannedOn("25.05.2022")
                 .plannedBy("Sönke")
-                .finalGang(new String[]{"Sönke","Robert"})
-                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalGang(List.of(
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build(),
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build()))
+                .dateOptions(List.of(
+                        DateOption.builder()
+                                .optionName("1")
+                                .optionDate("21.10.2022")
+                                .build(),
+                        DateOption.builder()
+                                .optionName("2")
+                                .optionDate("22.10.2022")
+                                .build()
+                ))
                 .finalDate("")
                 .status("DRAFT")
-                .build());
+                .build();
+
+        NewPlanItemDto newPlanItemDto = NewPlanItemDto.builder()
+                .actionItemId("1234567")
+                .planDescription("Wir Treffen uns irgendwo")
+                .plannedOn("25.05.2022")
+                .plannedBy("Sönke")
+                .finalGang(List.of(
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build(),
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build()))
+                .dateOptions(List.of(
+                        DateOption.builder()
+                                .optionName("1")
+                                .optionDate("21.10.2022")
+                                .build(),
+                        DateOption.builder()
+                                .optionName("2")
+                                .optionDate("22.10.2022")
+                                .build()
+                ))
+                .finalDate("")
+                .status("DRAFT")
+                .build();
+
+        ActionItem actionItem =ActionItem.builder()
+                .id("1234567")
+                .actionTitle ("Äkschn One")
+                .imageName ("")
+                .actionDescription("Der Peter geht ab")
+                .childFriendly ("true")
+                .openingSeason ("Von O bis O")
+                .openingHours ("24/7")
+                .estDuration ("2h")
+                .price ("ne Mark")
+                .homepage("www.de")
+                .build();
+
+        when(planItemMapper.mapToEntity(newPlanItemDto)).thenReturn(planItem);
+        when (planItemRepo.insert(any(PlanItem.class))).thenReturn(planItem);
+        when(planItemMapper.mapToDto(planItem, "Ups! ActionItem is lost!" )).thenReturn(planItemDto);
+
         //WHEN
-        PlanItem newPlan = PlanItem.builder()
+
+        PlanItemDto actual = planItemService.addPlanItem(newPlanItemDto);
+        PlanItemDto expected = PlanItemDto.builder()
+                .id("8080")
                 .actionItemId("1234567")
                 .planDescription("Wir Treffen uns irgendwo")
                 .plannedOn("25.05.2022")
                 .plannedBy("Sönke")
-                .finalGang(new String[]{"Sönke","Robert"})
-                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalGang(List.of(
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build(),
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build()))
+                .dateOptions(List.of(
+                        DateOption.builder()
+                                .optionName("1")
+                                .optionDate("21.10.2022")
+                                .build(),
+                        DateOption.builder()
+                                .optionName("2")
+                                .optionDate("22.10.2022")
+                                .build()
+                ))
                 .finalDate("")
                 .status("DRAFT")
                 .build();
-        PlanItem actual = planItemService.addPlanItem(newPlan);
-        PlanItem expected = (PlanItem.builder()
-                .id("4711")
-                .actionItemId("1234567")
-                .planDescription("Wir Treffen uns irgendwo")
-                .plannedOn("25.05.2022")
-                .plannedBy("Sönke")
-                .finalGang(new String[]{"Sönke","Robert"})
-                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
-                .finalDate("")
-                .status("DRAFT")
-                .build());
-        verify(planItemRepo).insert(newplan1);
+        verify(planItemRepo).insert(planItem);
         assertEquals(expected, actual);
     }
 
@@ -228,35 +457,90 @@ class PlanItemServiceTest {
                 .planDescription("Wir Treffen uns irgendwo")
                 .plannedOn("25.05.2022")
                 .plannedBy("Sönke")
-                .finalGang(new String[]{"Sönke","Robert"})
-                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalGang(List.of(
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build(),
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build()))
+                .dateOptions(List.of(
+                        DateOption.builder()
+                                .optionName("1")
+                                .optionDate("21.10.2022")
+                                .build(),
+                        DateOption.builder()
+                                .optionName("2")
+                                .optionDate("22.10.2022")
+                                .build()
+                ))
                 .finalDate("")
                 .status("DRAFT")
                 .build();
-        when(planItemRepo.save(newplan1)).thenReturn(PlanItem.builder()
+        PlanItemDto newplan1Dto = PlanItemDto.builder()
                 .id("4711")
                 .actionItemId("1234567")
                 .planDescription("Wir Treffen uns irgendwo")
                 .plannedOn("25.05.2022")
                 .plannedBy("Sönke")
-                .finalGang(new String[]{"Sönke","Robert"})
-                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalGang(List.of(
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build(),
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build()))
+                .dateOptions(List.of(
+                        DateOption.builder()
+                                .optionName("1")
+                                .optionDate("21.10.2022")
+                                .build(),
+                        DateOption.builder()
+                                .optionName("2")
+                                .optionDate("22.10.2022")
+                                .build()
+                ))
                 .finalDate("")
                 .status("DRAFT")
-                .build());
-        PlanItem expected = PlanItem.builder()
+                .build();
+        when(planItemRepo.save(newplan1)).thenReturn(newplan1);
+        when(planItemMapper.mapToEntity(any(PlanItemDto.class))).thenReturn(newplan1);
+
+        when(planItemMapper.mapToDto(newplan1, "Ups! ActionItem is lost!" )).thenReturn(newplan1Dto);
+        PlanItemDto expected = PlanItemDto.builder()
                 .id("4711")
                 .actionItemId("1234567")
                 .planDescription("Wir Treffen uns irgendwo")
                 .plannedOn("25.05.2022")
                 .plannedBy("Sönke")
-                .finalGang(new String[]{"Sönke","Robert"})
-                .dateOptions(new String[]{"02.06.2022","09.06.2022"})
+                .finalGang(List.of(
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build(),
+                        MemberWorkItem.builder()
+                                .id("4711")
+                                .username("Sönke")
+                                .build()))
+                .dateOptions(List.of(
+                        DateOption.builder()
+                                .optionName("1")
+                                .optionDate("21.10.2022")
+                                .build(),
+                        DateOption.builder()
+                                .optionName("2")
+                                .optionDate("22.10.2022")
+                                .build()
+                ))
                 .finalDate("")
                 .status("DRAFT")
                 .build();
         //WHEN
-        PlanItem actual = planItemService.updatePlanItem(newplan1);
+        PlanItemDto actual = planItemService.updatePlanItem(newplan1Dto);
         //THEN
         assertEquals(expected, actual);
     }
