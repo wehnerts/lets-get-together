@@ -2,7 +2,6 @@ import {useNavigate, useParams} from "react-router";
 import React, {useEffect, useState} from "react";
 import "./ActionItemDetailPage.css"
 import ActionItemDisplayDetails from "../components/ActionItem/ActionItemDisplayDetails";
-
 import useDetailedActionItem from "../hooks/useDetailedActionItem";
 import EditActionItem from "../components/ActionItem/EditActionItem";
 import {ActionItem} from "../model/ActionItem";
