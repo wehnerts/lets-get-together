@@ -54,6 +54,5 @@ export default function EditPlanItem({item, editPlanItem}:EditPlanItemProps){
                                             onChange={event => setStatus(event.target.value)}/></div>
             </form>
         </div>
-
     )
 }
