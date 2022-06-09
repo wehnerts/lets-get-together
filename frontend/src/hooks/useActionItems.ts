@@ -38,6 +38,5 @@ export default function useActionItems(){
                 toast.error("Update failed. Please try again later.")
             })
     }
-
     return {actionItems, addNewActionItem, deleteActionItem, editActionItem}
 }
