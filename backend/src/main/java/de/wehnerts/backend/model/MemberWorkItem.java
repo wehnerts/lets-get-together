@@ -17,5 +17,8 @@ public class MemberWorkItem {
     @Id
     private String id;
     private String username;
+    private String opt1;
+    private String opt2;
+    private String opt3;
 
 }
