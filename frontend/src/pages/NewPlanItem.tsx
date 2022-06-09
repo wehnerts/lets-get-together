@@ -37,7 +37,7 @@ export default function NewPlanItem({membersForWork}:NewPlanItemProps) {
             getActionItemById(actionId)
         }
         // eslint-disable-next-line
-    }, [actionId])
+    }, [])
 
     const onAdd = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
