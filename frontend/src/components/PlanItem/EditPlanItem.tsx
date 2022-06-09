@@ -36,8 +36,6 @@ export default function EditPlanItem({item, editPlanItem}:EditPlanItemProps){
     editPlanItem(editItem)
     toast.info("Action löppt")
     }
-
-
     return(
         <div>
             <form id="editPlanItem" onSubmit={onEdit}>
