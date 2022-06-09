@@ -24,7 +24,7 @@ justify-items: center;
 }
 .tablerow{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: #282c34;
