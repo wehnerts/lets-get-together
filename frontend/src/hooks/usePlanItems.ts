@@ -37,7 +37,6 @@ export default function usePlanItems(){
             .catch(()=>{
                 toast.error("Update failed. Please try again later.")
             })
-
     }
     return {planItems, addNewPlanItem, deletePlanItem, editPlanItem}
 }
