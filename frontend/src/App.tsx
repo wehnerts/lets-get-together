@@ -31,7 +31,6 @@ const {membersForWork}=useMembers()
                 <Route path={"/plans"} element={<PlanItemsPage planItems={planItems}/>}/>
                 <Route path={'/planItem/:id'} element={<PlanItemDetailPage editPlanItem={editPlanItem} deletePlanItem={deletePlanItem}/>}/>
                 <Route path={'/new-plan/:actionId'} element={<NewPlanItem membersForWork={membersForWork} />}/>
-
             </Routes>
             <ToastContainer/>
         </div>
