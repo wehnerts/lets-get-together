@@ -39,6 +39,5 @@ export default function usePlanItems(){
             })
 
     }
-
     return {planItems, addNewPlanItem, deletePlanItem, editPlanItem}
 }
