@@ -48,7 +48,6 @@ export default function PlanItemDetailPage({deletePlanItem, editPlanItem}: PlanI
                     alignItems: 'center',
                     '& > *': {
                         m: 1
-
                     }
                 }}
             >
