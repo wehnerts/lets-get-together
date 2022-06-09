@@ -18,7 +18,7 @@ import useMembers from "./hooks/useMembers";
 
 export default function App() {
 const {addNewActionItem, actionItems, deleteActionItem, editActionItem}= useActionItems()
-const {planItems}=usePlanItems()
+const {planItems, deletePlanItem, editPlanItem}=usePlanItems()
 const {membersForWork}=useMembers()
     return (
     <div className="App">
@@ -28,11 +28,9 @@ const {membersForWork}=useMembers()
                 <Route path={"/actions"} element={<ActionItemsPage actionItems={actionItems}/>}/>
                 <Route path={'/actionitem/:id'} element={<ActionItemDetailPage editActionItem={editActionItem} deleteActionItem={deleteActionItem}/>}/>
                 <Route path={"/new-action"} element={<NewActionItem addNewActionItem={addNewActionItem}/>}/>
-
                 <Route path={"/plans"} element={<PlanItemsPage planItems={planItems}/>}/>
-                <Route path={'/planItem/:id'} element={<PlanItemDetailPage/>}/>
+                <Route path={'/planItem/:id'} element={<PlanItemDetailPage editPlanItem={editPlanItem} deletePlanItem={deletePlanItem}/>}/>
                 <Route path={'/new-plan/:actionId'} element={<NewPlanItem membersForWork={membersForWork} />}/>
-
             </Routes>
             <ToastContainer/>
         </div>

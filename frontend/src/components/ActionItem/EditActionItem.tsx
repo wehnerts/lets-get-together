@@ -24,7 +24,7 @@ export default function EditActionItem({item, editActionItem}:EditActionItemProp
    const onEdit= (event : FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (!actionTitle) {
-            toast.error("Name is required");
+            toast.error("Name is required")
             return
         }
 
@@ -40,9 +40,8 @@ export default function EditActionItem({item, editActionItem}:EditActionItemProp
             price:price,
             homepage:homepage,
        }
-       editActionItem(editItem);
+       editActionItem(editItem)
     }
-
     return (
         <div className={"new-action-item-details"}>
             <form id="editActionItem" onSubmit={onEdit}>
@@ -55,7 +54,6 @@ export default function EditActionItem({item, editActionItem}:EditActionItemProp
                 <div>Dauer: <input type={"text"} placeholder="Add a new item" value={estDuration} onChange={event => setEstDuration(event.target.value)} /></div>
                 <div>Preis: <input type={"text"} placeholder="Add a new item" value={price} onChange={event => setPrice(event.target.value)} /></div>
                 <div>Homepage: <input type={"text"} placeholder="Add a new item" value={homepage} onChange={event => setHomepage(event.target.value)} /></div>
-                <button type={"submit"}>Submit</button>
             </form>
         </div>
     )

@@ -13,6 +13,7 @@ type NewActionItemProps={
 
 const ActionItemsPage=({actionItems}:NewActionItemProps)=>{
     const navigate = useNavigate()
+
     return(
         <div>
             <div className={"gallery"}>
@@ -26,7 +27,6 @@ const ActionItemsPage=({actionItems}:NewActionItemProps)=>{
                     alignItems: 'center',
                     '& > *': {
                         m: 1
-
                     }
                 }}
             >
