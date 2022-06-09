@@ -63,7 +63,6 @@ export default function PlanItemDetailPage({deletePlanItem, editPlanItem}: PlanI
                     <Button sx={{color: "#F6E27F"}} onClick={toggleEdit}>{editingEnabled ? "cancel" : "Edit"}</Button>
                 </ButtonGroup>
             </Box>
-
         </div>
     )
 }
