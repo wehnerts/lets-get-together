@@ -10,6 +10,7 @@ import {useEffect, useState} from "react";
 import "./UserVote.css"
 import Button from "@mui/material/Button";
 import useMembers from "../../hooks/useMembers";
+import {EditedVoteUserDto} from "../../dto/EditedVoteUserDto";
 
 
 type votingProps = {
@@ -75,8 +76,9 @@ export default function UserVote({member, planItem}: votingProps) {
         member.opt3=Number(opti3).toString()
 
         console.log("Manno")
-        const memberEdited: MemberForWork = {
-            id: member.id,
+        const memberEdited: EditedVoteUserDto = {
+            planId: planItem.id,
+            userId: member.id,
             username: member.username,
             isPlanned: member.isPlanned,
             opt1: member.opt1,
