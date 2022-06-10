@@ -35,9 +35,9 @@ export default function VotingScorecard({detailedPlanItem}: DisplayVotingProps) 
                     <div>{item.opt1}</div>
                     <div>{item.opt2}</div>
                     <div>{item.opt3}</div>
-                    <Button sx={{color: '#f4e07f'}} onClick={() => toggleVoting(item.id)}>Vote</Button>
+                    <Button sx={{color: '#f4e07f'}} onClick={() => toggleVoting(item.id)}>{!votingEnabled?"Vote":"CLOSE"}</Button>
                 </div>
-                    {rowItem===item.id&&votingEnabled?<UserVote member={item}/>:<div/>}
+                    {rowItem===item.id&&votingEnabled?<UserVote member={item} planItem={detailedPlanItem}/>:<div/>}
                 </div>)
             }</div>
         </div>

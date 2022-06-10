@@ -1,5 +1,4 @@
 import axios from "axios";
-import {PlanItem} from "../model/PlanItem";
 import {MemberForWork} from "../model/MemberForWork";
 
 export const getAllMembers: () => Promise<MemberForWork[]> = () => {
@@ -8,3 +7,7 @@ export const getAllMembers: () => Promise<MemberForWork[]> = () => {
 }
 
 
+export const putMemberItem: (editItem:MemberForWork)=>Promise<MemberForWork>=(editItem:MemberForWork)=>{
+    return axios.put(`/api/members`,editItem)
+        .then(response => response.data)
+}
