@@ -7,7 +7,7 @@ export const getAllMembers: () => Promise<MemberForWork[]> = () => {
 }
 
 
-export const putMemberItem: (editItem:MemberForWork)=>Promise<MemberForWork>=(editItem:MemberForWork)=>{
-    return axios.put(`/api/members`,editItem)
+export const putMemberVoteItem: (editItem:MemberForWork)=>Promise<MemberForWork>=(editItem:MemberForWork)=>{
+    return axios.put(`/api/uservote`,editItem)
         .then(response => response.data)
 }

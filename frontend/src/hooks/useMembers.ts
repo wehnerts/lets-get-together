@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {toast} from "react-toastify";
 import {MemberForWork} from "../model/MemberForWork";
-import {getAllMembers, putMemberItem} from "../services/api-service-members";
+import {getAllMembers, putMemberVoteItem} from "../services/api-service-members";
 
 
 export default function useMembers(){
@@ -15,8 +15,8 @@ export default function useMembers(){
 
     membersForWork.forEach((member)=>{{member.isPlanned=true} {member.opt1="0"} {member.opt2="0"} {member.opt3="0"}} )
 
-    const editMemberItem=(memberEdit:MemberForWork)=>{
-        return putMemberItem(memberEdit)
+    const editMemberVoteItem=(memberEdit:MemberForWork)=>{
+        return putMemberVoteItem(memberEdit)
             .then(editedItem=>{
                 toast.success("Thanks for the Vote" +editedItem.id+" updated")
                 return editedItem})
@@ -25,6 +25,6 @@ export default function useMembers(){
             })
     }
 
-    return {membersForWork, editMemberItem}
+    return {membersForWork, editMemberItem: editMemberVoteItem}
 
 }
