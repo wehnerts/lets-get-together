@@ -25,6 +25,7 @@ private final PlanItemRepo planItemRepo = mock(PlanItemRepo.class);
 private final PlanItemMapper planItemMapper = mock(PlanItemMapper.class);
 private final VotingService votingService = new VotingService(planItemRepo, planItemMapper);
 
+
     @Test
     void updatePlanItem() {
         PlanItem planItem = PlanItem.builder()
@@ -74,6 +75,7 @@ private final VotingService votingService = new VotingService(planItemRepo, plan
                                 .optionDate("21.10.2022")
                                 .build()))
                 .build();
+
         UserVoteDto userVoteDto = UserVoteDto.builder()
                 .planId("4711")
                 .userId("1007")
@@ -82,11 +84,13 @@ private final VotingService votingService = new VotingService(planItemRepo, plan
                 .opt2("4")
                 .opt3("3")
                 .build();
+
         planItemRepo.insert(planItem);
+
         when(planItemRepo.findById("4711")).thenReturn(Optional.of(planItem));
         when(planItemRepo.save(planItem)).thenReturn(planItem);
-
         when(planItemMapper.mapToDto(planItem,"Ringelpietz")).thenReturn(expected);
+
         //WHEN
         PlanItemDto actual = votingService.updatePlanItem(userVoteDto);
         assertEquals(expected, actual);
