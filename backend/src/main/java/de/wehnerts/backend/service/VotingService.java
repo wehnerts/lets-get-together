@@ -1,60 +1,53 @@
 package de.wehnerts.backend.service;
 
-import de.wehnerts.backend.dto.NewPlanItemDto;
 import de.wehnerts.backend.dto.PlanItemDto;
 import de.wehnerts.backend.dto.UserVoteDto;
 import de.wehnerts.backend.mapper.PlanItemMapper;
-import de.wehnerts.backend.model.ActionItem;
+import de.wehnerts.backend.model.MemberWorkItem;
 import de.wehnerts.backend.model.PlanItem;
-import de.wehnerts.backend.repository.ActionItemRepo;
 import de.wehnerts.backend.repository.PlanItemRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
+
 
 @Service
 public class VotingService {
     private final PlanItemRepo planItemRepo;
-
+    private final PlanItemMapper planItemMapper;
 
     @Autowired
-    public VotingService(PlanItemRepo planItemRepo) {
-
+    public VotingService(PlanItemRepo planItemRepo, PlanItemMapper planItemMapper) {
         this.planItemRepo = planItemRepo;
+        this.planItemMapper = planItemMapper;
+    }
+
+    public PlanItemDto updatePlanItem(UserVoteDto userVoteDto) {
+
+        PlanItem planToUpdate = planItemRepo.findById(userVoteDto.getPlanId())
+                .orElseThrow(() -> new NoSuchElementException("Das gesuchte PlanItem wurde nicht gefunden."));
+        MemberWorkItem updatedMember = MemberWorkItem.builder()
+                .id(userVoteDto.getUserId())
+                .username(userVoteDto.getUsername())
+                .opt1(userVoteDto.getOpt1())
+                .opt2(userVoteDto.getOpt2())
+                .opt3(userVoteDto.getOpt3())
+                .build();
+
+        planToUpdate.getFinalGang()
+                .stream()
+                .filter(e -> e.getId().equals(updatedMember.getId()))
+                .findFirst()
+                .ifPresent(e -> {
+                            e.setOpt1(updatedMember.getOpt1());
+                            e.setOpt2(updatedMember.getOpt2());
+                            e.setOpt3(updatedMember.getOpt3());
+                        }
+                );
+
+        return planItemMapper.mapToDto(planItemRepo.save(planToUpdate), planToUpdate.getActionItemName());
 
     }
 
-    public List<PlanItemDto> getPlanItems() {
-        List<PlanItem> planWithoutAction = planItemRepo.findAll();
-        List<PlanItemDto> planItemDtos = new ArrayList<>();
-
-        planWithoutAction.forEach(planItem ->
-                planItemDtos.add(PlanItemDto.builder()
-                        .id(planItem.getId())
-                        .actionItemId(planItem.getActionItemId())
-                        .actionItemName(planItem.getActionItemId())
-                        .planDescription(planItem.getPlanDescription())
-                        .plannedOn(planItem.getPlannedOn())
-                        .plannedBy(planItem.getPlannedBy())
-                        .finalGang(planItem.getFinalGang())
-                        .dateOptions(planItem.getDateOptions())
-                        .finalDate(planItem.getFinalDate())
-                        .status(planItem.getStatus())
-                        .build()));
-        return planItemDtos;
-    }
-
-
-    public PlanItemDto updatePlanItem(UserVoteDto changedPlanItemDto) {
-        //PlanItem changedPlanItem = planItemMapper.mapToEntity(changedPlanItemDto);
-        //PlanItem persistedPlanItem = planItemRepo.save(changedPlanItem);
-        //String actionItemName = getActionItemNameById(persistedPlanItem.getActionItemId());
-        return PlanItemDto.builder()
-                .id("4711")
-                .build();//planItemMapper.mapToDto(persistedPlanItem, actionItemName);
-    }
 }

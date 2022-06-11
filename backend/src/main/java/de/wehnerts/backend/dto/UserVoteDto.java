@@ -12,14 +12,12 @@ import lombok.NoArgsConstructor;
 @Builder
 
 public class UserVoteDto {
-        private String planItemId;
+        private String planId;
         private String userId;
         private String username;
-        private String Option1;
-        private String Option2;
-        private String Option3;
-        private String Option4;
-        private String Option5;
+        private String opt1;
+        private String opt2;
+        private String opt3;
 
 }
 

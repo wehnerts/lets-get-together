@@ -1,5 +1,6 @@
 package de.wehnerts.backend.controller;
 
+import de.wehnerts.backend.dto.PlanItemDto;
 import de.wehnerts.backend.dto.UserVoteDto;
 import de.wehnerts.backend.service.VotingService;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,7 @@ public class VotingController {
     }
 
     @PutMapping
-    UserVoteDto updatePlanItem(@RequestBody UserVoteDto userVoteDto){
-          return (userVoteDto);
+    PlanItemDto updatePlanItem(@RequestBody UserVoteDto userVoteDto){
+        return (votingService.updatePlanItem(userVoteDto));
     }
 }
