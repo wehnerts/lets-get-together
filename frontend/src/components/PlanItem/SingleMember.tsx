@@ -1,5 +1,5 @@
 import {MemberForWork} from "../../model/MemberForWork";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 
 type SingleMemberProps ={
     memberForWork:MemberForWork

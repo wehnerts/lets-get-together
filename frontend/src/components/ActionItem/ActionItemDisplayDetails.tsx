@@ -11,7 +11,7 @@ export default function ActionItemDisplayDetails({detailedActionItem}:ActionItem
                     <p>id: {detailedActionItem.id}</p>
                     <p>Title: {detailedActionItem.actionTitle}</p>
                     {detailedActionItem.imageName&&
-                        <img className={"actionimage"} src={detailedActionItem.imageName} alt={"Sorry, no pic! Please set another Picture"}/>}
+                        <img className={"actionimage"} src={detailedActionItem.imageName} alt={""} />}
                     <p>Description: {detailedActionItem.actionDescription}</p>
                     <p>Kinder: {detailedActionItem.childFriendly}</p>
                     <p>Saison: {detailedActionItem.openingSeason}</p>

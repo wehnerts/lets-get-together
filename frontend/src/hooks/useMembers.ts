@@ -14,7 +14,11 @@ export default function useMembers(){
             .catch(()=>toast.error("Connection failed! Please try again later"))
     },[])
 
-    membersForWork.forEach((member)=>{{member.isPlanned=true} {member.opt1="0"} {member.opt2="0"} {member.opt3="0"}} )
+    membersForWork.forEach((member)=>{
+        member.isPlanned=true
+        member.opt1="0"
+        member.opt2="0"
+        member.opt3="0"})
 
     const editMemberVoteItem=(memberEdit:EditedVoteUserDto)=>{
         return putMemberVoteItem(memberEdit)
