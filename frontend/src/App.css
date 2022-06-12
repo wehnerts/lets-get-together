@@ -23,4 +23,10 @@ a:visited{
   color: #435757;
 }
 
-
+.actionimage {
+  max-width: 20vmax;
+  box-shadow: 2px 2px whitesmoke;
+  border-bottom-right-radius: 5% 5%;
+  border-top-left-radius: 5% 5%;
+  margin: 5px;
+}

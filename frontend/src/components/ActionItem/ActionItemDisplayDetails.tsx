@@ -10,6 +10,8 @@ export default function ActionItemDisplayDetails({detailedActionItem}:ActionItem
                 <div className={"action-title"}>
                     <p>id: {detailedActionItem.id}</p>
                     <p>Title: {detailedActionItem.actionTitle}</p>
+                    {detailedActionItem.imageName&&
+                        <img className={"actionimage"} src={detailedActionItem.imageName} alt={"Sorry, no pic! Please set another Picture"}/>}
                     <p>Description: {detailedActionItem.actionDescription}</p>
                     <p>Kinder: {detailedActionItem.childFriendly}</p>
                     <p>Saison: {detailedActionItem.openingSeason}</p>

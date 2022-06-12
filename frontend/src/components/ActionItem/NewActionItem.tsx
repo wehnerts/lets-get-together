@@ -21,6 +21,7 @@ export default function NewActionItem({addNewActionItem}:NewActionItemProps) {
    const [estDuration, setEstDuration] = useState(``)
    const [price, setPrice] = useState(``)
    const [homepage, setHomepage] = useState(``)
+   const [imageName, setImageName] = useState(``)
     const navigate = useNavigate()
 
     const onAdd = (event : FormEvent<HTMLFormElement>) => {
@@ -38,6 +39,7 @@ export default function NewActionItem({addNewActionItem}:NewActionItemProps) {
             estDuration:estDuration,
             price:price,
             homepage:homepage,
+            imageName:imageName
         }
 
         addNewActionItem(newItem);
@@ -55,6 +57,7 @@ export default function NewActionItem({addNewActionItem}:NewActionItemProps) {
                 <div>Dauer: <input type={"text"} placeholder="Add a new item" value={estDuration} onChange={event => setEstDuration(event.target.value)} /></div>
                 <div>Preis: <input type={"text"} placeholder="Add a new item" value={price} onChange={event => setPrice(event.target.value)} /></div>
                 <div>Homepage: <input type={"text"} placeholder="Add a new item" value={homepage} onChange={event => setHomepage(event.target.value)} /></div>
+                <div>Image URI: <input type={"text"} placeholder="Add a picture URI" value={imageName} onChange={event => setImageName(event.target.value)} /></div>
 
 
             <Box

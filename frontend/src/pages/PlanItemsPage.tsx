@@ -5,18 +5,20 @@ import {PlanItem} from "../model/PlanItem";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import {ActionItem} from "../model/ActionItem";
 
 
 type PlanItemProps={
     planItems: PlanItem[]
+    actionItems: ActionItem[]
 }
-const PlanItemsPage=({planItems}:PlanItemProps)=>{
+const PlanItemsPage=({planItems,actionItems}:PlanItemProps)=>{
     const navigate = useNavigate()
 
     return(
         <div>
             <div className={"gallery"}>
-                <PlanItemsGallery planItems={planItems}/>
+                <PlanItemsGallery achtionItems={actionItems} planItems={planItems}/>
             </div>
             <Box
                 sx={{
