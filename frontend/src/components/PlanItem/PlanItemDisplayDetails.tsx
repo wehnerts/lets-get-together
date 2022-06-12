@@ -1,5 +1,6 @@
 import {PlanItem} from "../../model/PlanItem";
 import React from "react";
+import VotingScorecard from "../Voting/VotingScorecard";
 
 type PlanItemDisplayProps = {
     detailedPlanItem: PlanItem
@@ -16,6 +17,7 @@ export default function PlanItemDisplayDetails({detailedPlanItem}: PlanItemDispl
                 <div>Beschreibung: {detailedPlanItem.planDescription}</div>
                 <div>Geplant am: {detailedPlanItem.plannedOn}</div>
                 <div>Planer: {detailedPlanItem.plannedBy}</div>
+                <div><VotingScorecard detailedPlanItem={detailedPlanItem}/></div>
                 <div>Teilnehmer: {detailedPlanItem.finalGang.filter(item => (!item.isPlanned)).map(item => <div
                     key={item.id}>{item.username}</div>)}</div>
                 <div>Optionen: {detailedPlanItem.dateOptions.map(item => <div

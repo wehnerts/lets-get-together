@@ -1,9 +1,9 @@
 import {useEffect, useState} from "react";
-import {PlanItem} from "../model/PlanItem";
 import {toast} from "react-toastify";
-import {getAllPlanItems} from "../services/api-service-plan";
 import {MemberForWork} from "../model/MemberForWork";
-import {getAllMembers} from "../services/api-service-members";
+import {getAllMembers, putMemberVoteItem} from "../services/api-service-members";
+import {EditedVoteUserDto} from "../dto/EditedVoteUserDto";
+
 
 export default function useMembers(){
     const [membersForWork, setMembersForWork]= useState<MemberForWork[]>([])
@@ -14,8 +14,18 @@ export default function useMembers(){
             .catch(()=>toast.error("Connection failed! Please try again later"))
     },[])
 
-    membersForWork.forEach((member)=>{member.isPlanned=true})
+    membersForWork.forEach((member)=>{{member.isPlanned=true} {member.opt1="0"} {member.opt2="0"} {member.opt3="0"}} )
 
-    return {membersForWork}
+    const editMemberVoteItem=(memberEdit:EditedVoteUserDto)=>{
+        return putMemberVoteItem(memberEdit)
+            .then(editedItem=>{
+                toast.success("Thanks for the Vote" +editedItem.id+" updated")
+                return editedItem})
+            .catch(()=>{
+                toast.error("Update failed. Please try again later.")
+            })
+    }
+
+    return {membersForWork, editMemberItem: editMemberVoteItem}
 
 }

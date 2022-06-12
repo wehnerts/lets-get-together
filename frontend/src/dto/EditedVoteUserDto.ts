@@ -1,5 +1,6 @@
-export type MemberForWork = {
-    id:string;
+export type EditedVoteUserDto = {
+    planId:string,
+    userId:string;
     username:string;
     isPlanned:boolean;
     opt1:string;
