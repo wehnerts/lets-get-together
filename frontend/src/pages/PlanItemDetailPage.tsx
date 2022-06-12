@@ -50,7 +50,6 @@ export default function PlanItemDetailPage({deletePlanItem, editPlanItem, action
                     alignItems: 'center',
                     '& > *': {
                         m: 1
-
                     }
                 }}
             >
@@ -66,7 +65,6 @@ export default function PlanItemDetailPage({deletePlanItem, editPlanItem, action
                     <Button sx={{color: "#F6E27F"}} onClick={toggleEdit}>{editingEnabled ? "cancel" : "Edit"}</Button>
                 </ButtonGroup>
             </Box>
-
         </div>
     )
 }

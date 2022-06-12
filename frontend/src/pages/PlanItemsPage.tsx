@@ -36,7 +36,6 @@ const PlanItemsPage=({planItems,actionItems}:PlanItemProps)=>{
                     <Button sx={{color: "#F6E27F"}} onClick={()=>navigate(-1)}>Back</Button>
                 </ButtonGroup>
             </Box>
-
         </div>
     )
 };

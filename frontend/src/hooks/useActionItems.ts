@@ -12,7 +12,6 @@ export default function useActionItems(){
         getAllActionItems()
             .then(allActionItems => setActionItems(allActionItems))
             .catch(()=>toast.error("Connection failed! Please retry later."))
-
     },[])
 
     const addNewActionItem = (newActionItem : ActionItemDto)=>{
@@ -39,6 +38,5 @@ export default function useActionItems(){
                 toast.error("Update failed. Please try again later.")
             })
     }
-
     return {actionItems, addNewActionItem, deleteActionItem, editActionItem}
 }

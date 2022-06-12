@@ -20,7 +20,6 @@ export default function usePlanItems(){
             .then(()=>toast.success("Es wurde eine neuer Plan angelegt!"))
             .catch(()=>toast.error("Something went wrong!"))
     }
-
     const deletePlanItem = (id:string)=>{
         removePlanItem(id)
             .then(() => setPlanItems(planItems.filter(planItem => planItem.id !==id)))
@@ -37,8 +36,6 @@ export default function usePlanItems(){
             .catch(()=>{
                 toast.error("Update failed. Please try again later.")
             })
-
     }
-
     return {planItems, addNewPlanItem, deletePlanItem, editPlanItem}
 }

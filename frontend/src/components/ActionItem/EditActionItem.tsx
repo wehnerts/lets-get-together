@@ -42,7 +42,6 @@ export default function EditActionItem({item, editActionItem}:EditActionItemProp
        }
        editActionItem(editItem)
     }
-
     return (
         <div className={"new-action-item-details"}>
             <form id="editActionItem" onSubmit={onEdit}>

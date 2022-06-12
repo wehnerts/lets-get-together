@@ -36,8 +36,6 @@ export default function EditPlanItem({item, editPlanItem}:EditPlanItemProps){
     editPlanItem(editItem)
     toast.info("Action löppt")
     }
-
-
     return(
         <div>
             <form id="editPlanItem" onSubmit={onEdit}>
@@ -54,6 +52,5 @@ export default function EditPlanItem({item, editPlanItem}:EditPlanItemProps){
                                             onChange={event => setStatus(event.target.value)}/></div>
             </form>
         </div>
-
     )
 }
