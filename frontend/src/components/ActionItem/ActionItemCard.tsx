@@ -12,9 +12,10 @@ export default function ActionItemCard({actionItem}:ActionItemcardProps){
         <div className={"action-item-card"} onClick={()=>navigate(`/actionitem/${actionItem.id}`)}>
                 <div className={"action-title"}>{actionItem.actionTitle}</div>
                 {actionItem.imageName&&
-                <img className={"actionimage"} src={actionItem.imageName} alt={"Sorry, no pic! Please set another Picture"}/>}
+                <img className={"actionimage"} src={actionItem.imageName} alt={""} />}
                 <div className={"action-description"}>{actionItem.actionDescription}</div>
                 <div className={"homepage"}>{actionItem.homepage}</div>
+
         </div>
     )
 }
