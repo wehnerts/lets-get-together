@@ -18,7 +18,7 @@ export default function EditActionItem({item, editActionItem}:EditActionItemProp
    const [price, setPrice] = useState(item.price)
    const [homepage, setHomepage] = useState(item.homepage)
    const [id] = useState(item.id)
-   const [imageName] = useState(item.imageName)
+   const [imageName,setImageName] = useState(item.imageName)
 
 
    const onEdit= (event : FormEvent<HTMLFormElement>) => {
@@ -55,6 +55,7 @@ export default function EditActionItem({item, editActionItem}:EditActionItemProp
                 <div>Dauer: <input type={"text"} placeholder="Add a new item" value={estDuration} onChange={event => setEstDuration(event.target.value)} /></div>
                 <div>Preis: <input type={"text"} placeholder="Add a new item" value={price} onChange={event => setPrice(event.target.value)} /></div>
                 <div>Homepage: <input type={"text"} placeholder="Add a new item" value={homepage} onChange={event => setHomepage(event.target.value)} /></div>
+                <div>Bild URL: <input type={"text"} placeholder="Add a new item" value={imageName} onChange={event => setImageName(event.target.value)} /></div>
             </form>
         </div>
     )

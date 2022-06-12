@@ -29,8 +29,8 @@ const {membersForWork}=useMembers()
                 <Route path={'/actionitem/:id'} element={<ActionItemDetailPage editActionItem={editActionItem} deleteActionItem={deleteActionItem}/>}/>
                 <Route path={"/new-action"} element={<NewActionItem addNewActionItem={addNewActionItem}/>}/>
 
-                <Route path={"/plans"} element={<PlanItemsPage planItems={planItems}/>}/>
-                <Route path={'/planItem/:id'} element={<PlanItemDetailPage editPlanItem={editPlanItem} deletePlanItem={deletePlanItem}/>}/>
+                <Route path={"/plans"} element={<PlanItemsPage actionItems={actionItems} planItems={planItems}/>}/>
+                <Route path={'/planItem/:id'} element={<PlanItemDetailPage actionItems={actionItems} editPlanItem={editPlanItem} deletePlanItem={deletePlanItem}/>}/>
                 <Route path={'/new-plan/:actionId'} element={<NewPlanItem membersForWork={membersForWork} />}/>
 
             </Routes>

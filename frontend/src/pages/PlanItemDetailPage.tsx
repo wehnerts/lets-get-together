@@ -8,13 +8,15 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import EditPlanItem from "../components/PlanItem/EditPlanItem";
 import {PlanItem} from "../model/PlanItem";
+import {ActionItem} from "../model/ActionItem";
 
 
 type PlanItemDetailProps = {
     deletePlanItem: (id: string) => void
     editPlanItem: (editItem: PlanItem) => Promise<PlanItem | void>
+    actionItems: ActionItem[]
 }
-export default function PlanItemDetailPage({deletePlanItem, editPlanItem}: PlanItemDetailProps) {
+export default function PlanItemDetailPage({deletePlanItem, editPlanItem, actionItems}: PlanItemDetailProps) {
     const {id} = useParams()
     const {detailedPlanItem, getPlanItemById} = useDetailedPlanItem()
     const navigate = useNavigate()
@@ -37,7 +39,7 @@ export default function PlanItemDetailPage({deletePlanItem, editPlanItem}: PlanI
                 <div>
 
                     {editingEnabled ? <EditPlanItem item={detailedPlanItem} editPlanItem={editPlanItem}/>
-                        : <PlanItemDisplayDetails detailedPlanItem={detailedPlanItem}/>}
+                        : <PlanItemDisplayDetails actionItems={actionItems} detailedPlanItem={detailedPlanItem}/>}
 
                 </div>}
             <Box
