@@ -3,11 +3,15 @@ package de.wehnerts.backend.controller;
 import de.wehnerts.backend.dto.NewActionItemDto;
 import de.wehnerts.backend.model.ActionItem;
 import de.wehnerts.backend.repository.ActionItemRepo;
+import de.wehnerts.backend.security.model.AppUser;
+import de.wehnerts.backend.security.repository.AppUserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import java.util.List;
@@ -18,10 +22,21 @@ import static org.junit.jupiter.api.Assertions.*;
 class ActionItemControllerTest {
     ActionItem item1 = null;
     ActionItem item2 = null;
+
     @Autowired
     private WebTestClient testClient;
+
     @Autowired
     private ActionItemRepo actionItemRepo;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private AppUserRepository appUserRepository;
+
+    @LocalServerPort
+    private int port;
 
     @BeforeEach
     public void cleanRepoAndSetItems(){
@@ -246,5 +261,23 @@ class ActionItemControllerTest {
                 .getResponseBody();
         //THEN
         assertEquals(actual, newItem);
+    }
+    private String generateJWTToken() {
+        String hashedPassword = passwordEncoder.encode("passwort");
+        AppUser testUser = AppUser.builder()
+                .username("testuser")
+                .password(hashedPassword)
+                .build();
+        appUserRepository.save(testUser);
+        return testClient.post()
+                .uri("/auth/login")
+                .bodyValue(AppUser.builder()
+                        .username("testuser")
+                        .password("passwort")
+                        .build())
+                .exchange()
+                .expectBody(String.class)
+                .returnResult()
+                .getResponseBody();
     }
 }
