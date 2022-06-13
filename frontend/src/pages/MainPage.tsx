@@ -4,8 +4,8 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 
-
 export default function MainPage(){
+
     const navigate = useNavigate()
     return(
         <div>
