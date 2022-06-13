@@ -7,10 +7,14 @@ import de.wehnerts.backend.model.MemberWorkItem;
 import de.wehnerts.backend.model.PlanItem;
 import de.wehnerts.backend.repository.ActionItemRepo;
 import de.wehnerts.backend.repository.PlanItemRepo;
+import de.wehnerts.backend.security.model.AppUser;
+import de.wehnerts.backend.security.repository.AppUserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import java.util.List;
@@ -18,6 +22,13 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class PlanItemControllerTest {
+    @Value("${wehnerts.lets-get-together-app.jwt.secret}")
+    private String jwtToken;
+    @Autowired
+    private AppUserRepository appUserRepository;
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     PlanItem plan1, plan2;
     ActionItem item1, item2;
     @Autowired
@@ -30,6 +41,8 @@ class PlanItemControllerTest {
     public void cleanRepoAndSetItems(){
         planItemRepo.deleteAll();
         actionItemRepo.deleteAll();
+        appUserRepository.deleteAll();
+        jwtToken = generateJWTToken();
         plan1 = PlanItem.builder()
                 .id("4711")
                 .actionItemId("1234567")
@@ -124,6 +137,7 @@ class PlanItemControllerTest {
         //WHEN
         List<PlanItemDto> actual = testClient.get()
                 .uri("api/planitems")
+                .headers(http->http.setBearerAuth(jwtToken))
                 .exchange()
                 .expectStatus().is2xxSuccessful()
                 .expectBodyList(PlanItemDto.class)
@@ -202,6 +216,7 @@ class PlanItemControllerTest {
         //WHEN
         PlanItemDto actual = testClient.get()
                 .uri("/api/planitems/"+"4711")
+                .headers(http->http.setBearerAuth(jwtToken))
                 .exchange()
                 .expectStatus().is2xxSuccessful()
                 .expectBody(PlanItemDto.class)
@@ -251,8 +266,9 @@ class PlanItemControllerTest {
         //WHEN//THEN
         testClient.get()
                 .uri("/api/planitems/"+"4712")
+                .headers(http->http.setBearerAuth(jwtToken))
                 .exchange()
-                .expectStatus().is5xxServerError();
+                .expectStatus().is4xxClientError();
 
 
     }
@@ -294,6 +310,7 @@ class PlanItemControllerTest {
         //WHEN
         PlanItemDto actual = testClient.get()
                 .uri("/api/planitems/"+"4711")
+                .headers(http->http.setBearerAuth(jwtToken))
                 .exchange()
                 .expectStatus().is2xxSuccessful()
                 .expectBody(PlanItemDto.class)
@@ -341,6 +358,7 @@ class PlanItemControllerTest {
         //WHEN
         PlanItem actual = testClient.post()
                 .uri("api/planitems")
+                .headers(http->http.setBearerAuth(jwtToken))
                 .bodyValue(item1)
                 .exchange()
                 .expectStatus().is2xxSuccessful()
@@ -417,6 +435,7 @@ class PlanItemControllerTest {
 
         PlanItem actual = testClient.post()
                 .uri("api/planitems")
+                .headers(http->http.setBearerAuth(jwtToken))
                 .bodyValue(item1)
                 .exchange()
                 .expectStatus().is2xxSuccessful()
@@ -427,6 +446,7 @@ class PlanItemControllerTest {
         assertNotNull(actual);
         testClient.delete()
                 .uri("/api/planitems/"+actual.getId())
+                .headers(http->http.setBearerAuth(jwtToken))
                 .exchange()
         //THEN
                 .expectStatus().is2xxSuccessful();
@@ -469,6 +489,7 @@ class PlanItemControllerTest {
         //WHEN
         PlanItem actual = testClient.put()
                 .uri("api/planitems")
+                .headers(http->http.setBearerAuth(jwtToken))
                 .bodyValue(newplan1)
                 .exchange()
                 .expectStatus().is2xxSuccessful()
@@ -477,5 +498,24 @@ class PlanItemControllerTest {
                 .getResponseBody();
         //THEN
         assertEquals(actual, newplan1);
+    }
+    private String generateJWTToken() {
+        String hashedPassword = passwordEncoder.encode("passwort");
+        AppUser testUser = AppUser.builder()
+                .username("testuser")
+                .password(hashedPassword)
+                .build();
+        appUserRepository.save(testUser);
+
+        return testClient.post()
+                .uri("/auth/login")
+                .bodyValue(AppUser.builder()
+                        .username("testuser")
+                        .password("passwort")
+                        .build())
+                .exchange()
+                .expectBody(String.class)
+                .returnResult()
+                .getResponseBody();
     }
 }

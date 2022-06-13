@@ -10,6 +10,7 @@ import de.wehnerts.backend.security.repository.AppUserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.reactive.server.WebTestClient;
@@ -20,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class VotingControllerTest {
+    @Value("${wehnerts.lets-get-together-app.jwt.secret}")
     private String jwtToken;
     @Autowired
     private WebTestClient testClient;
@@ -36,6 +38,7 @@ class VotingControllerTest {
         planItemRepo.deleteAll();
         appUserRepository.deleteAll();
         jwtToken = generateJWTToken();
+
     }
     @Test
     void updatePlanItem_() {

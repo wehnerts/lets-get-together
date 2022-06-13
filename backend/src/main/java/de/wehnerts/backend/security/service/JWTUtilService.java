@@ -13,7 +13,7 @@ import java.util.HashMap;
 @Service
 public class JWTUtilService {
 
-    @Value("${wehnerts.lets-get-together-app.jwtSecret}")
+    @Value("${wehnerts.lets-get-together-app.jwt.secret")
     private String JWT_SECRET;
 
     public String createToken(String username) {
