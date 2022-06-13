@@ -11,7 +11,11 @@ type PlanItemDisplayProps = {
 export default function PlanItemDisplayDetails({detailedPlanItem,actionItems}: PlanItemDisplayProps) {
     const [image, setImage] = useState("")
     useEffect(()=>{
-            actionItems.filter(item=>detailedPlanItem.actionItemId===item.id).map(img=>setImage(img.imageName))},[detailedPlanItem.id])
+        actionItems.forEach(item=> {
+            if (item.id===detailedPlanItem.actionItemId){
+                setImage(item.imageName)
+            }
+        })})
     return (
         <div className={"plan-item-details"}>
             <div>Details</div>
@@ -20,7 +24,7 @@ export default function PlanItemDisplayDetails({detailedPlanItem,actionItems}: P
                 <div>ActionId: {detailedPlanItem.actionItemId}</div>
                 <div>Aktion: {detailedPlanItem.actionItemName}</div>
                 {image&&
-                    <img className={"actionimage"} src={image} alt={"Sorry, no pic! Please set another Picture"}/>}
+                    <img className={"actionimage"} src={image} alt={""}/>}
                 <div>Beschreibung: {detailedPlanItem.planDescription}</div>
                 <div>Geplant am: {detailedPlanItem.plannedOn}</div>
                 <div>Planer: {detailedPlanItem.plannedBy}</div>
