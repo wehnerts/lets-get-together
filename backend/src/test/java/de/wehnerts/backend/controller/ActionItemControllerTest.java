@@ -3,13 +3,16 @@ package de.wehnerts.backend.controller;
 import de.wehnerts.backend.dto.NewActionItemDto;
 import de.wehnerts.backend.model.ActionItem;
 import de.wehnerts.backend.repository.ActionItemRepo;
+import de.wehnerts.backend.security.model.AppUser;
+import de.wehnerts.backend.security.repository.AppUserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-
+import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.reactive.server.WebTestClient;
-
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,13 +21,25 @@ import static org.junit.jupiter.api.Assertions.*;
 class ActionItemControllerTest {
     ActionItem item1 = null;
     ActionItem item2 = null;
+    @Value("${wehnerts.lets-get-together-app.jwt.secret}")
+    private String jwtToken;
+    @Autowired
+    private AppUserRepository appUserRepository;
+    @Autowired
+    PasswordEncoder passwordEncoder;
     @Autowired
     private WebTestClient testClient;
+
     @Autowired
     private ActionItemRepo actionItemRepo;
 
+    @LocalServerPort
+    private int port;
+
     @BeforeEach
     public void cleanRepoAndSetItems(){
+        appUserRepository.deleteAll();
+        jwtToken = generateJWTToken();
         actionItemRepo.deleteAll();
             item1 = ActionItem.builder()
                 .id("1")
@@ -63,6 +78,7 @@ class ActionItemControllerTest {
         //WHEN
         List<ActionItem> actual = testClient.get()
                 .uri("/api/actionitem")
+                .headers(http->http.setBearerAuth(jwtToken))
                 .exchange()
                 .expectStatus().is2xxSuccessful()
                 .expectBodyList(ActionItem.class)
@@ -104,6 +120,7 @@ class ActionItemControllerTest {
         //WHEN
         ActionItem actual = testClient.get()
                 .uri("/api/actionitem/"+"2")
+                .headers(http->http.setBearerAuth(jwtToken))
                 .exchange()
                 .expectStatus().is2xxSuccessful()
                 .expectBody(ActionItem.class)
@@ -134,11 +151,12 @@ class ActionItemControllerTest {
         //WHEN
         testClient.get()
                 .uri("/api/actionitem/" + "20")
+                .headers(http->http.setBearerAuth(jwtToken))
                 .exchange()
 
 
                 //THEN
-                .expectStatus().is5xxServerError();
+                .expectStatus().is4xxClientError();
     }
 
     @Test
@@ -159,6 +177,7 @@ class ActionItemControllerTest {
         //WHEN
         ActionItem actual = testClient.post()
                 .uri("api/actionitem")
+                .headers(http->http.setBearerAuth(jwtToken))
                 .bodyValue(item1)
                 .exchange()
                 .expectStatus().is2xxSuccessful()
@@ -201,6 +220,7 @@ class ActionItemControllerTest {
                 .build();
         ActionItem actual = testClient.post()
                 .uri("api/actionitem")
+                .headers(http->http.setBearerAuth(jwtToken))
                 .bodyValue(item1)
                 .exchange()
                 .expectStatus().is2xxSuccessful()
@@ -212,8 +232,9 @@ class ActionItemControllerTest {
         //WHEN
         assertNotNull(actual);
       testClient.delete()
-                .uri("/api/actionitem/"+ actual.getId())
-                .exchange()
+              .uri("/api/actionitem/"+ actual.getId())
+              .headers(http->http.setBearerAuth(jwtToken))
+              .exchange()
         //THEN
                 .expectStatus().is2xxSuccessful();
     }
@@ -238,6 +259,7 @@ class ActionItemControllerTest {
         //WHEN
         ActionItem actual = testClient.put()
                 .uri("api/actionitem")
+                .headers(http->http.setBearerAuth(jwtToken))
                 .bodyValue(newItem)
                 .exchange()
                 .expectStatus().is2xxSuccessful()
@@ -246,5 +268,23 @@ class ActionItemControllerTest {
                 .getResponseBody();
         //THEN
         assertEquals(actual, newItem);
+    }
+    private String generateJWTToken() {
+        String hashedPassword = passwordEncoder.encode("passwort");
+        AppUser testUser = AppUser.builder()
+                .username("testuser")
+                .password(hashedPassword)
+                .build();
+        appUserRepository.save(testUser);
+        return testClient.post()
+                .uri("/auth/login")
+                .bodyValue(AppUser.builder()
+                        .username("testuser")
+                        .password("passwort")
+                        .build())
+                .exchange()
+                .expectBody(String.class)
+                .returnResult()
+                .getResponseBody();
     }
 }
