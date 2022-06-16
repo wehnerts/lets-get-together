@@ -1,7 +1,7 @@
 import {PlanItem} from "../../model/PlanItem";
 import PlanItemCard from "./PlanItemCard";
 import {ActionItem} from "../../model/ActionItem";
-
+import '../css/PlanItemGallery.css'
 
 type PlanItemsGalleryProps = {
     planItems: PlanItem[]

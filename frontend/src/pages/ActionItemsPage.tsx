@@ -2,7 +2,7 @@ import {useNavigate} from "react-router"
 import ActionItemsGallery from "../components/ActionItem/ActionItemsGallery";
 import React from "react";
 import {ActionItem} from "../model/ActionItem";
-import './ActionItemsPage.css'
+import './css/ActionItemsPage.css'
 import Box from "@mui/material/Box";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Button from "@mui/material/Button";
@@ -16,6 +16,7 @@ const ActionItemsPage=({actionItems}:NewActionItemProps)=>{
 
     return(
         <div>
+            <div>Actions:</div>
             <div className={"gallery"}>
             <ActionItemsGallery actionItems={actionItems}/>
             </div>

@@ -6,7 +6,7 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import {ActionItem} from "../model/ActionItem";
-
+import './css/PlanItemsPage.css'
 
 type PlanItemProps={
     planItems: PlanItem[]
@@ -17,6 +17,7 @@ const PlanItemsPage=({planItems,actionItems}:PlanItemProps)=>{
 
     return(
         <div>
+            <div>Plans:</div>
             <div className={"gallery"}>
                 <PlanItemsGallery achtionItems={actionItems} planItems={planItems}/>
             </div>

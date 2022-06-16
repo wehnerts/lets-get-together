@@ -1,6 +1,6 @@
 import {useNavigate, useParams} from "react-router";
 import React, {useEffect, useState} from "react";
-import "./ActionItemDetailPage.css"
+import "./css/ActionItemDetailPage.css"
 import ActionItemDisplayDetails from "../components/ActionItem/ActionItemDisplayDetails";
 import useDetailedActionItem from "../hooks/useDetailedActionItem";
 import EditActionItem from "../components/ActionItem/EditActionItem";
@@ -35,7 +35,7 @@ export default function ActionItemDetailPage({deleteActionItem, editActionItem}:
    return(
        <div>
            {detailedActionItem&&
-           <div>
+           <div className={"gallery"}>
                {editingEnabled
                    ? <EditActionItem editActionItem={editActionItem} item={detailedActionItem}/>
                    : <ActionItemDisplayDetails detailedActionItem={detailedActionItem}/>}

@@ -1,7 +1,7 @@
 import React, {FormEvent,  useState} from "react";
-import {ActionItemDto} from "../../dto/ActionItemDto";
+import {ActionItemDto} from "../dto/ActionItemDto";
 import {toast} from "react-toastify";
-import './NewActionItem.css'
+import './css/NewActionItem.css'
 import {useNavigate} from "react-router"
 import Box from "@mui/material/Box";
 import ButtonGroup from "@mui/material/ButtonGroup";
@@ -48,7 +48,7 @@ export default function NewActionItem({addNewActionItem}:NewActionItemProps) {
 
     return (
         <div className={"new-action-item-details"}>
-            <form onSubmit={onAdd}>
+            <form id="newPlanItem" onSubmit={onAdd}>
                 <div>Titel: <input type={"text"} placeholder="Add a new item" value={actionTitle} onChange={event => setActionTitle(event.target.value)} /></div>
                 <div>Beschreibung: <input type={"text"} placeholder="Add a new item" value={actionDescription} onChange={event => setActionDescription(event.target.value)} /></div>
                 <div>Geeignet für Kinder:  <input type={"text"} placeholder="Add a new item" value={childFriendly} onChange={event => setChildFriendly(event.target.value)} /></div>

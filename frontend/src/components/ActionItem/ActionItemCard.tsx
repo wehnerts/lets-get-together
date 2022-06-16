@@ -1,5 +1,5 @@
 import {ActionItem} from "../../model/ActionItem";
-import './ActionItemCard.css';
+import '../css/ActionItemCard.css';
 import {useNavigate} from "react-router";
 
 type ActionItemcardProps = {

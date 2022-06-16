@@ -9,7 +9,7 @@ import MainPage from './pages/MainPage';
 import ActionItemsPage from './pages/ActionItemsPage';
 import ActionItemDetailPage from './pages/ActionItemDetailPage';
 import PlanItemsPage from './pages/PlanItemsPage';
-import NewActionItem from './components/ActionItem/NewActionItem';
+import NewActionItem from './pages/NewActionItem';
 import usePlanItems from "./hooks/usePlanItems";
 import PlanItemDetailPage from "./pages/PlanItemDetailPage";
 import NewPlanItem from "./pages/NewPlanItem";

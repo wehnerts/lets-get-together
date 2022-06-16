@@ -7,7 +7,7 @@ import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt
 import {MemberForWork} from "../../model/MemberForWork";
 import {PlanItem} from "../../model/PlanItem";
 import {useEffect, useState} from "react";
-import "./UserVote.css"
+import "../css/UserVote.css"
 import Button from "@mui/material/Button";
 import useMembers from "../../hooks/useMembers";
 import {EditedVoteUserDto} from "../../dto/EditedVoteUserDto";
@@ -16,9 +16,9 @@ import {EditedVoteUserDto} from "../../dto/EditedVoteUserDto";
 type votingProps = {
     member: MemberForWork
     planItem: PlanItem
-
+    optName: string
 }
-export default function UserVote({member, planItem}: votingProps) {
+export default function UserVote({member, planItem, optName}: votingProps) {
 
     const {editMemberItem} = useMembers()
     const [opti1, setOpt1] = useState(Number(member.opt1))
@@ -75,8 +75,7 @@ export default function UserVote({member, planItem}: votingProps) {
         member.opt2=Number(opti2).toString()
         member.opt3=Number(opti3).toString()
 
-        console.log("Manno")
-        const memberEdited: EditedVoteUserDto = {
+       const memberEdited: EditedVoteUserDto = {
             planId: planItem.id,
             userId: member.id,
             username: member.username,
@@ -85,7 +84,7 @@ export default function UserVote({member, planItem}: votingProps) {
             opt2: member.opt2,
             opt3: member.opt3
         }
-        console.log("HelloS")
+
         editMemberItem(memberEdited)
 
     }
@@ -93,9 +92,11 @@ export default function UserVote({member, planItem}: votingProps) {
     return (
 
         <div>
-
+            {(optName==="1"||optName==="2"||optName==="3")&&
+            <div>
             <div className={"option"}>Option 1:<br/> {date1}</div>
             <div className={"vote"}>
+
                 <div>
                     <Rating
                         size='small'
@@ -116,8 +117,13 @@ export default function UserVote({member, planItem}: votingProps) {
                     />
                 </div>
             </div>
+        </div>}
+
+            {(optName==="2"||optName==="3")&&
+            <div>
             <div>Option 2:<br/>{date2}</div>
             <div className={"vote"}>
+
                 <div>
                     <Rating
                         size="small"
@@ -137,9 +143,12 @@ export default function UserVote({member, planItem}: votingProps) {
                     />
                 </div>
             </div>
-
-            <div>Option 3:<br/> {date3}</div>
+            </div>}
+            {optName==="3"&&
+            <div>
+                <div>Option 3:<br/> {date3}</div>
             <div className={"vote"}>
+
                 <div>
                     <Rating
                         size="small"
@@ -160,6 +169,8 @@ export default function UserVote({member, planItem}: votingProps) {
                 </div>
 
             </div>
+
+        </div>}
             <Button sx={{color: '#f4e07f'}} onClick={submitVote}>Submit</Button>
         </div>)
 }

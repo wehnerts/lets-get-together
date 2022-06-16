@@ -1,6 +1,6 @@
 import {PlanItem} from "../../model/PlanItem";
 import {useNavigate} from "react-router";
-import './PlanItemCard.css'
+import '../css/PlanItemCard.css'
 import React, {useEffect, useState} from "react";
 import {ActionItem} from "../../model/ActionItem";
 

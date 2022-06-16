@@ -1,6 +1,6 @@
 import {useNavigate, useParams} from "react-router";
 import React, { useEffect, useState} from "react";
-import "./ActionItemDetailPage.css"
+import "./css/ActionItemDetailPage.css"
 import useDetailedPlanItem from "../hooks/useDetailedPlanItem";
 import PlanItemDisplayDetails from "../components/PlanItem/PlanItemDisplayDetails";
 import ButtonGroup from "@mui/material/ButtonGroup";

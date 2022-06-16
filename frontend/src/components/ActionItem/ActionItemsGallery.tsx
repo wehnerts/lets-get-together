@@ -1,6 +1,6 @@
 import {ActionItem} from "../../model/ActionItem";
 import ActionItemCard from "./ActionItemCard";
-import './ActionItemGallery.css'
+import '../css/ActionItemGallery.css'
 
 type ActionItemGalleryProps = {
     actionItems: ActionItem[]
