@@ -19,7 +19,6 @@ const ActionItemsPage = ({actionItems}: NewActionItemProps) => {
             <div>Actions:</div>
             <div className={"frameForGallery"}>
                 <ActionItemsGallery actionItems={actionItems}/>
-
             </div>
             <Box
                 sx={{
