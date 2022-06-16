@@ -13,3 +13,11 @@
     font-size: large;
     color: #F6E27F;
 }
+.gallery{
+    max-height: 78vh;
+    background-color: #2B4162;
+    height:100vh;
+    overflow: auto;
+    text-align: justify;
+    justify-content: start;
+}

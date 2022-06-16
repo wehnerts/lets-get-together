@@ -1,0 +1,37 @@
+.new-action-item-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    overflow: auto;
+    max-height: 82vh;
+}
+
+#newActionItem{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    justify-items: left;
+    align-self: center;
+    max-width: 90vw;
+    min-width: 90vw;
+    text-align: left;
+}
+
+@media (min-width: 768px) {
+    #newActionItem div {
+        font-weight: normal;
+        text-align: left;
+        max-width: 768px;
+    }
+
+    #newActionItem{
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
+        justify-items: left;
+        align-self: center;
+        max-width: 768px;
+        text-align: left;
+    }
+
+}

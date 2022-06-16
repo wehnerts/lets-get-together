@@ -1,0 +1,5 @@
+.planItemDetailpage{
+ display: flex;
+    justify-content: left;
+    justify-items: left;
+}

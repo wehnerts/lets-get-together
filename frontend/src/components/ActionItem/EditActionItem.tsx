@@ -1,6 +1,6 @@
 import React, {FormEvent,  useState} from "react";
 import {toast} from "react-toastify";
-import '../../pages/css/NewActionItem.css'
+import '../css/EditActionItem.css'
 import {ActionItem} from "../../model/ActionItem";
 
 type EditActionItemProps ={
@@ -43,18 +43,19 @@ export default function EditActionItem({item, editActionItem}:EditActionItemProp
        editActionItem(editItem)
     }
     return (
-        <div className={"new-action-item-details"}>
+        <div className={"edit-action-item-details"}>
             <form id="editActionItem" onSubmit={onEdit}>
-                <div>Edit action: ({id})</div>
-                <p>Titel:<br/> <input type={"text"} placeholder="Add a new item" value={actionTitle} onChange={event => setActionTitle(event.target.value)} /></p>
-                <p>Beschreibung:<br/> <textarea  placeholder="Add a new item" value={actionDescription} onChange={event => setActionDescription(event.target.value)}/></p>
-                <p>Geeignet für Kinder:<br/>  <input type={"text"} placeholder="Add a new item" value={childFriendly} onChange={event => setChildFriendly(event.target.value)} /></p>
-                <p>Saison: <br/> <input type={"text"} placeholder="Add a new item" value={openingSeason} onChange={event => setOpeningSeason(event.target.value)} /></p>
-                <p>Öffnungszeiten:<br/> <input type={"text"} placeholder="Add a new item" value={openingHours} onChange={event => setOpeningHours(event.target.value)} /></p>
-                <p>Dauer:<br/> <input type={"text"} placeholder="Add a new item" value={estDuration} onChange={event => setEstDuration(event.target.value)} /></p>
-                <p>Preis:<br/> <input type={"text"} placeholder="Add a new item" value={price} onChange={event => setPrice(event.target.value)} /></p>
-                <p>Homepage:<br/> <input type={"text"} placeholder="Add a new item" value={homepage} onChange={event => setHomepage(event.target.value)} /></p>
-                <p>Bild URL:<br/> <input type={"text"} placeholder="Add a new item" value={imageName} onChange={event => setImageName(event.target.value)} /></p>
+                <p>Edit action: ({id})</p>
+                <div>Titel:<br/> <input className={"writeInput"} type={"text"} placeholder="Add a new item" value={actionTitle} onChange={event => setActionTitle(event.target.value)} /></div>
+                <div>Beschreibung:<br/> <textarea className={"writeInput"} placeholder="Add a new item" value={actionDescription} onChange={event => setActionDescription(event.target.value)}/></div>
+                <div>Geeignet für Kinder:<br/>  <input className={"writeInput"} type={"text"} placeholder="Add a new item" value={childFriendly} onChange={event => setChildFriendly(event.target.value)} /></div>
+                <div>Saison: <br/> <input className={"writeInput"} type={"text"} placeholder="Add a new item" value={openingSeason} onChange={event => setOpeningSeason(event.target.value)} /></div>
+                <div>Öffnungszeiten:<br/><input  className={"writeInput"}  type={"text"} placeholder="Add a new item" value={openingHours} onChange={event => setOpeningHours(event.target.value)} /></div>
+                <div>Dauer:<br/> <input className={"writeInput"} type={"text"} placeholder="Add a new item" value={estDuration} onChange={event => setEstDuration(event.target.value)} /></div>
+                <div>Preis:<br/> <input className={"writeInput"} type={"text"} placeholder="Add a new item" value={price} onChange={event => setPrice(event.target.value)} /></div>
+                <div>Homepage:<br/> <input className={"writeInput"} type={"text"} placeholder="Add a new item" value={homepage} onChange={event => setHomepage(event.target.value)} /></div>
+                <div>Bild URL:<br/> <input className={"writeInput"} type={"text"} placeholder="Add a new item" value={imageName} onChange={event => setImageName(event.target.value)} /></div>
+            <br/>
             </form>
         </div>
     )

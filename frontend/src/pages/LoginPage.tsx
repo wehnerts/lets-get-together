@@ -29,6 +29,9 @@ export default function LoginPage() {
                 </form>
 
             </div>
+            <div>For test purposes use following credentials:<br/>
+            User: Test<br/>
+            PWD: Test123!</div>
         </div>
     )
 }

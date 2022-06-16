@@ -10,7 +10,6 @@ import EditPlanItem from "../components/PlanItem/EditPlanItem";
 import {PlanItem} from "../model/PlanItem";
 import {ActionItem} from "../model/ActionItem";
 
-
 type PlanItemDetailProps = {
     deletePlanItem: (id: string) => void
     editPlanItem: (editItem: PlanItem) => Promise<PlanItem | void>
@@ -36,7 +35,7 @@ export default function PlanItemDetailPage({deletePlanItem, editPlanItem, action
     return (
         <div>
             {detailedPlanItem &&
-                <div>
+                <div className={"planItemDetailpage"}>
 
                     {editingEnabled ? <EditPlanItem item={detailedPlanItem} editPlanItem={editPlanItem}/>
                         : <PlanItemDisplayDetails actionItems={actionItems} detailedPlanItem={detailedPlanItem}/>}

@@ -12,6 +12,7 @@ import {DateOption} from "../model/DateOption";
 import SingleMember from "../components/PlanItem/SingleMember";
 import {SingleDateOption} from "../components/PlanItem/SingleDateOption";
 import usePlanItems from "../hooks/usePlanItems";
+import {Input} from "@mui/material";
 
 type NewPlanItemProps = {
     membersForWork: MemberForWork[]
@@ -66,26 +67,27 @@ export default function NewPlanItem({membersForWork}: NewPlanItemProps) {
             <div className={"new-plan-item"}>
                 {detailedActionItem &&
                     <div className={"plan-action-description"}>
-                        <p>Du hast die Aktion "{detailedActionItem.actionTitle}" ausgewählt, um eine Veranstaltung zu
+                        <div>Du hast die Aktion "{detailedActionItem.actionTitle}" ausgewählt, um eine Veranstaltung zu
                             planen:
-                        </p>
-                        <p>Beschreibung:<br/> {detailedActionItem.actionDescription}</p>
-                        <p>Für Kinder:<br/> {detailedActionItem.childFriendly}</p>
-                        <p>Dauer: <br/>{detailedActionItem.estDuration}</p>
-                        <p>Kosten:<br/> {detailedActionItem.price}</p>
-                        <p>Homepage:<br/>
+                        </div>
+                        <div>Beschreibung:<br/> {detailedActionItem.actionDescription}</div>
+                        <div>Für Kinder:<br/> {detailedActionItem.childFriendly}</div>
+                        <div>Dauer: <br/>{detailedActionItem.estDuration}</div>
+                        <div>Kosten:<br/> {detailedActionItem.price}</div>
+                        <div>Homepage:<br/>
                             <a href={detailedActionItem.homepage}> {detailedActionItem.homepage}</a>
-                        </p>
+                        </div>
                     </div>}
                 <br/>
                 <form id="newPlanItem" onSubmit={onAdd}>
-                    <div>Beschreibung:<br/> <textarea  placeholder="Füge eine Beschreibung hinzu" value={planDescription}
+                    <div>Beschreibung:<br/> <textarea className={"writeInput"}  placeholder="Füge eine Beschreibung hinzu" value={planDescription}
                                                    onChange={event => setPlanDescription(event.target.value)}/></div>
-                    <div>Geplant am:<br/> <input type={"text"} placeholder="Add a new item" value={plannedOn}
-                                                 onChange={event => setPlannedOn(event.target.value)}/></div>
-                    <div>Geplant von:<br/> <input type={"text"} placeholder="Add a new item" value={plannedBy}
+                    <div>Geplant am:<br/> <Input sx={{color: "#F6E27F", fontSize:"small"}} type= {"date"} onChange={event => setPlannedOn(event.target.value)}/></div>
+
+
+                    <div>Geplant von:<br/> <input className={"writeInput"} type={"text"} placeholder="Add a new item" value={plannedBy}
                                                   onChange={event => setPlannedBy(event.target.value)}/></div>
-                    <div>Veranstaltungsdatum:<br/> <input type={"text"} placeholder="Add a new item" value={finalDate}
+                    <div>Veranstaltungsdatum:<br/> <input className={"writeInput"} type={"text"} placeholder="Add a new item" value={finalDate}
                                                           onChange={event => setFinalDate(event.target.value)}/></div>
                     <br/>
                     <div>

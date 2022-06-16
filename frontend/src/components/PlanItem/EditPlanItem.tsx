@@ -1,13 +1,14 @@
 import React, {FormEvent, useState} from "react";
 import {PlanItem} from "../../model/PlanItem";
 import {toast} from "react-toastify";
+import '../css/EditPlanItem.css'
 
 type EditPlanItemProps = {
-    item:PlanItem
-    editPlanItem: (editedPlanItem:PlanItem)=>void
+    item: PlanItem
+    editPlanItem: (editedPlanItem: PlanItem) => void
 }
 
-export default function EditPlanItem({item, editPlanItem}:EditPlanItemProps){
+export default function EditPlanItem({item, editPlanItem}: EditPlanItemProps) {
     const [id] = useState(item.id)
     const [actionItemId] = useState(item.actionItemId)
     const [actionItemName] = useState(item.actionItemName)
@@ -15,11 +16,11 @@ export default function EditPlanItem({item, editPlanItem}:EditPlanItemProps){
     const [plannedOn, setPlannedOn] = useState<string>(item.plannedOn)
     const [plannedBy, setPlannedBy] = useState<string>(item.plannedBy)
     const [finalDate, setFinalDate] = useState<string>(item.finalDate)
-    const [status, setStatus] = useState<string>(item.status)
+    const [status] = useState<string>(item.status)
     const [dateOptions] = useState(item.dateOptions)
     const [finalGang] = useState(item.finalGang)
 
-    const onEdit=(event: FormEvent<HTMLFormElement>)=>{
+    const onEdit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const editItem: PlanItem = {
             id: id,
@@ -33,23 +34,26 @@ export default function EditPlanItem({item, editPlanItem}:EditPlanItemProps){
             finalDate: finalDate,
             status: status
         }
-    editPlanItem(editItem)
-    toast.info("Action löppt")
+        editPlanItem(editItem)
+        toast.info("Action löppt")
     }
-    return(
-        <div>
+    return (
+        <div className={"edit-planItem"}>
             <form id="editPlanItem" onSubmit={onEdit}>
-            <div>Eigenschaften des Planes ändern </div>
-            <div>Beschreibung: <input type={"text"} placeholder={planDescription} value={planDescription}
-                                      onChange={event => setPlanDescription(event.target.value)}/></div>
-            <div>Geplant am: <input type={"text"} placeholder={plannedOn} value={plannedOn}
-                                    onChange={event => setPlannedOn(event.target.value)}/></div>
-            <div>Geplant von: <input type={"text"} placeholder={plannedBy} value={plannedBy}
-                                     onChange={event => setPlannedBy(event.target.value)}/></div>
-            <div>Veranstaltungsdatum: <input type={"text"} placeholder={finalDate} value={finalDate}
-                                             onChange={event => setFinalDate(event.target.value)}/></div>
-            <div>Bearbeitungsstatus: <input type={"text"} placeholder="Add a new item" value={status}
-                                            onChange={event => setStatus(event.target.value)}/></div>
+                <p>Eigenschaften des Planes ändern </p>
+                <div>Beschreibung:<br/> <textarea className={"writeInput"} placeholder={planDescription}
+                                                  value={planDescription}
+                                                  onChange={event => setPlanDescription(event.target.value)}/></div>
+                <div>Geplant am:<br/> <input className={"writeInput"} type={"text"} placeholder={plannedOn}
+                                             value={plannedOn}
+                                             onChange={event => setPlannedOn(event.target.value)}/></div>
+                <div>Geplant von: <br/> <input className={"writeInput"} type={"text"} placeholder={plannedBy}
+                                               value={plannedBy}
+                                               onChange={event => setPlannedBy(event.target.value)}/></div>
+                <div>Veranstaltungsdatum: <br/> <input className={"writeInput"} type={"text"} placeholder={finalDate}
+                                                       value={finalDate}
+                                                       onChange={event => setFinalDate(event.target.value)}/></div>
+
             </form>
         </div>
     )

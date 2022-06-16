@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  align-items: center;
 }
 
 
@@ -13,10 +14,12 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
+div {
+  color: #F6E27F;
+}
 
 a:link{
-  color: cadetblue;
+  color:grey ;
 }
 
 a:visited{
@@ -24,9 +27,22 @@ a:visited{
 }
 
 .actionimage {
-  max-width: 20vmax;
-  box-shadow: 2px 2px whitesmoke;
+  box-shadow: 2px 2px lightgray;
   border-bottom-right-radius: 5% 5%;
   border-top-left-radius: 5% 5%;
   margin: 5px;
+  max-width: 90vw;
+}
+.writeInput{
+  max-width: 90vw;
+  min-width: 90vw;
+}
+@media (min-width: 768px) {
+  .actionimage {
+    max-width: 768px;
+  }
+  .writeInput{
+    max-width:768px;
+    min-width:768px;
+  }
 }

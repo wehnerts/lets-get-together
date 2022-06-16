@@ -1,0 +1,53 @@
+.new-plan-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    justify-items: left;
+    justify-self: left;
+    overflow: auto;
+    max-height: 82vh;
+}
+
+.plan-action-description {
+    flex-direction: column;
+    justify-content: left;
+    margin-left: 18px;
+    margin-right: 10px;
+}
+
+.plan-action-description div{
+    font-weight: normal;
+    text-align: left;
+    max-width: 90vw;
+
+}
+
+#newPlanItem{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    justify-items: left;
+    align-self: center;
+    max-width: 90vw;
+    min-width: 90vw;
+    text-align: left;
+}
+
+@media (min-width: 768px) {
+    #newPlanItem div {
+        font-weight: normal;
+        text-align: left;
+        max-width: 768px;
+    }
+
+    #newPlanItem {
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
+        justify-items: left;
+        align-self: center;
+        max-width: 768px;
+        text-align: left;
+    }
+}
