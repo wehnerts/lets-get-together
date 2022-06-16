@@ -1,6 +1,6 @@
 import {useNavigate, useParams} from "react-router";
 import React, { useEffect, useState} from "react";
-import "./ActionItemDetailPage.css"
+import "./css/ActionItemDetailPage.css"
 import useDetailedPlanItem from "../hooks/useDetailedPlanItem";
 import PlanItemDisplayDetails from "../components/PlanItem/PlanItemDisplayDetails";
 import ButtonGroup from "@mui/material/ButtonGroup";
@@ -9,7 +9,6 @@ import Box from "@mui/material/Box";
 import EditPlanItem from "../components/PlanItem/EditPlanItem";
 import {PlanItem} from "../model/PlanItem";
 import {ActionItem} from "../model/ActionItem";
-
 
 type PlanItemDetailProps = {
     deletePlanItem: (id: string) => void
@@ -36,7 +35,7 @@ export default function PlanItemDetailPage({deletePlanItem, editPlanItem, action
     return (
         <div>
             {detailedPlanItem &&
-                <div>
+                <div className={"planItemDetailpage"}>
 
                     {editingEnabled ? <EditPlanItem item={detailedPlanItem} editPlanItem={editPlanItem}/>
                         : <PlanItemDisplayDetails actionItems={actionItems} detailedPlanItem={detailedPlanItem}/>}

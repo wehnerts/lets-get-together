@@ -1,13 +1,13 @@
 import {ActionItem} from "../../model/ActionItem";
 import ActionItemCard from "./ActionItemCard";
-import './ActionItemGallery.css'
+import '../css/ActionItemGallery.css'
 
 type ActionItemGalleryProps = {
     actionItems: ActionItem[]
 }
 
-export default function ActionItemsGallery({actionItems}:ActionItemGalleryProps){
-    return(
+export default function ActionItemsGallery({actionItems}: ActionItemGalleryProps) {
+    return (
         <div className={"gallery"}>
             <div className={"content"}>
                 {actionItems.map(item => <ActionItemCard key={item.id} actionItem={item}/>)}

@@ -1,0 +1,15 @@
+.action-item-details{
+    margin-left: 10px;
+    margin-right: 5px;
+}
+.id{
+    font-size: x-small;
+}
+
+h2 p{
+    text-align: left;
+}
+
+.float{
+    max-width: 90%;
+}

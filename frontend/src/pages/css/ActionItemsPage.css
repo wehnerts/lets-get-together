@@ -1,0 +1,7 @@
+.frameForGallery{
+    max-height: 80vh;
+    background-color: #2B4162;
+    height:80vh;
+    overflow: auto;
+    text-align: justify;
+}

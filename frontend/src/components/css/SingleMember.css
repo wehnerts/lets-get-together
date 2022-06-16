@@ -1,0 +1,18 @@
+.mainline{
+    display: flex;
+    justify-self: left;
+    justify-content: left;
+    align-self: flex-start;
+    min-width: 5vw;
+  }
+
+.mainChecker{
+    max-width: 5vw;
+    min-width: 5vw;
+    background-color: lightgray;
+    justify-self: left;
+}
+
+.id{
+    margin-left: 5px;
+}

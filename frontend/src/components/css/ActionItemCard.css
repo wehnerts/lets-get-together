@@ -1,0 +1,30 @@
+.action-item-card{
+    display: flex;
+    background-color: #F27059;
+    color:#2C1A1D;
+    margin: 10px 10px 10px 10px;
+    padding: 5px 5px 5px 5px;
+    box-shadow: #847d61 4px 4px ;
+    align-items: center ;
+    flex-direction: column;
+    border-color: #f4e07f;
+    border-width: medium;
+    border-style: solid;
+
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 40px 30px;
+    border-top-left-radius: 40px 30px;
+    max-width: 90vw;
+
+}
+
+.action-title{
+    font-weight: normal;
+    font-size: medium;
+}
+@media (min-width: 768px) {
+    .action-item-card {
+        max-width: 768px;
+    }
+}

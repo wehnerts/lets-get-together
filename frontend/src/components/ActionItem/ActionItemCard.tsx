@@ -1,5 +1,5 @@
 import {ActionItem} from "../../model/ActionItem";
-import './ActionItemCard.css';
+import '../css/ActionItemCard.css';
 import {useNavigate} from "react-router";
 
 type ActionItemcardProps = {
@@ -13,8 +13,8 @@ export default function ActionItemCard({actionItem}:ActionItemcardProps){
                 <div className={"action-title"}>{actionItem.actionTitle}</div>
                 {actionItem.imageName&&
                 <img className={"actionimage"} src={actionItem.imageName} alt={""} />}
-                <div className={"action-description"}>{actionItem.actionDescription}</div>
-                <div className={"homepage"}>{actionItem.homepage}</div>
+                <div className={"action-title"}>{actionItem.actionDescription}</div>
+                <div className={"action-title"}>{actionItem.homepage}</div>
 
         </div>
     )

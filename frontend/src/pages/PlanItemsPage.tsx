@@ -6,23 +6,25 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import {ActionItem} from "../model/ActionItem";
+import './css/PlanItemsPage.css'
 
-
-type PlanItemProps={
+type PlanItemProps = {
     planItems: PlanItem[]
     actionItems: ActionItem[]
 }
-const PlanItemsPage=({planItems,actionItems}:PlanItemProps)=>{
+
+const PlanItemsPage = ({planItems, actionItems}: PlanItemProps) => {
     const navigate = useNavigate()
 
-    return(
+    return (
         <div>
-            <div className={"gallery"}>
-                <PlanItemsGallery achtionItems={actionItems} planItems={planItems}/>
+            <div>Plans:</div>
+            <div className={"frameForGallery"}>
+                <PlanItemsGallery actionItems={actionItems} planItems={planItems}/>
             </div>
             <Box
                 sx={{
-                    outlineColor:"#F6E27F",
+                    outlineColor: "#F6E27F",
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
@@ -32,8 +34,8 @@ const PlanItemsPage=({planItems,actionItems}:PlanItemProps)=>{
                     }
                 }}
             >
-                <ButtonGroup  variant="text" aria-label="text button group" sx={{outlineColor: "#F6E27F"}}>
-                    <Button sx={{color: "#F6E27F"}} onClick={()=>navigate(-1)}>Back</Button>
+                <ButtonGroup variant="text" aria-label="text button group" sx={{outlineColor: "#F6E27F"}}>
+                    <Button sx={{color: "#F6E27F"}} onClick={() => navigate(-1)}>Back</Button>
                 </ButtonGroup>
             </Box>
         </div>

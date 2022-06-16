@@ -1,0 +1,37 @@
+.edit-planItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    overflow: auto;
+    max-height: 82vh;
+
+}
+
+#editPlanItem{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    justify-items: left;
+    align-self: center;
+    max-width: 90vw;
+    min-width: 90vw;
+    text-align: left;
+}
+
+@media (min-width: 768px) {
+    #editPlanItem div {
+        font-weight: normal;
+        text-align: left;
+        max-width: 768px;
+    }
+
+    #editPlanItem{
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
+        justify-items: left;
+        align-self: center;
+        max-width: 760px;
+        text-align: left;
+    }
+}

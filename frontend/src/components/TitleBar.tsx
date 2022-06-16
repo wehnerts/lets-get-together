@@ -1,5 +1,5 @@
 import logo from '../images/letsgettogether.png'
-import "./TitleBar.css"
+import "./css/TitleBar.css"
 export default function TitleBar(){
     return (
         <div className={"titlebar"}>

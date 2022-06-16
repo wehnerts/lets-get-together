@@ -1,0 +1,32 @@
+
+
+.row{
+
+}
+
+
+.row div{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    alignment: center;
+
+}
+.row .c1{
+    flex-direction: row;
+}
+.c1 .c2{
+    flex-direction: row;
+}
+.c1{
+    width:15vmax;
+    background-color: cadetblue;
+
+}
+.c2{
+width: 15vmax;
+    display:flex;
+    flex-direction: row;
+    background-color: cadetblue;
+
+}

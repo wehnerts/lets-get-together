@@ -5,20 +5,21 @@ import Box from "@mui/material/Box";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Button from "@mui/material/Button";
 import useDetailedActionItem from "../hooks/useDetailedActionItem";
-import './NewPlanItem.css'
+import './css/NewPlanItem.css'
 import {MemberForWork} from "../model/MemberForWork";
 import {PlanItemDto} from "../dto/PlanItemDto";
 import {DateOption} from "../model/DateOption";
 import SingleMember from "../components/PlanItem/SingleMember";
 import {SingleDateOption} from "../components/PlanItem/SingleDateOption";
 import usePlanItems from "../hooks/usePlanItems";
+import {Input} from "@mui/material";
 
 type NewPlanItemProps = {
     membersForWork: MemberForWork[]
 
 }
 
-export default function NewPlanItem({membersForWork}:NewPlanItemProps) {
+export default function NewPlanItem({membersForWork}: NewPlanItemProps) {
     const {actionId} = useParams()
     const navigate = useNavigate()
     const {addNewPlanItem} = usePlanItems()
@@ -27,7 +28,7 @@ export default function NewPlanItem({membersForWork}:NewPlanItemProps) {
     const [plannedOn, setPlannedOn] = useState<string>('')
     const [plannedBy, setPlannedBy] = useState<string>('')
     const [finalDate, setFinalDate] = useState<string>('')
-    const [status, setStatus] = useState<string>('DRAFT')
+    const [status] = useState<string>('DRAFT')
     const [dateOptions] = useState<DateOption[]>
     ([{optionName: '1', optionDate: ''}, {optionName: '2', optionDate: ''},
         {optionName: '3', optionDate: ''}])
@@ -58,62 +59,66 @@ export default function NewPlanItem({membersForWork}:NewPlanItemProps) {
                 status: status
             }
             addNewPlanItem(newPlanItem)
-            navigate(-1)
+            navigate("/plans")
         }
     }
     return (
-        <div className={"new-plan-item"}>
-            {detailedActionItem &&
-                <div>
-                    <div>Du hast die Aktion "{detailedActionItem.actionTitle}" ausgewählt, um eine Veranstaltung zu
-                        planen:
-                    </div>
-                    <div>Description: {detailedActionItem.actionDescription}</div>
-                    <div>Für Kinder: {detailedActionItem.childFriendly}</div>
-                    <div>Estimated duration: {detailedActionItem.estDuration}</div>
-                    <div>Price: {detailedActionItem.price}</div>
-                    <div>Homepage: &nbsp;
-                        <a href={detailedActionItem.homepage}> {detailedActionItem.homepage}</a>
-                    </div>
-                </div>}
-            <br/>
-            <form onSubmit ={onAdd}>
-                <div>Beschreibung: <input type={"text"} placeholder="Add a new item" value={planDescription}
-                                          onChange={event => setPlanDescription(event.target.value)}/></div>
-                <div>Geplant am: <input type={"text"} placeholder="Add a new item" value={plannedOn}
-                                        onChange={event => setPlannedOn(event.target.value)}/></div>
-                <div>Geplant von: <input type={"text"} placeholder="Add a new item" value={plannedBy}
-                                         onChange={event => setPlannedBy(event.target.value)}/></div>
-                <div>Veranstaltungsdatum: <input type={"text"} placeholder="Add a new item" value={finalDate}
-                                                 onChange={event => setFinalDate(event.target.value)}/></div>
-                <div>Bearbeitungsstatus: <input type={"text"} placeholder="Add a new item" value={status}
-                                                onChange={event => setStatus(event.target.value)}/></div>
-                <div>
-                    {membersForWork.map(item => <SingleMember key={item.id} memberForWork={item}/>)}
-                </div>
-                <div>
+        <div>
+            <div className={"new-plan-item"}>
+                {detailedActionItem &&
+                    <div className={"plan-action-description"}>
+                        <div>Du hast die Aktion "{detailedActionItem.actionTitle}" ausgewählt, um eine Veranstaltung zu
+                            planen:
+                        </div>
+                        <div>Beschreibung:<br/> {detailedActionItem.actionDescription}</div>
+                        <div>Für Kinder:<br/> {detailedActionItem.childFriendly}</div>
+                        <div>Dauer: <br/>{detailedActionItem.estDuration}</div>
+                        <div>Kosten:<br/> {detailedActionItem.price}</div>
+                        <div>Homepage:<br/>
+                            <a href={detailedActionItem.homepage}> {detailedActionItem.homepage}</a>
+                        </div>
+                    </div>}
+                <br/>
+                <form id="newPlanItem" onSubmit={onAdd}>
+                    <div>Beschreibung:<br/> <textarea className={"writeInput"}  placeholder="Füge eine Beschreibung hinzu" value={planDescription}
+                                                   onChange={event => setPlanDescription(event.target.value)}/></div>
+                    <div>Geplant am:<br/> <Input sx={{color: "#F6E27F", fontSize:"small"}} type= {"date"} onChange={event => setPlannedOn(event.target.value)}/></div>
+
+
+                    <div>Geplant von:<br/> <input className={"writeInput"} type={"text"} placeholder="Add a new item" value={plannedBy}
+                                                  onChange={event => setPlannedBy(event.target.value)}/></div>
+                    <div>Veranstaltungsdatum:<br/> <input className={"writeInput"} type={"text"} placeholder="Add a new item" value={finalDate}
+                                                          onChange={event => setFinalDate(event.target.value)}/></div>
+                    <br/>
                     <div>
-                        {dateOptions.map(item => <SingleDateOption key={item.optionName} dateOption={item}/>)}
+                        {membersForWork.map(item => <SingleMember key={item.id} memberForWork={item}/>)}
                     </div>
-                    <Button sx={{color: "#F6E27F"}}>+</Button>
-                </div>
-                <Box
-                    sx={{
-                        outlineColor: "#F6E27F",
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        '& > *': {
-                            m: 1
-                        }
-                    }}
-                >
-                    <ButtonGroup variant="text" aria-label="text button group" sx={{outlineColor: "#F6E27F"}}>
-                        <Button sx={{color: "#F6E27F"}} onClick={() => navigate(-1)}>Back</Button>
-                        <Button sx={{color: "#F6E27F"}} type={"submit"}>Submit</Button>
-                    </ButtonGroup>
-                </Box>
-            </form>
+                    <div>
+                        <div>
+                            {dateOptions.map(item => <SingleDateOption key={item.optionName} dateOption={item}/>)}
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+            <Box
+                sx={{
+                    outlineColor: "#F6E27F",
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    '& > *': {
+                        m: 1
+                    }
+                }}
+            >
+                <ButtonGroup variant="text" aria-label="text button group" sx={{outlineColor: "#F6E27F"}}>
+                    <Button sx={{color: "#F6E27F"}} onClick={() => navigate(-1)}>Back</Button>
+                    <Button sx={{color: "#F6E27F"}} type={"submit"} form={"newPlanItem"}>Submit</Button>
+                </ButtonGroup>
+            </Box>
         </div>
     )
 }

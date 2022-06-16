@@ -1,0 +1,15 @@
+.titlebar {
+    display: flex;
+    color:#2C1A1D;
+    max-height: 50%;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+.title{
+    margin-right: 5px;
+    margin-left: 5px;
+    max-width: 99%;
+    justify-self: center;
+    background-color: #2B4162;
+}
