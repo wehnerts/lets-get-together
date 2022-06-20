@@ -5,7 +5,6 @@ import {getAllPlanItems, postPlanItem, putPlanItem, removePlanItem} from "../ser
 import {PlanItemDto} from "../dto/PlanItemDto";
 import {AuthContext} from "../context/AuthProvider";
 
-
 export default function usePlanItems() {
     const [planItems, setPlanItems] = useState<PlanItem[]>([])
     const {token} = useContext(AuthContext);
