@@ -91,8 +91,8 @@ export default function UserVote({member, planItem, optName}: votingProps) {
 
         <div>
             {(optName === "1" || optName === "2" || optName === "3") &&
-                <div>
-                    <div className={"option"}>Option 1:<br/> {date1}</div>
+                <div className={"voteItem"}>
+                    <div className={"option"}>{date1}</div>
                     <div className={"vote"}>
 
                         <div>
@@ -119,7 +119,7 @@ export default function UserVote({member, planItem, optName}: votingProps) {
 
             {(optName === "2" || optName === "3") &&
                 <div>
-                    <div>Option 2:<br/>{date2}</div>
+                    <div>{date2}</div>
                     <div className={"vote"}>
 
                         <div>
@@ -144,7 +144,7 @@ export default function UserVote({member, planItem, optName}: votingProps) {
                 </div>}
             {optName === "3" &&
                 <div>
-                    <div>Option 3:<br/> {date3}</div>
+                    <div>{date3}</div>
                     <div className={"vote"}>
 
                         <div>
