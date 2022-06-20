@@ -1,5 +1,5 @@
 import {useNavigate, useParams} from "react-router";
-import React, { useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import "./css/ActionItemDetailPage.css"
 import useDetailedPlanItem from "../hooks/useDetailedPlanItem";
 import PlanItemDisplayDetails from "../components/PlanItem/PlanItemDisplayDetails";

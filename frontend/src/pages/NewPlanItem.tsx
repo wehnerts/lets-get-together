@@ -13,6 +13,7 @@ import SingleMember from "../components/PlanItem/SingleMember";
 import {SingleDateOption} from "../components/PlanItem/SingleDateOption";
 import usePlanItems from "../hooks/usePlanItems";
 import {Input} from "@mui/material";
+import useSecurityToken from "../hooks/useSecurityToken";
 
 type NewPlanItemProps = {
     membersForWork: MemberForWork[]
@@ -32,6 +33,8 @@ export default function NewPlanItem({membersForWork}: NewPlanItemProps) {
     const [dateOptions] = useState<DateOption[]>
     ([{optionName: '1', optionDate: ''}, {optionName: '2', optionDate: ''},
         {optionName: '3', optionDate: ''}])
+    const {checkToken} = useSecurityToken()
+
 
     useEffect(() => {
         if (actionId) {
@@ -42,7 +45,7 @@ export default function NewPlanItem({membersForWork}: NewPlanItemProps) {
 
     const onAdd = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-
+        checkToken()
         if (!actionId) {
             toast.error("Bitte erst eine Action wählen")
             return
@@ -67,28 +70,42 @@ export default function NewPlanItem({membersForWork}: NewPlanItemProps) {
             <div className={"new-plan-item"}>
                 {detailedActionItem &&
                     <div className={"plan-action-description"}>
-                        <div>Du hast die Aktion "{detailedActionItem.actionTitle}" ausgewählt, um eine Veranstaltung zu
+                        <div className={"textOnPages"}>Du hast die Aktion "{detailedActionItem.actionTitle}" ausgewählt,
+                            um eine Veranstaltung zu
                             planen:
                         </div>
-                        <div>Beschreibung:<br/> {detailedActionItem.actionDescription}</div>
-                        <div>Für Kinder:<br/> {detailedActionItem.childFriendly}</div>
-                        <div>Dauer: <br/>{detailedActionItem.estDuration}</div>
-                        <div>Kosten:<br/> {detailedActionItem.price}</div>
-                        <div>Homepage:<br/>
+                        <div className={"textOnPages"}>Beschreibung:<br/> {detailedActionItem.actionDescription}</div>
+                        <div className={"textOnPages"}>Für Kinder:<br/> {detailedActionItem.childFriendly}</div>
+                        <div className={"textOnPages"}>Dauer: <br/>{detailedActionItem.estDuration}</div>
+                        <div className={"textOnPages"}>Kosten:<br/> {detailedActionItem.price}</div>
+                        <div className={"textOnPages"}>Homepage:<br/>
                             <a href={detailedActionItem.homepage}> {detailedActionItem.homepage}</a>
                         </div>
                     </div>}
                 <br/>
                 <form id="newPlanItem" onSubmit={onAdd}>
-                    <div>Beschreibung:<br/> <textarea className={"writeInput"}  placeholder="Füge eine Beschreibung hinzu" value={planDescription}
-                                                   onChange={event => setPlanDescription(event.target.value)}/></div>
-                    <div>Geplant am:<br/> <Input sx={{color: "#F6E27F", fontSize:"small"}} type= {"date"} onChange={event => setPlannedOn(event.target.value)}/></div>
+                    <div className={"textOnPages"}>Beschreibung:<br/> <textarea className={"writeInput"}
+                                                                                placeholder="Füge eine Beschreibung hinzu"
+                                                                                value={planDescription}
+                                                                                onChange={event => setPlanDescription(event.target.value)}/>
+                    </div>
+                    <div className={"textOnPages"}>Geplant am:<br/> <Input sx={{color: "#F6E27F", fontSize: "small"}}
+                                                                           type={"date"}
+                                                                           onChange={event => setPlannedOn(event.target.value)}/>
+                    </div>
 
 
-                    <div>Geplant von:<br/> <input className={"writeInput"} type={"text"} placeholder="Add a new item" value={plannedBy}
-                                                  onChange={event => setPlannedBy(event.target.value)}/></div>
-                    <div>Veranstaltungsdatum:<br/> <input className={"writeInput"} type={"text"} placeholder="Add a new item" value={finalDate}
-                                                          onChange={event => setFinalDate(event.target.value)}/></div>
+                    <div className={"textOnPages"}>Geplant von:<br/> <input className={"writeInput"} type={"text"}
+                                                                            placeholder="Add a new item"
+                                                                            value={plannedBy}
+                                                                            onChange={event => setPlannedBy(event.target.value)}/>
+                    </div>
+                    <div className={"textOnPages"}>Veranstaltungsdatum:<br/> <input className={"writeInput"}
+                                                                                    type={"text"}
+                                                                                    placeholder="Add a new item"
+                                                                                    value={finalDate}
+                                                                                    onChange={event => setFinalDate(event.target.value)}/>
+                    </div>
                     <br/>
                     <div>
                         {membersForWork.map(item => <SingleMember key={item.id} memberForWork={item}/>)}

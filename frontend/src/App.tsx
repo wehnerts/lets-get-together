@@ -21,6 +21,7 @@ export default function App() {
     const {addNewActionItem, actionItems, deleteActionItem, editActionItem} = useActionItems()
     const {planItems, deletePlanItem, editPlanItem} = usePlanItems()
     const {membersForWork} = useMembers()
+
     return (
         <div className="App">
             <TitleBar/>

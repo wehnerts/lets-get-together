@@ -1,7 +1,6 @@
 .plan-item-card {
     display: flex;
     background-color: #F27059;
-    color: #2C1A1D;
     margin: 10px 10px 10px 10px;
     padding: 5px 5px 5px 5px;
     box-shadow: #847d61 4px 4px;
@@ -16,6 +15,7 @@
     border-bottom-right-radius: 40px 30px;
     border-top-left-radius: 40px 30px;
     max-width: 90vw;
+    color: #F6E27F;
 }
 
 .plan-title {

@@ -6,10 +6,10 @@ export type PlanItem = {
     actionItemId: string;
     actionItemName: string;
     planDescription: string;
-    plannedOn:string;
-    plannedBy:string;
+    plannedOn: string;
+    plannedBy: string;
     finalGang: MemberForWork[];
-    dateOptions:DateOption[];
-    finalDate:string;
-    status:string;
-    }
+    dateOptions: DateOption[];
+    finalDate: string;
+    status: string;
+}

@@ -45,16 +45,16 @@ export default function EditActionItem({item, editActionItem}:EditActionItemProp
     return (
         <div className={"edit-action-item-details"}>
             <form id="editActionItem" onSubmit={onEdit}>
-                <p>Edit action: ({id})</p>
-                <div>Titel:<br/> <input className={"writeInput"} type={"text"} placeholder="Add a new item" value={actionTitle} onChange={event => setActionTitle(event.target.value)} /></div>
-                <div>Beschreibung:<br/> <textarea className={"writeInput"} placeholder="Add a new item" value={actionDescription} onChange={event => setActionDescription(event.target.value)}/></div>
-                <div>Geeignet für Kinder:<br/>  <input className={"writeInput"} type={"text"} placeholder="Add a new item" value={childFriendly} onChange={event => setChildFriendly(event.target.value)} /></div>
-                <div>Saison: <br/> <input className={"writeInput"} type={"text"} placeholder="Add a new item" value={openingSeason} onChange={event => setOpeningSeason(event.target.value)} /></div>
-                <div>Öffnungszeiten:<br/><input  className={"writeInput"}  type={"text"} placeholder="Add a new item" value={openingHours} onChange={event => setOpeningHours(event.target.value)} /></div>
-                <div>Dauer:<br/> <input className={"writeInput"} type={"text"} placeholder="Add a new item" value={estDuration} onChange={event => setEstDuration(event.target.value)} /></div>
-                <div>Preis:<br/> <input className={"writeInput"} type={"text"} placeholder="Add a new item" value={price} onChange={event => setPrice(event.target.value)} /></div>
-                <div>Homepage:<br/> <input className={"writeInput"} type={"text"} placeholder="Add a new item" value={homepage} onChange={event => setHomepage(event.target.value)} /></div>
-                <div>Bild URL:<br/> <input className={"writeInput"} type={"text"} placeholder="Add a new item" value={imageName} onChange={event => setImageName(event.target.value)} /></div>
+                <p className={"textOnPages"}>Edit action: ({id})</p>
+                <div className={"textOnPages"}>Titel:<br/> <input className={"writeInput"} type={"text"} placeholder="Add a new item" value={actionTitle} onChange={event => setActionTitle(event.target.value)} /></div>
+                <div className={"textOnPages"}>Beschreibung:<br/> <textarea className={"writeInput"} placeholder="Add a new item" value={actionDescription} onChange={event => setActionDescription(event.target.value)}/></div>
+                <div className={"textOnPages"}>Geeignet für Kinder:<br/>  <input className={"writeInput"} type={"text"} placeholder="Add a new item" value={childFriendly} onChange={event => setChildFriendly(event.target.value)} /></div>
+                <div className={"textOnPages"}>Saison: <br/> <input className={"writeInput"} type={"text"} placeholder="Add a new item" value={openingSeason} onChange={event => setOpeningSeason(event.target.value)} /></div>
+                <div className={"textOnPages"}>Öffnungszeiten:<br/><input  className={"writeInput"}  type={"text"} placeholder="Add a new item" value={openingHours} onChange={event => setOpeningHours(event.target.value)} /></div>
+                <div className={"textOnPages"}>Dauer:<br/> <input className={"writeInput"} type={"text"} placeholder="Add a new item" value={estDuration} onChange={event => setEstDuration(event.target.value)} /></div>
+                <div className={"textOnPages"}>Preis:<br/> <input className={"writeInput"} type={"text"} placeholder="Add a new item" value={price} onChange={event => setPrice(event.target.value)} /></div>
+                <div className={"textOnPages"}>Homepage:<br/> <input className={"writeInput"} type={"text"} placeholder="Add a new item" value={homepage} onChange={event => setHomepage(event.target.value)} /></div>
+                <div className={"textOnPages"}>Bild URL:<br/> <input className={"writeInput"} type={"text"} placeholder="Add a new item" value={imageName} onChange={event => setImageName(event.target.value)} /></div>
             <br/>
             </form>
         </div>

@@ -16,7 +16,7 @@ const ActionItemsPage = ({actionItems}: NewActionItemProps) => {
 
     return (
         <div>
-            <div>Actions:</div>
+            <div className={"textOnPages"}>Actions:</div>
             <div className={"frameForGallery"}>
                 <ActionItemsGallery actionItems={actionItems}/>
             </div>

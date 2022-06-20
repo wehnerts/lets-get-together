@@ -1,48 +1,56 @@
 .App {
-  text-align: center;
-  align-items: center;
+    text-align: center;
+    align-items: center;
 }
 
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-div {
-  color: #F6E27F;
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
-a:link{
-  color:grey ;
+.textOnPages {
+    color: #F6E27F;
 }
 
-a:visited{
-  color: #435757;
+a:link {
+    color: grey;
+}
+
+a:visited {
+    color: #435757;
 }
 
 .actionimage {
-  box-shadow: 2px 2px lightgray;
-  border-bottom-right-radius: 5% 5%;
-  border-top-left-radius: 5% 5%;
-  margin: 5px;
-  max-width: 90vw;
+    box-shadow: 2px 2px lightgray;
+    border-bottom-right-radius: 5% 5%;
+    border-top-left-radius: 5% 5%;
+    margin: 5px;
+    max-width: 90vw;
 }
-.writeInput{
-  max-width: 90vw;
-  min-width: 90vw;
+
+.writeInput {
+    max-width: 90vw;
+    min-width: 90vw;
 }
+
 @media (min-width: 768px) {
-  .actionimage {
-    max-width: 768px;
-  }
-  .writeInput{
-    max-width:768px;
-    min-width:768px;
-  }
+    .actionimage {
+        max-width: 768px;
+    }
+
+    .writeInput {
+        max-width: 768px;
+        min-width: 768px;
+    }
+
+    .Toastify__toast-body div {
+        color: #2C1A1D;
+    }
 }

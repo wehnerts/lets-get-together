@@ -1,18 +1,19 @@
-.mainline{
+.mainline {
     display: flex;
     justify-self: left;
     justify-content: left;
     align-self: flex-start;
     min-width: 5vw;
-  }
+}
 
-.mainChecker{
+.mainChecker {
     max-width: 5vw;
     min-width: 5vw;
     background-color: lightgray;
     justify-self: left;
 }
 
-.id{
+.id {
     margin-left: 5px;
+    color: #F6E27F;
 }

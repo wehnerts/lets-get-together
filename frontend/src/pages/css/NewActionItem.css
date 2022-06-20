@@ -6,7 +6,7 @@
     max-height: 82vh;
 }
 
-#newActionItem{
+#newActionItem {
     display: flex;
     flex-direction: column;
     justify-content: left;
@@ -24,7 +24,7 @@
         max-width: 768px;
     }
 
-    #newActionItem{
+    #newActionItem {
         display: flex;
         flex-direction: column;
         justify-content: left;
