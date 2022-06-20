@@ -19,7 +19,7 @@ export default function SingleMember({memberForWork}: SingleMemberProps) {
             <div className={"mainline"}>
                 <input className={"mainChecker"} type={"checkbox"} id={memberForWork.id} name={"isPlanned"}
                        checked={checked} onChange={handleChange}/>
-                <div className={"textOnPages"}>{memberForWork.username} </div>
+                <div className={"textOnPages"}>{memberForWork.username}</div>
             </div>
             <div className={"id"}>Id: {memberForWork.id} {memberForWork.isPlanned}</div>
             <br/>
