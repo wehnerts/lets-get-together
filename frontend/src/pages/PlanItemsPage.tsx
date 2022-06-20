@@ -18,7 +18,7 @@ const PlanItemsPage = ({planItems, actionItems}: PlanItemProps) => {
 
     return (
         <div>
-            <div>Plans:</div>
+            <div className={"textOnPages"}>Plans:</div>
             <div className={"frameForGallery"}>
                 <PlanItemsGallery actionItems={actionItems} planItems={planItems}/>
             </div>

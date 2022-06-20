@@ -7,7 +7,7 @@
 
 }
 
-#editPlanItem{
+#editPlanItem {
     display: flex;
     flex-direction: column;
     justify-content: left;
@@ -25,7 +25,7 @@
         max-width: 768px;
     }
 
-    #editPlanItem{
+    #editPlanItem {
         display: flex;
         flex-direction: column;
         justify-content: left;

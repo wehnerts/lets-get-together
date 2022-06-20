@@ -71,11 +71,11 @@ export default function UserVote({member, planItem, optName}: votingProps) {
     }
 
     const submitVote = () => {
-        member.opt1=Number(opti1).toString()
-        member.opt2=Number(opti2).toString()
-        member.opt3=Number(opti3).toString()
+        member.opt1 = Number(opti1).toString()
+        member.opt2 = Number(opti2).toString()
+        member.opt3 = Number(opti3).toString()
 
-       const memberEdited: EditedVoteUserDto = {
+        const memberEdited: EditedVoteUserDto = {
             planId: planItem.id,
             userId: member.id,
             username: member.username,
@@ -84,93 +84,91 @@ export default function UserVote({member, planItem, optName}: votingProps) {
             opt2: member.opt2,
             opt3: member.opt3
         }
-
         editMemberItem(memberEdited)
-
     }
 
     return (
 
         <div>
-            {(optName==="1"||optName==="2"||optName==="3")&&
-            <div>
-            <div className={"option"}>Option 1:<br/> {date1}</div>
-            <div className={"vote"}>
+            {(optName === "1" || optName === "2" || optName === "3") &&
+                <div className={"voteItem"}>
+                    <div className={"option"}>{date1}</div>
+                    <div className={"vote"}>
 
+                        <div>
+                            <Rating
+                                size='small'
+                                name="highlight-selected-only"
+                                max={3}
+                                defaultValue={Number(member.opt1)}
+                                IconContainerComponent={IconContainer}
+                                highlightSelectedOnly
+                                onChange={(_event, value) => {
+                                    value && setOpt1(value)
+                                }}
+
+                                sx={{
+                                    "& .MuiRating-iconFilled": {
+                                        color: "#F6E27F"
+                                    }
+                                }}
+                            />
+                        </div>
+                    </div>
+                </div>}
+
+            {(optName === "2" || optName === "3") &&
                 <div>
-                    <Rating
-                        size='small'
-                        name="highlight-selected-only"
-                        max={3}
-                        defaultValue={Number(member.opt1)}
-                        IconContainerComponent={IconContainer}
-                        highlightSelectedOnly
-                        onChange={(_event, value) => {
-                            value && setOpt1(value)
-                        }}
+                    <div>{date2}</div>
+                    <div className={"vote"}>
 
-                        sx={{
-                            "& .MuiRating-iconFilled": {
-                                color: "#F6E27F"
-                            }
-                        }}
-                    />
-                </div>
-            </div>
-        </div>}
-
-            {(optName==="2"||optName==="3")&&
-            <div>
-            <div>Option 2:<br/>{date2}</div>
-            <div className={"vote"}>
-
+                        <div>
+                            <Rating
+                                size="small"
+                                name="highlight-selected-only"
+                                max={3}
+                                defaultValue={Number(member.opt2)}
+                                IconContainerComponent={IconContainer}
+                                highlightSelectedOnly
+                                onChange={(_event, value) => {
+                                    value && setOpt2(value)
+                                }}
+                                sx={{
+                                    "& .MuiRating-iconFilled": {
+                                        color: "#F6E27F"
+                                    }
+                                }}
+                            />
+                        </div>
+                    </div>
+                </div>}
+            {optName === "3" &&
                 <div>
-                    <Rating
-                        size="small"
-                        name="highlight-selected-only"
-                        max={3}
-                        defaultValue={Number(member.opt2)}
-                        IconContainerComponent={IconContainer}
-                        highlightSelectedOnly
-                        onChange={(_event, value) => {
-                            value && setOpt2(value)
-                        }}
-                        sx={{
-                            "& .MuiRating-iconFilled": {
-                                color: "#F6E27F"
-                            }
-                        }}
-                    />
-                </div>
-            </div>
-            </div>}
-            {optName==="3"&&
-            <div>
-                <div>Option 3:<br/> {date3}</div>
-            <div className={"vote"}>
+                    <div>{date3}</div>
+                    <div className={"vote"}>
 
-                <div>
-                    <Rating
-                        size="small"
-                        name="highlight-selected-only"
-                        max={3}
-                        defaultValue={Number(member.opt3)}
-                        IconContainerComponent={IconContainer}
-                        highlightSelectedOnly
-                        onChange={(_event, value) => {
-                            value && setOpt3(value)
-                        }}
-                        sx={{
-                            "& .MuiRating-iconFilled": {
-                                color: "#F6E27F"
-                            }
-                        }}
-                    />
-                </div>
+                        <div>
+                            <Rating
+                                size="small"
+                                name="highlight-selected-only"
+                                max={3}
+                                defaultValue={Number(member.opt3)}
+                                IconContainerComponent={IconContainer}
+                                highlightSelectedOnly
+                                onChange={(_event, value) => {
+                                    value && setOpt3(value)
+                                }}
+                                sx={{
+                                    "& .MuiRating-iconFilled": {
+                                        color: "#F6E27F"
+                                    }
+                                }}
+                            />
+                        </div>
 
-            </div>
+                    </div>
 
-        </div>}
+                </div>}
             <Button sx={{color: '#f4e07f'}} onClick={submitVote}>Submit</Button>
         </div>)
 }

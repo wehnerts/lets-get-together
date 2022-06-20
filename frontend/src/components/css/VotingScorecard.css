@@ -1,32 +1,31 @@
 
-
-.row{
-
+.row1 div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #847d61;
 }
 
+.cx {
+    min-width: 20%;
+    max-width: 20%;
+}
 
-.row div{
+.row div {
     display: flex;
     flex-direction: row;
     justify-content: center;
     alignment: center;
+}
+
+.c1 {
+    width: 20%;
 
 }
-.row .c1{
-    flex-direction: row;
-}
-.c1 .c2{
-    flex-direction: row;
-}
-.c1{
-    width:15vmax;
-    background-color: cadetblue;
 
-}
-.c2{
-width: 15vmax;
-    display:flex;
+.c2 {
+    min-width: 20%;
+    max-width: 20%;
+    display: flex;
     flex-direction: row;
-    background-color: cadetblue;
-
 }

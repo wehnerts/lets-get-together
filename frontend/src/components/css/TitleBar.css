@@ -1,15 +1,28 @@
 .titlebar {
     display: flex;
-    color:#2C1A1D;
+    color: #2C1A1D;
     max-height: 50%;
+    flex-direction: column;
     justify-content: center;
     margin-top: 5px;
+    align-items: center;
 }
 
-.title{
+.navibuttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    min-width: 60vw;
+}
+
+.title {
     margin-right: 5px;
     margin-left: 5px;
     max-width: 99%;
     justify-self: center;
     background-color: #2B4162;
+}
+
+.navicon {
+    max-width: 20px;
 }

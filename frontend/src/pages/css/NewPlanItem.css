@@ -15,14 +15,14 @@
     margin-right: 10px;
 }
 
-.plan-action-description div{
+.plan-action-description div {
     font-weight: normal;
     text-align: left;
     max-width: 90vw;
 
 }
 
-#newPlanItem{
+#newPlanItem {
 
     display: flex;
     flex-direction: column;

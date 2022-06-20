@@ -5,9 +5,10 @@ import {getAllMembers, putMemberVoteItem} from "../services/api-service-members"
 import {EditedVoteUserDto} from "../dto/EditedVoteUserDto";
 import {AuthContext} from "../context/AuthProvider";
 
+
 export default function useMembers() {
     const [membersForWork, setMembersForWork] = useState<MemberForWork[]>([])
-    const {token} = useContext(AuthContext);
+    const {token} = useContext(AuthContext)
 
     useEffect(() => {
         getAllMembers(token)

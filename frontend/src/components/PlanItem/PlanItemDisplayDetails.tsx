@@ -17,9 +17,10 @@ export default function PlanItemDisplayDetails({detailedPlanItem, actionItems}: 
             }
         })
     })
+
     return (
         <div className={"plan-item-details"}>
-            <div>Details</div>
+            <div className={"textOnPages"}>Details</div>
             <div className={"action-title"}>
                 <div>Aktion: {detailedPlanItem.actionItemName}</div>
                 {image &&
