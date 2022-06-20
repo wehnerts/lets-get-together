@@ -40,7 +40,7 @@ export default function EditPlanItem({item, editPlanItem}: EditPlanItemProps) {
     return (
         <div className={"edit-planItem"}>
             <form id="editPlanItem" onSubmit={onEdit}>
-                <p className={"textOnPages"}>Eigenschaften des Planes ändern </p>
+                <p className={"textOnPages"}>Eigenschaften des Planes ändern</p>
                 <div className={"textOnPages"}>Beschreibung:<br/> <textarea className={"writeInput"}
                                                                             placeholder={planDescription}
                                                                             value={planDescription}
